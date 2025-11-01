@@ -11,20 +11,21 @@ It automates every stage of the campus recruitment lifecycle — from job postin
 🎯 Objectives
 
 
-Centralize the placement process for colleges and universities.
-
-Enable students to showcase their profiles, skills, and achievements.
-
-Simplify company recruitment workflows (job posting, quizzes, interviews).
-
-Empower TNP coordinators with dashboards and analytics.
-
-Enhance transparency, automation, and traceability of placement data.
+        Centralize the placement process for colleges and universities.
+        
+        Enable students to showcase their profiles, skills, and achievements.
+        
+        Simplify company recruitment workflows (job posting, quizzes, interviews).
+        
+        Empower TNP coordinators with dashboards and analytics.
+        
+        Enhance transparency, automation, and traceability of placement data.
 
 
 🧱 Key Highlights
 
 Feature	Description
+
         🔐 Role-Based Access	Four distinct dashboards: Admin, TNP, Company, Student
         🧠 AI & Automation	Automated quiz evaluation, scoring, and analytics
         📊 Dashboard Analytics	Visual representation of placement metrics
