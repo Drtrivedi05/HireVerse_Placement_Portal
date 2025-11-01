@@ -49,6 +49,7 @@ Feature	Description
 
 
 🧩 System Architecture
+
         ┌─────────────────────────────────────┐
         │             Admin                   │
         │  ─ Manage Colleges & TNPs           │
@@ -83,32 +84,33 @@ Feature	Description
 
 
 📂 Project Directory Structure
-HIREVERSE/
-│
-├── manage.py
-├── requirements.txt
-├── HIRE/
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py               # Database Schema
-│   ├── views.py                # Application Logic
-│   ├── urls.py                 # URL Routing
-│   ├── utils.py                # Helper Functions
-│   ├── ai_utils.py             # AI / Automation Features
-│   ├── decorators.py           # Role-based Access Control
-│   ├── middleware.py           # Request/Response Middleware
-│   ├── templates/              # HTML Templates
-│   │   ├── admin/
-│   │   ├── company/
-│   │   ├── tnp/
-│   │   └── student/
-│   ├── static/                 # CSS, JS, Images
-│   ├── management/
-│   │   └── commands/
-│   │       └── send_round_reminders.py
-│   └── migrations/
-└── README.md
+
+        HIREVERSE/
+        │
+        ├── manage.py
+        ├── requirements.txt
+        ├── HIRE/
+        │   ├── __init__.py
+        │   ├── admin.py
+        │   ├── apps.py
+        │   ├── models.py               # Database Schema
+        │   ├── views.py                # Application Logic
+        │   ├── urls.py                 # URL Routing
+        │   ├── utils.py                # Helper Functions
+        │   ├── ai_utils.py             # AI / Automation Features
+        │   ├── decorators.py           # Role-based Access Control
+        │   ├── middleware.py           # Request/Response Middleware
+        │   ├── templates/              # HTML Templates
+        │   │   ├── admin/
+        │   │   ├── company/
+        │   │   ├── tnp/
+        │   │   └── student/
+        │   ├── static/                 # CSS, JS, Images
+        │   ├── management/
+        │   │   └── commands/
+        │   │       └── send_round_reminders.py
+        │   └── migrations/
+        └── README.md
 
 
 ⚙️ Installation Guide
