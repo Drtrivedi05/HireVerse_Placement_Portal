@@ -1,0 +1,723 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Evaluate Selection Process | HireVerse</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Sidebar styles -->
+  <link rel="stylesheet" href="{% static 'sidebar.css' %}">
+
+  <style>
+    body {
+      background: #f6f8fa;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    .main-content {
+      margin-left: 240px;
+      padding: 1.6rem;
+    }
+
+    .topbar {
+      background: #fff;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ---- Tab Navigation ---- */
+    .nav-tabs-selection {
+      background: #f4f8fb;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-tabs-selection .nav-link {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #6c757d;
+      border-radius: 8px;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      background: none;
+      transition: all 0.25s ease;
+    }
+
+    .nav-tabs-selection .nav-link.active {
+      color: #111;
+      background: #fff;
+      border: 2px solid #111;
+    }
+
+    /* ---- Cards ---- */
+    .selection-card {
+      border: 1px solid #e9ecef;
+      border-radius: 1rem;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .selection-card:hover {
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+      border-color: #cfe3ff;
+    }
+
+    .section-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .small-muted {
+      color: #6c757d;
+      font-size: 0.95rem;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 991px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar d-flex flex-column justify-content-between"
+     style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 240px;
+        background: #ffffff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+        padding: 20px 0;
+        z-index: 1000;
+     ">
+
+    <!-- Logo Section -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      {% load static %}
+      <img src="{% static 'assets/logo_main.png' %}" 
+          alt="HireVerse Logo" 
+          style="width: 180px; height: auto; object-fit: contain;">
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+      <a class="nav-link" href="/companyDashboard"
+        style="color: #007bff; font-weight: 500;
+                font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+                border-radius: 8px; display: flex; align-items: center; 
+                gap: 8px; text-decoration: none; transition: 0.2s;">
+        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+      </a>
+
+      <a class="nav-link" href="/companyProfile"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-person-circle me-2"></i> Profile
+      </a>
+
+      <a class="nav-link" href="/companyJobPosts"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-briefcase me-2"></i> Posts
+      </a>
+
+      <a class="nav-link" href="/companySelectionTest"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-file-earmark-text me-2"></i> Selection
+      </a>
+
+      <a class="nav-link active" href="/companyEvaluateTest"
+        style="background: #e9f5ff; color: #0056b3; font-weight: 600; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-clipboard-check me-2"></i> Evaluate
+      </a>
+
+      <a class="nav-link" href="/companyReport"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-bar-chart me-2"></i> Reports
+      </a>
+    </nav>
+
+    <!-- Logout Button (Bottom Fixed) -->
+    <a class="nav-link" href="{% url 'logout' %}"
+      style="
+          color: #dc3545; 
+          font-weight: 600; 
+          font-size: 1.05rem; 
+          padding: 10px 12px; 
+          border-radius: 8px; 
+          display: flex; align-items: center; gap: 8px;
+          text-decoration: none; 
+          transition: 0.2s; 
+          border-top: 1px solid #f0f0f0; 
+          justify-content: center;
+          margin-top: auto;
+      "
+      onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+      onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+      <i class="bi bi-box-arrow-right me-2"></i> Logout
+    </a>
+
+  </div>
+
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="topbar">
+      <h3 class="m-0">Evaluate Selection Process</h3>
+    </div>
+
+    <!-- TABS -->
+    <div class="nav-tabs-selection mb-3" id="evaluationTabs" role="tablist">
+      <button class="nav-link active" id="tab-aptitude-tab" data-bs-toggle="tab" data-bs-target="#tab-aptitude" type="button" role="tab">1 — Aptitude</button>
+      <button class="nav-link" id="tab-technical-tab" data-bs-toggle="tab" data-bs-target="#tab-technical" type="button" role="tab">2 — Technical / GD</button>
+      <button class="nav-link" id="tab-tech-interview-tab" data-bs-toggle="tab" data-bs-target="#tab-tech-interview" type="button" role="tab">3 — Tech Interview</button>
+      <button class="nav-link" id="tab-hr-interview-tab" data-bs-toggle="tab" data-bs-target="#tab-hr-interview" type="button" role="tab">4 — HR Interview</button>
+    </div>
+
+    <!-- TAB CONTENT -->
+    <div class="tab-content" id="evaluationTabsContent">
+
+      <!-- Aptitude Tab -->
+      <div class="tab-pane fade show active" id="tab-aptitude" role="tabpanel">
+        {% for item in evaluation_data.Aptitude %}
+            <div class="card selection-card shadow-sm p-4 mb-3">
+            <h5 class="section-title">{{ item.round.round_name }} — {{ item.round.job.title }}</h5>
+            <p class="small-muted">Total Students: {{ item.students|length }}</p>
+            <table class="table table-bordered table-sm mt-2">
+                <thead class="table-light">
+                <tr>
+                    <th>Student Name</th>
+                    <th>College Name</th>
+                    <th>Score</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                </tr>
+                </thead>
+                <tbody>
+                  {% for s in item.students %}
+                  <tr>
+                    <td>{{ s.student_name }}</td>
+                    <td>{{ s.college_name }}</td>
+                    <td>{{ s.score }}</td>
+                    <td>{{ s.status }}</td>
+                    <td>{{ s.remarks }}</td>
+                  </tr>
+                  {% empty %}
+                  <tr><td colspan="5" class="text-center text-muted">No records found.</td></tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        {% empty %}
+            <p class="text-muted">No Aptitude rounds found for this company.</p>
+        {% endfor %}
+      </div>
+
+      <!-- Technical / GD Tab -->
+      <div class="tab-pane fade" id="tab-technical" role="tabpanel">
+        {% if evaluation_data.Group_Discussion %}
+          {% for group in evaluation_data.Group_Discussion %}
+            <div class="card selection-card shadow-sm p-4 mb-3">
+              <h5 class="section-title">
+                {{ group.job_title }} — Group {{ group.group.GROUP_NUMBER }}
+              </h5>
+              <p class="small-muted mb-2">
+                Schedule: {{ group.schedule }} | College: {{ group.group.COLLEGE.COLLEGE_NAME }}
+              </p>
+
+              <form class="gd-evaluation-form" data-group="{{ group.group.GROUP_ID }}" data-job="{{ group.group.JOB.JOB_ID }}">
+                {% csrf_token %}
+                <table class="table table-bordered table-sm mt-2 align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Student Name</th>
+                      <th>College</th>
+                      <th>Status</th>
+                      <th>Evaluation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for s in group.students %}
+                      <tr>
+                        <td>{{ s.name }}</td>
+                        <td>{{ s.college }}</td>
+                        <td>
+                          {% if s.status == "Passed" %}
+                            <span class="badge bg-success current-status">{{ s.status }}</span>
+                          {% elif s.status == "Failed" %}
+                            <span class="badge bg-danger current-status">{{ s.status }}</span>
+                          {% else %}
+                            <span class="badge bg-info text-dark current-status">{{ s.status }}</span>
+                          {% endif %}
+                        </td>
+                        <td>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio"
+                              name="status_{{ s.id|slugify }}" value="Passed"
+                              {% if s.status == "Passed" %}checked{% endif %}
+                              {% if s.status in "Passed,Failed,Selected,Rejected" %}disabled{% endif %}>
+                            <label class="form-check-label">Pass</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio"
+                              name="status_{{ s.id|slugify }}" value="Failed"
+                              {% if s.status == "Failed" %}checked{% endif %}
+                              {% if s.status in "Passed,Failed,Selected,Rejected" %}disabled{% endif %}>
+                            <label class="form-check-label">Fail</label>
+                          </div>
+                        </td>
+                      </tr>
+                    {% empty %}
+                      <tr><td colspan="4" class="text-center text-muted">No members found.</td></tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <div class="text-end">
+                  <button type="button" class="btn btn-primary btn-save-gd">
+                    <i class="bi bi-save2"></i> Save Evaluation
+                  </button>
+                </div>
+              </form>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted">No Group Discussion groups found.</p>
+        {% endif %}
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          document.querySelectorAll(".btn-save-gd").forEach((saveBtn) => {
+            saveBtn.addEventListener("click", async (e) => {
+              const form = e.target.closest("form");
+              const csrftoken = form.querySelector("[name=csrfmiddlewaretoken]").value;
+              const jobId = form.dataset.job;
+              const groupId = form.dataset.group;
+
+              // Collect results
+              const results = {};
+              form.querySelectorAll("input[type='radio']:checked").forEach((radio) => {
+                const studentId = radio.name.split("_")[1];
+                results[studentId] = radio.value;
+              });
+
+              if (Object.keys(results).length === 0) {
+                showToast("Please select Pass/Fail for at least one student", "warning");
+                return;
+              }
+
+              saveBtn.disabled = true;
+              saveBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Saving...';
+
+              try {
+                const response = await fetch(`/company/save-gd-evaluation/${jobId}/${groupId}/`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                    "X-Requested-With": "XMLHttpRequest",
+                  },
+                  body: JSON.stringify({ results }),
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                  showToast("Evaluation saved successfully", "success");
+
+                  // Update UI badges
+                  form.querySelectorAll("input[type='radio']:checked").forEach((radio) => {
+                    const row = radio.closest("tr");
+                    const badge = row.querySelector(".current-status");
+                    badge.className = "badge " + (radio.value === "Passed" ? "bg-success" : "bg-danger");
+                    badge.textContent = radio.value;
+                  });
+                } else {
+                  throw new Error(data.error || "Error saving data");
+                }
+              } catch (err) {
+                console.error("Error:", err);
+                showToast("Failed to save evaluation", "danger");
+              } finally {
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = '<i class="bi bi-save2"></i> Save Evaluation';
+              }
+            });
+          });
+
+          // ✅ Bootstrap toast helper
+          function showToast(message, type = "success") {
+            const toast = document.createElement("div");
+            toast.className = `toast align-items-center text-white bg-${type} border-0 position-fixed bottom-0 end-0 m-3`;
+            toast.role = "alert";
+            toast.innerHTML = `
+              <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+              </div>`;
+            document.body.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast, { delay: 2000 });
+            bsToast.show();
+            toast.addEventListener("hidden.bs.toast", () => toast.remove());
+          }
+        });
+      </script>
+
+      <!-- Technical Interview Tab -->
+      <div class="tab-pane fade" id="tab-tech-interview" role="tabpanel">
+        {% if evaluation_data.Technical_Interview %}
+          {% for item in evaluation_data.Technical_Interview %}
+            <div class="card selection-card shadow-sm p-4 mb-3">
+              <h5 class="section-title">{{ item.round.round_name }} — {{ item.round.job.title }}</h5>
+              <p class="small-muted">Total Students: {{ item.students|length }}</p>
+
+              <form class="tech-evaluation-form" data-round="{{ item.round.round_name }}" data-job="{{ item.round.job.title }}">
+                {% csrf_token %}
+                <table class="table table-bordered table-sm mt-2 align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Student Name</th>
+                      <th>College Name</th>
+                      <th>Status</th>
+                      <th>Evaluation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for s in item.students %}
+                      <tr>
+                        <td>{{ s.student_name }}</td>
+                        <td>{{ s.college_name }}</td>
+                        <td>
+                          {% if s.status == "Passed" %}
+                            <span class="badge bg-success current-status">{{ s.status }}</span>
+                          {% elif s.status == "Failed" %}
+                            <span class="badge bg-danger current-status">{{ s.status }}</span>
+                          {% else %}
+                            <span class="badge bg-info text-dark current-status">{{ s.status }}</span>
+                          {% endif %}
+                        </td>
+                        <td>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio"
+                              name="status_{{ s.student_name|slugify }}" value="Passed"
+                              {% if s.status == "Passed" %}checked{% endif %}
+                              {% if s.status in "Passed,Failed,Selected,Rejected" %}disabled{% endif %}>
+                            <label class="form-check-label">Pass</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio"
+                              name="status_{{ s.student_name|slugify }}" value="Failed"
+                              {% if s.status == "Failed" %}checked{% endif %}
+                              {% if s.status in "Passed,Failed,Selected,Rejected" %}disabled{% endif %}>
+                            <label class="form-check-label">Fail</label>
+                          </div>
+                        </td>
+                      </tr>
+                    {% empty %}
+                      <tr><td colspan="6" class="text-center text-muted">No students found.</td></tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+                {% if item.students|length > 0 %}
+                  <div class="text-end mt-2">
+                    <button type="button" class="btn btn-primary btn-save-tech">
+                      <i class="bi bi-save2"></i> Save Evaluation
+                    </button>
+                  </div>
+                {% endif %}
+              </form>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted">No Technical Interview rounds found for this company.</p>
+        {% endif %}
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          document.querySelectorAll(".btn-save-tech").forEach((saveBtn) => {
+            saveBtn.addEventListener("click", async (e) => {
+              const form = e.target.closest("form");
+              const csrftoken = form.querySelector("[name=csrfmiddlewaretoken]").value;
+              const jobTitle = form.dataset.job;
+              const roundName = form.dataset.round;
+
+              // Collect Pass/Fail results
+              const results = {};
+              form.querySelectorAll("input[type='radio']:checked").forEach((radio) => {
+                const studentKey = radio.name.split("_")[1];
+                results[studentKey] = radio.value;
+              });
+
+              if (Object.keys(results).length === 0) {
+                showToast("Please mark at least one student as Pass/Fail.", "warning");
+                return;
+              }
+
+              saveBtn.disabled = true;
+              saveBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Saving...';
+
+              try {
+                const response = await fetch(`/company/save-tech-evaluation/`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                    "X-Requested-With": "XMLHttpRequest",
+                  },
+                  body: JSON.stringify({
+                    job_title: jobTitle,
+                    round_name: roundName,
+                    results: results,
+                  }),
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                  showToast("Evaluation saved successfully.", "success");
+
+                  form.querySelectorAll("input[type='radio']:checked").forEach((radio) => {
+                    const row = radio.closest("tr");
+                    const badge = row.querySelector(".current-status");
+                    badge.className = "badge " + (radio.value === "Passed" ? "bg-success" : "bg-danger");
+                    badge.textContent = radio.value;
+
+                    // disable radios
+                    const radios = row.querySelectorAll("input[type='radio']");
+                    radios.forEach((r) => (r.disabled = true));
+                  });
+
+                  saveBtn.innerHTML = "✅ Saved";
+                  saveBtn.classList.remove("btn-primary");
+                  saveBtn.classList.add("btn-secondary");
+                  saveBtn.disabled = true;
+                } else {
+                  throw new Error(data.error || "Failed to save results.");
+                }
+              } catch (err) {
+                console.error("Error:", err);
+                showToast("Failed to save evaluation.", "danger");
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = '<i class="bi bi-save2"></i> Save Evaluation';
+              }
+            });
+          });
+
+          // Toast notification helper
+          function showToast(message, type = "success") {
+            const toast = document.createElement("div");
+            toast.className = `toast align-items-center text-white bg-${type} border-0 position-fixed bottom-0 end-0 m-3`;
+            toast.role = "alert";
+            toast.innerHTML = `
+              <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+              </div>`;
+            document.body.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast, { delay: 2000 });
+            bsToast.show();
+            toast.addEventListener("hidden.bs.toast", () => toast.remove());
+          }
+        });
+      </script>
+
+      <!-- HR Interview Tab -->
+      <div class="tab-pane fade" id="tab-hr-interview" role="tabpanel">
+        {% if evaluation_data.HR_Interview %}
+          {% for item in evaluation_data.HR_Interview %}
+            <div class="card selection-card shadow-sm p-4 mb-3">
+              <h5 class="section-title">{{ item.round.round_name }} — {{ item.round.job.title }}</h5>
+              <p class="small-muted">Total Students: {{ item.students|length }}</p>
+
+              <form class="hr-evaluation-form" data-round="{{ item.round.round_name }}" data-job="{{ item.round.job.title }}">
+                {% csrf_token %}
+                <table class="table table-bordered table-sm mt-2 align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Student Name</th>
+                      <th>College Name</th>
+                      <th>Status</th>
+                      <th>Evaluation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for s in item.students %}
+                      <tr>
+                        <td>{{ s.student_name }}</td>
+                        <td>{{ s.college_name }}</td>
+                        <td>
+                          {% if s.status == "Selected" %}
+                            <span class="badge bg-success">{{ s.status }}</span>
+                          {% elif s.status == "Rejected" %}
+                            <span class="badge bg-danger">{{ s.status }}</span>
+                          {% else %}
+                            <span class="badge bg-secondary">{{ s.status }}</span>
+                          {% endif %}
+                        </td>
+                        <td>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" 
+                              name="status_{{ s.student_name|slugify }}" 
+                              value="Passed"
+                              {% if s.status == "Selected" %}checked{% endif %}
+                              {% if s.status in "Selected,Rejected" %}disabled{% endif %}>
+                            <label class="form-check-label">Pass</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio"
+                              name="status_{{ s.student_name|slugify }}" 
+                              value="Failed"
+                              {% if s.status == "Rejected" %}checked{% endif %}
+                              {% if s.status in "Selected,Rejected" %}disabled{% endif %}>
+                            <label class="form-check-label">Fail</label>
+                          </div>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+                {% if item.students|length > 0 %}
+                  <div class="text-end mt-2">
+                    <button type="button" class="btn btn-primary btn-save-hr">
+                      <i class="bi bi-save2"></i> Save Evaluation
+                    </button>
+                  </div>
+                {% endif %}
+              </form>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-muted">No HR Interview rounds found for this company.</p>
+        {% endif %}
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          document.querySelectorAll(".btn-save-hr").forEach((saveBtn) => {
+            saveBtn.addEventListener("click", async (e) => {
+              const form = e.target.closest("form");
+              const csrftoken = form.querySelector("[name=csrfmiddlewaretoken]").value;
+              const jobTitle = form.dataset.job;
+              const roundName = form.dataset.round;
+
+              // 🧠 Collect results
+              const results = {};
+              form.querySelectorAll("input[type='radio']:checked").forEach((radio) => {
+                const studentKey = radio.name.split("_")[1];
+                const remarks = form.querySelector(`[name='remarks_${studentKey}']`)?.value || "";
+                results[studentKey] = { status: radio.value, remarks: remarks };
+              });
+
+              if (Object.keys(results).length === 0) {
+                showToast("Please mark at least one student.", "warning");
+                return;
+              }
+
+              saveBtn.disabled = true;
+              saveBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Saving...';
+
+              try {
+                const response = await fetch(`/company/save-hr-evaluation/`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                    "X-Requested-With": "XMLHttpRequest",
+                  },
+                  body: JSON.stringify({ job_title: jobTitle, round_name: roundName, results: results }),
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                  showToast("HR evaluation saved successfully!", "success");
+                  saveBtn.innerHTML = "✅ Saved";
+                  saveBtn.classList.replace("btn-primary", "btn-secondary");
+                  saveBtn.disabled = true;
+                  form.querySelectorAll("input, textarea").forEach((el) => (el.disabled = true));
+                } else {
+                  throw new Error(data.error || "Failed to save evaluation");
+                }
+              } catch (err) {
+                console.error("Error:", err);
+                showToast("Error saving HR evaluation", "danger");
+                saveBtn.innerHTML = '<i class="bi bi-save2"></i> Save Evaluation';
+                saveBtn.disabled = false;
+              }
+            });
+          });
+
+          function showToast(message, type = "success") {
+            const toast = document.createElement("div");
+            toast.className = `toast align-items-center text-white bg-${type} border-0 position-fixed bottom-0 end-0 m-3`;
+            toast.role = "alert";
+            toast.innerHTML = `
+              <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+              </div>`;
+            document.body.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast, { delay: 2000 });
+            bsToast.show();
+            toast.addEventListener("hidden.bs.toast", () => toast.remove());
+          }
+        });
+      </script>
+    </div>
+  </div>
+
+  <!-- JS: Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

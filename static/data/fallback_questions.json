@@ -1,0 +1,2862 @@
+[
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 35)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 37)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 38)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 38)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 19)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 23)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 8)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 36)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 16)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 18)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 17)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 6)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 10)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 15)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 8)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 7)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 1)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 21)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 35)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 29)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 27)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 28)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 25)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 27)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 31)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 19)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 13)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 34)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 25)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 11)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 30)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 3)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 8)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 15)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 30)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 22)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 37)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 3)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 34)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 24)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 1)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 28)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 24)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 8)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 26)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 20)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 23)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 36)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 26)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 21)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 24)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 3)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 19)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 28)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 6)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 13)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 27)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 5)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 10)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 24)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 16)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 1)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 21)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 13)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 28)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 31)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 17)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 30)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 17)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 16)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 28)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 36)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 9)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 31)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 8)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 33)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 27)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 26)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 19)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 4)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 18)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 9)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 14)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 30)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 37)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 11)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 4)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 21)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 22)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 27)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 32)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 5)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 29)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 2)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 30)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 24)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 37)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 32)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 3)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 21)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 13)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 20)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 20)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 12)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 10)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 16)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 11)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 26)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 16)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 7)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 36)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 38)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 31)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 34)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 14)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 10)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 4)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 9)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 1)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 19)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 38)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 17)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 39)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 24)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 15)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 39)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 15)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 37)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 18)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 36)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 4)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 9)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 13)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 25)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 28)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 32)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 9)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 15)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 17)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 36)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 33)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 3)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 30)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 10)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 12)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 20)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 12)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 5)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 35)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 9)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 23)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 10)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 19)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 5)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 11)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 12)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 10)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 7)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 29)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 38)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 33)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 22)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 2)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 30)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 11)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 23)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 23)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 14)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 34)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 18)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 32)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 26)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 16)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 33)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 11)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 7)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 25)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 39)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 29)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 32)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 34)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 8)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 31)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 22)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 3)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 35)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 31)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 14)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 36)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 6)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 38)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 18)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 12)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 9)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 15)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 26)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 6)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 12)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 14)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 23)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 11)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 16)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 13)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 35)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 22)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 38)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 14)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 28)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 25)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 29)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "Which layer of the OSI model does IP operate in? (Var 8)",
+        "options": [
+            "Transport",
+            "Network",
+            "Session",
+            "Data Link"
+        ],
+        "answer": "Network",
+        "category": "Networking"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 25)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 2)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 5)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 35)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 7)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 2)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 4)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 21)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 2)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Which SQL statement is used to extract data from a database? (Var 31)",
+        "options": [
+            "GET",
+            "EXTRACT",
+            "SELECT",
+            "OPEN"
+        ],
+        "answer": "SELECT",
+        "category": "SQL"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 20)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 37)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 19)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 2)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 5)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 18)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 22)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 34)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 39)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 4)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 39)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 14)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 33)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 20)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "Solve: (2x + 3) = 11. What is x? (Var 29)",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "answer": "4",
+        "category": "Maths"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 17)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 21)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 6)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 4)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "If sin\u03b8 = 3/5, find cos\u03b8. (Var 1)",
+        "options": [
+            "4/5",
+            "5/4",
+            "3/4",
+            "1/2"
+        ],
+        "answer": "4/5",
+        "category": "Maths"
+    },
+    {
+        "question": "What is the simple interest on \u20b95000 at 5% for 2 years? (Var 6)",
+        "options": [
+            "\u20b9250",
+            "\u20b9400",
+            "\u20b9500",
+            "\u20b9600"
+        ],
+        "answer": "\u20b9500",
+        "category": "Quantitative"
+    },
+    {
+        "question": "If all roses are flowers and some flowers fade quickly, which of the following is true? (Var 25)",
+        "options": [
+            "All roses fade quickly",
+            "Some roses fade quickly",
+            "Some flowers are roses",
+            "None"
+        ],
+        "answer": "Some flowers are roses",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 3)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 7)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 18)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 27)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 32)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 1)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 6)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "The average of 5 numbers is 27. If one number is removed, the average becomes 25. What is the removed number? (Var 34)",
+        "options": [
+            "27",
+            "30",
+            "35",
+            "37"
+        ],
+        "answer": "35",
+        "category": "Quantitative"
+    },
+    {
+        "question": "Which keyword is used to define a function in Python? (Var 7)",
+        "options": [
+            "func",
+            "def",
+            "function",
+            "lambda"
+        ],
+        "answer": "def",
+        "category": "Coding"
+    },
+    {
+        "question": "What does HTTP stand for? (Var 23)",
+        "options": [
+            "HyperText Transfer Protocol",
+            "HyperText Transmission Process",
+            "Hyper Transfer Text Protocol",
+            "None"
+        ],
+        "answer": "HyperText Transfer Protocol",
+        "category": "Networking"
+    },
+    {
+        "question": "If the ratio of two numbers is 3:4 and their sum is 84, what is the larger number? (Var 33)",
+        "options": [
+            "32",
+            "36",
+            "48",
+            "52"
+        ],
+        "answer": "48",
+        "category": "Aptitude"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 35)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "Which keyword is used to sort the result-set in SQL? (Var 12)",
+        "options": [
+            "SORT",
+            "ORDER BY",
+            "GROUP BY",
+            "ARRANGE"
+        ],
+        "answer": "ORDER BY",
+        "category": "SQL"
+    },
+    {
+        "question": "A train 120 meters long runs at 54 km/h. How much time will it take to cross a pole? (Var 2)",
+        "options": [
+            "6s",
+            "8s",
+            "10s",
+            "12s"
+        ],
+        "answer": "8s",
+        "category": "Aptitude"
+    },
+    {
+        "question": "What is the output of: print(2 ** 3 ** 2) in Python? (Var 26)",
+        "options": [
+            "512",
+            "64",
+            "16",
+            "256"
+        ],
+        "answer": "512",
+        "category": "Coding"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 27)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    },
+    {
+        "question": "Find the odd one out: Apple, Banana, Orange, Potato (Var 32)",
+        "options": [
+            "Apple",
+            "Banana",
+            "Orange",
+            "Potato"
+        ],
+        "answer": "Potato",
+        "category": "Logical Reasoning"
+    }
+]

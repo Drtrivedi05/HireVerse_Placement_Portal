@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Aptitude Test Reminder</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f7f9fb; margin: 0; padding: 0;">
+  <div style="max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); padding: 20px;">
+    <h2 style="color: #007bff; text-align: center;">Aptitude Test Reminder</h2>
+
+    <p>Dear <strong>{{ student_name }}</strong>,</p>
+
+    <p>This is a reminder that your <strong>Aptitude Test</strong> for <b>{{ company_name }}</b> is scheduled for tomorrow.</p>
+
+    <div style="background: #f0f6ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+      <p style="margin: 5px 0;"><strong>Position:</strong> {{ job_title }}</p>
+      <p style="margin: 5px 0;"><strong>Test Window:</strong> {{ date|date:"d M Y" }}</p>
+      <p style="margin: 5px 0;"><strong>Duration:</strong> {{ duration }} minutes</p>
+      <p style="margin: 5px 0;"><strong>College:</strong> {{ college_name }}</p>
+    </div>
+
+    <p>Kindly log in to your <b>HireVerse Student Dashboard</b> during the test window to attempt your test.</p>
+
+    <p>Good luck!<br>
+    <strong>{{ company_name }} - HireVerse Placement Team</strong></p>
+
+    <div style="text-align: center; margin-top: 15px; color: #777; font-size: 13px;">
+      This is an automated reminder from HireVerse. Please do not reply to this email.
+    </div>
+  </div>
+</body>
+</html>

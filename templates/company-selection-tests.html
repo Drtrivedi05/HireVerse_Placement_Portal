@@ -1,0 +1,1222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Selection Process Management | HireVerse</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- your sidebar styles -->
+  <link rel="stylesheet" href="{% static 'sidebar.css' %}">
+
+  <style>
+    /* ---- page layout and look consistent with your sample ---- */
+    body { background: #f6f8fa; min-height:100vh; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    .nav-tabs-selection { background: #f4f8fb; border-radius: 12px; display: flex; justify-content: center; gap: 2rem; padding: 0.5rem 0; margin-bottom: 2rem; }
+    .nav-tabs-selection .nav-link { font-size: 1.15rem; font-weight: 500; color: #6c757d; border-radius: 8px; padding: 0.7rem 2.5rem; border: none; background: none; transition: all 0.2s; }
+    .nav-tabs-selection .nav-link.active { color: #111; background: #fff; border: 2px solid #111; }
+    .main-content { margin-left:240px; padding:1.6rem; }
+
+    .topbar { background:#fff; padding:1rem 1.25rem; border-bottom:1px solid #e9ecef; display:flex; align-items:center; justify-content:space-between; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:1.25rem; }
+    .nav-tabs-selection { background:#f4f8fb; border-radius:12px; display:flex; justify-content:center; gap:1rem; padding:0.45rem; margin-bottom:1.25rem; }
+    .nav-tabs-selection .nav-link { font-size:1rem; font-weight:600; color:#6c757d; border-radius:8px; padding:0.5rem 1.25rem; border:none; }
+    .nav-tabs-selection .nav-link.active { color:#111; background:#fff; border:2px solid #111; }
+
+    .selection-card { border:1px solid #e9ecef; transition:box-shadow .18s, border-color .18s; }
+    .selection-card:hover { box-shadow:0 6px 24px rgba(0,0,0,0.08); border-color:#cfe3ff; }
+
+    .rounded-4 { border-radius:1rem !important; }
+    .shadow-sm { box-shadow:0 2px 8px rgba(0,0,0,0.05) !important; }
+
+    /* small helpers */
+    .small-muted { color:#6c757d; font-size:0.95rem; }
+    .section-title { font-weight:700; font-size:1.05rem; margin-bottom:.6rem; }
+
+    /* responsive tweak */
+    @media (max-width: 991px) {
+      .sidebar { position:relative; width:100%; height:auto; box-shadow:none; }
+      .main-content { margin-left:0; padding:1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar d-flex flex-column justify-content-between"
+     style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 240px;
+        background: #ffffff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+        padding: 20px 0;
+        z-index: 1000;
+     ">
+
+  <!-- Logo Section -->
+  <div style="text-align: center; margin-bottom: 20px;">
+    {% load static %}
+    <img src="{% static 'assets/logo_main.png' %}" 
+         alt="HireVerse Logo" 
+         style="width: 180px; height: auto; object-fit: contain;">
+  </div>
+
+  <!-- Navigation Links -->
+  <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+    <a class="nav-link" href="/companyDashboard"
+       style="color: #007bff; font-weight: 500; font-weight: 600;
+              font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+              border-radius: 8px; display: flex; align-items: center; 
+              gap: 8px; text-decoration: none; transition: 0.2s;">
+      <i class="bi bi-speedometer2 me-2"></i> Dashboard
+    </a>
+
+    <a class="nav-link" href="/companyProfile"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-person-circle me-2"></i> Profile
+    </a>
+
+    <a class="nav-link" href="/companyJobPosts"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-briefcase me-2"></i> Posts
+    </a>
+
+    <a class="nav-link active" href="/companySelectionTest"
+       style="background: #e9f5ff; color: #0056b3; font-weight: 600; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-file-earmark-text me-2"></i> Selection
+    </a>
+
+    <a class="nav-link" href="/companyEvaluateTest"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-clipboard-check me-2"></i> Evaluate
+    </a>
+
+    <a class="nav-link" href="/companyReport"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-bar-chart me-2"></i> Reports
+    </a>
+  </nav>
+
+  <!-- Logout Button (Bottom Fixed) -->
+  <a class="nav-link" href="{% url 'logout' %}"
+     style="
+        color: #dc3545; 
+        font-weight: 600; 
+        font-size: 1.05rem; 
+        padding: 10px 12px; 
+        border-radius: 8px; 
+        display: flex; align-items: center; gap: 8px;
+        text-decoration: none; 
+        transition: 0.2s; 
+        border-top: 1px solid #f0f0f0; 
+        justify-content: center;
+        margin-top: auto;
+     "
+     onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+     onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+    <i class="bi bi-box-arrow-right me-2"></i> Logout
+  </a>
+
+</div>
+
+
+  <!-- MAIN -->
+  <div class="main-content">
+    <div class="topbar">
+      <h3 class="m-0">Selection Process Management</h3>
+    </div>
+
+    <!-- TAB NAV -->
+    <div class="nav-tabs-selection mb-3">
+      <button class="nav-link active" data-target="tab-aptitude">1 — Aptitude</button>
+      <button class="nav-link" data-target="tab-technical">2 — Technical / GD</button>
+      <button class="nav-link" data-target="tab-tech-interview">3 — Tech Interview</button>
+      <button class="nav-link" data-target="tab-hr-interview">4 — HR Interview</button>
+    </div>
+
+    <!-- TAB CONTENT WRAPPER -->
+    <div class="tab-content">
+
+      <!--TAB 1: APTITUDE -->
+      <div id="tab-aptitude" class="tab-pane active">
+        <div class="test-config-section bg-white p-4 rounded-4 shadow-sm">
+
+          <!-- Header -->
+          <div class="d-flex align-items-start justify-content-between mb-4">
+            <div>
+              <h5 class="fw-bold mb-0">Aptitude Test Configuration</h5>
+              <div class="text-muted small">Configure manual or AI-generated aptitude tests for applicants</div>
+            </div>
+          </div>
+          {% if messages %}
+            <div class="mt-3">
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow-sm" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <div class="row g-4">
+            <!-- 🟩 Manual Quiz Builder -->
+            <div class="col-lg-6">
+              <div class="bg-white border rounded-4 p-4 shadow-sm h-100">
+                <h6 class="fw-bold mb-2">Manual — Custom Quiz Builder</h6>
+                <p class="text-muted small mb-3">Create and save your own questions for the aptitude test.</p>
+
+                <form id="apt-quiz-builder" method="post" action="{% url 'save_aptitude_quiz' %}">
+                  {% csrf_token %}
+                  <div class="bg-light p-4 rounded-3 mb-4">
+                    <h5 class="fw-bold mb-3">Quiz Settings</h5>
+                    <div class="row g-3">
+                      <div class="col-md-12">
+                        <label class="form-label fw-semibold">Select Job</label>
+                        <select class="form-select" name="job_id" id="apt-job-select" required>
+                          <option value="">-- Select Job --</option>
+                          {% for job in jobs %}
+                            <option value="{{ job.JOB_ID }}">{{ job.JOB_TITLE }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Quiz Title</label>
+                        <input type="text" id="apt-quiz-title" name="title" class="form-control" value="Aptitude Test" readonly>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Total Qustions</label>
+                        <input type="number" id="apt-total-questions" name="total_questions" class="form-control" min="1" max="100" value="10">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Passing Marks</label>
+                        <input type="number" id="apt-pass-points" name="pass_marks" class="form-control" min="1" value="5">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Duration (min)</label>
+                        <input type="number" id="apt-duration" name="duration" class="form-control" min="5" max="180" value="30">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Start Date</label>
+                        <input type="date" id="apt-start-date" name="start_date" class="form-control">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">End Date</label>
+                        <input type="date" id="apt-end-date" name="end_date" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div id="apt-quiz-questions" class="mt-3"></div>
+                  
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      const addBtn = document.getElementById("apt-add-q");
+                      const totalInput = document.getElementById("apt-total-questions");
+                      const container = document.getElementById("apt-quiz-questions");
+
+                      addBtn.addEventListener("click", () => {
+                        const total = parseInt(totalInput.value) || 0;
+                        container.innerHTML = ""; // clear old ones
+
+                        for (let i = 1; i <= total; i++) {
+                          const card = document.createElement("div");
+                          card.classList.add("card", "mb-3", "shadow-sm");
+                          card.innerHTML = `
+                            <div class="card-body">
+                              <h6 class="fw-bold mb-3">Question ${i}</h6>
+                              <div class="mb-2">
+                                <label class="form-label">Question Text</label>
+                                <input type="text" name="question_${i}" class="form-control" required>
+                              </div>
+                              <div class="row g-2">
+                                <div class="col-md-6">
+                                  <label class="form-label">Option A</label>
+                                  <input type="text" name="option_${i}_A" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                  <label class="form-label">Option B</label>
+                                  <input type="text" name="option_${i}_B" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                  <label class="form-label">Option C</label>
+                                  <input type="text" name="option_${i}_C" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                  <label class="form-label">Option D</label>
+                                  <input type="text" name="option_${i}_D" class="form-control" required>
+                                </div>
+                              </div>
+                              <div class="mt-2">
+                                <label class="form-label">Correct Option</label>
+                                <select name="correct_${i}" class="form-select" required>
+                                  <option value="A">A</option>
+                                  <option value="B">B</option>
+                                  <option value="C">C</option>
+                                  <option value="D">D</option>
+                                </select>
+                              </div>
+                            </div>
+                          `;
+                          container.appendChild(card);
+                        }
+                      });
+                    });
+                  </script>
+
+                  <div class="mt-4 d-flex flex-wrap gap-2">
+                    <button type="button" class="btn btn-outline-primary" id="apt-add-q">
+                      <i class="bi bi-plus-circle"></i> Add Question
+                    </button>
+                    <button type="submit" class="btn btn-success" id="apt-save-quiz">
+                      <i class="bi bi-save"></i> Save
+                    </button>
+                    <span id="apt-quiz-msg" class="ms-2 text-success small d-none">
+                      <i class="bi bi-check-circle"></i> Saved!
+                    </span>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <style>
+              /* Loader styles */
+              #loadingOverlay {
+                display: none;
+                position: fixed;
+                z-index: 9999;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: rgba(255,255,255,0.8);
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+              }
+              .spinner-border {
+                width: 3rem;
+                height: 3rem;
+              }
+            </style>
+
+              <div id="loadingOverlay">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-3 fw-bold text-primary">Generating quiz... please wait</p>
+              </div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", function() {
+                const form = document.querySelector("#aiGenerateQuizForm");
+                const loader = document.querySelector("#loadingOverlay");
+                
+                if (form) {
+                  form.addEventListener("submit", function() {
+                    loader.style.display = "flex"; // Show loader
+                  });
+                }
+              });
+              </script>
+
+            <!-- 🤖 AI Smart Setup -->
+            <div class="col-lg-6">
+              <div class="bg-white border rounded-4 p-4 shadow-sm h-100">
+                <h6 class="fw-bold mb-2">AI — Smart Setup</h6>
+                <p class="text-muted small mb-3">Let AI generate aptitude questions automatically.</p>
+
+                <form id="aiGenerateQuizForm" method="POST" action="{% url 'ai_generate_and_save_quiz' %}">
+                  {% csrf_token %}
+                  <div class="bg-light p-4 rounded-3 mb-4">
+                    <h5 class="fw-bold mb-3">Quiz Settings</h5>
+                    <div class="row g-3">
+                      <div class="col-md-12">
+                        <label class="form-label fw-semibold">Select Job</label>
+                        <select class="form-select" name="job_id" id="apt-job-select" required>
+                          <option value="">-- Select Job --</option>
+                          {% for job in jobs %}
+                            <option value="{{ job.JOB_ID }}">{{ job.JOB_TITLE }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Quiz Title</label>
+                        <input type="text" id="apt-quiz-title" name="title" class="form-control" value="Aptitude Test" readonly>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Total Qustions</label>
+                        <input type="number" id="apt-total-questions" name="total_questions" class="form-control" min="1" max="100" value="10">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Passing Marks</label>
+                        <input type="number" id="apt-pass-points" name="pass_marks" class="form-control" min="1" value="5">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Duration (min)</label>
+                        <input type="number" id="apt-duration" name="duration" class="form-control" min="5" max="180" value="30">
+                      </div>
+                      <div class="col-md-12">
+                        <label class="form-label fw-semibold">Difficulty</label>
+                        <select class="form-select" name="difficulty" id="ai-apt-difficulty">
+                          <option>Easy</option>
+                          <option selected>Medium</option>
+                          <option>Hard</option>
+                        </select>
+                      </div>
+                      <div class="col-md-12">
+                        <label class="form-label fw-semibold">Topics (comma separated)</label>
+                        <input type="text" class="form-control" name="topics" id="ai-apt-topics"
+                          placeholder="Logical Reasoning, Quantitative">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Start Date</label>
+                        <input type="date" id="apt-start-date" name="start_date" class="form-control">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">End Date</label>
+                        <input type="date" id="apt-end-date" name="end_date" class="form-control">
+                      </div>
+                      
+                    </div>
+                  </div>
+
+                  <div class="mt-4 d-flex flex-wrap gap-2">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-robot"></i> Generate & Save
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: TECHNICAL / GD -->
+      <div id="tab-technical" class="tab-pane" style="display:none;">
+        <div class="row g-4 mb-3">
+          <div class="col-12">
+            <div class="bg-white p-4 rounded-4 shadow-sm">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <div>
+                  <h5 class="fw-bold mb-0">AI Genrated Codeing or Group Discussion</h5>
+                  <div class="small-muted">Coding test (manual/AI) or Group Discussion (GD)</div>
+                </div>
+                <div>
+                  <select id="tech-mode" class="form-select">
+                    <option value="coding">Coding</option>
+                    <option value="gd">Group Discussion</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Round 2 Settings -->
+              <!-- CODING SECTION -->
+              <div id="tech-coding-section">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="border rounded-3 p-3 h-100">
+                      <h6 class="fw-bold mb-2">Manual Coding Questions</h6>
+                      <p class="small-muted mb-2">Add coding problems for candidates</p>
+                      <div class="mb-3">
+                        <label class="form-label fw-semibold">Select Job</label>
+                        <select class="form-select" id="apt-job-select" required>
+                          <option value="">-- Select Job --</option>
+                          {% for job in jobs %}
+                            <option value="{{ job.JOB_ID }}">{{ job.JOB_TITLE }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div id="coding-questions"></div>
+                      <div class="mt-2">
+                        <button class="btn btn-outline-primary btn-sm" id="coding-add-q"><i class="bi bi-plus-circle"></i> Add Problem</button>
+                        <button class="btn btn-success btn-sm ms-2" id="coding-save"><i class="bi bi-save"></i> Save</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="border rounded-3 p-3 h-100">
+                      <h6 class="fw-bold mb-2">AI Generated Coding</h6>
+                      <p class="small-muted mb-2">
+                        Configure your coding test — AI will generate problems with sample test cases for evaluation.
+                      </p>
+
+                      <!-- Select Job -->
+                      <div class="mb-3">
+                        <label class="form-label fw-semibold">Select Job</label>
+                        <select class="form-select" id="code-job-select" required>
+                          <option value="">-- Select Job --</option>
+                          {% for job in jobs %}
+                            <option value="{{ job.JOB_ID }}">{{ job.JOB_TITLE }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+
+                      <!-- Language -->
+                      <div class="mb-3">
+                        <label class="form-label">Preferred Language</label>
+                        <input id="ai-code-lang" class="form-control" placeholder="Python / Java / C++ / SQL">
+                      </div>
+
+                      <!-- Difficulty -->
+                      <div class="mb-3">
+                        <label class="form-label">Difficulty Level</label>
+                        <select id="ai-code-diff" class="form-select">
+                          <option>Easy</option>
+                          <option selected>Medium</option>
+                          <option>Hard</option>
+                        </select>
+                      </div>
+
+                      <!-- Topics -->
+                      <div class="mb-3">
+                        <label class="form-label">Topics</label>
+                        <input id="ai-code-topics" class="form-control" placeholder="Arrays, Loops, SQL Joins">
+                      </div>
+
+                      <!-- Number of Questions -->
+                      <div class="mb-3">
+                        <label class="form-label">Number of Questions</label>
+                        <input type="number" id="ai-code-count" class="form-control" value="3" min="1" max="10">
+                      </div>
+
+                      <!-- Coding Type -->
+                      <div class="mb-3">
+                        <label class="form-label">Coding Type</label>
+                        <select id="ai-code-type" class="form-select">
+                          <option selected disabled>-- Select Type --</option>
+                          <option value="full">Full Coding (Complete program)</option>
+                          <option value="partial">Code Completion (Provide starter code)</option>
+                          <option value="sql">SQL Query Problems</option>
+                          <option value="mix">Mixed Mode (Randomly selected types)</option>
+                        </select>
+                      </div>
+
+                      <!-- Test Case Count -->
+                      <div class="mb-3">
+                        <label class="form-label">Number of Test Cases per Problem</label>
+                        <input type="number" id="ai-testcase-count" class="form-control" value="3" min="1" max="10">
+                        <div class="form-text text-muted small">
+                          AI will generate input/output pairs for each problem. These test cases can be used for auto-evaluation.
+                        </div>
+                      </div>
+
+                      <!-- Buttons -->
+                      <div class="mt-3 d-flex gap-2">
+                        <button class="btn btn-primary" id="ai-generate-coding">
+                          <i class="bi bi-cpu"></i> Generate
+                        </button>
+                        <button class="btn btn-outline-secondary" id="ai-preview-coding">Preview</button>
+                      </div>
+
+                      <!-- Generated Preview -->
+                      <div id="ai-coding-result" class="mt-3" style="display:none;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <!-- GD SECTION -->
+              <!-- ================= GROUP DISCUSSION SECTION ================= -->
+              <div id="tech-gd-section" style="display:none;">
+                <div class="mt-3">
+                  <h6 class="fw-bold">Group Discussion — Groups & Scheduling</h6>
+                  <p class="small-muted">Generate random groups from passed students, schedule each group, and send meeting link.</p>
+
+                  <!-- Django messages -->
+                  {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+
+                  <!-- Group Discussion Settings -->
+                  <div class="bg-light p-4 rounded-3 mb-4 shadow-sm">
+                    <h5 class="fw-bold mb-3">Group Discussion Settings</h5>
+
+                    <form method="POST" action="{% url 'generate_gd_groups' %}">
+                      {% csrf_token %}
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Select Job</label>
+                          <select class="form-select" name="job_id" required>
+                            <option value="">-- Select Job --</option>
+                            {% for job in jobs %}
+                              <option value="{{ job.JOB_ID }}">{{ job.JOB_TITLE }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Round Title</label>
+                          <input type="text" class="form-control" value="Group Discussion" disabled>
+                        </div>
+
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Start Date</label>
+                          <input type="date" name="start_date" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">End Date</label>
+                          <input type="date" name="end_date" class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Group Size</label>
+                          <input name="group_size" class="form-control" type="number" min="2" max="8" value="3">
+                        </div>
+                      </div>
+
+                      <div class="mt-4">
+                        <button type="submit" class="btn btn-outline-secondary">
+                          <i class="bi bi-shuffle"></i> Generate Groups
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                  <!-- ================= GROUP DISCUSSION GENERATED GROUPS SECTION ================= -->
+                  <div class="card shadow-sm p-3 mb-4">
+                    <h5 class="fw-bold mb-3">Generated Groups</h5>
+
+                    {% if groups %}
+                    <div class="table-responsive">
+                      <table class="table table-bordered align-middle">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Group</th>
+                            <th>Job</th>
+                            <th>Students</th>
+                            <th>College</th>
+                            <th>Schedule</th>
+                            <th>Meeting Link</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for g in groups %}
+                          <tr>
+                            <!-- Group Number -->
+                            <td class="fw-semibold text-center">{{ g.group.GROUP_NUMBER }}</td>
+
+                            <!-- Job Title -->
+                            <td>{{ g.group.JOB.JOB_TITLE }}</td>
+
+                            <!-- Student Names -->
+                            <td>
+                              {% for s in g.students %}
+                                <span class="badge bg-light text-dark border me-1">{{ s }}</span>
+                              {% empty %}
+                                <span class="text-muted">No students</span>
+                              {% endfor %}
+                            </td>
+
+                            <!-- College -->
+                            <td>{{ g.college }}</td>
+
+                            <!-- Schedule -->
+                            <td style="width: 220px;">
+                              {% if g.group.STATUS == "Pending" %}
+                                <!-- Schedule Form -->
+                                <form method="POST" action="{% url 'companyUpdateGDSchedule' g.group.GROUP_ID %}" class="d-flex flex-column align-items-start">
+                                  {% csrf_token %}
+                                  <input 
+                                    type="datetime-local" 
+                                    name="schedule" 
+                                    class="form-control form-control-sm mb-2"
+                                    value="{{ g.group.SCHEDULE|date:'Y-m-d\\TH:i' }}"
+                                    required>
+                                  <button type="submit" class="btn btn-sm btn-success w-100">
+                                    <i class="bi bi-save"></i> Save
+                                  </button>
+                                </form>
+                              {% else %}
+                                <span class="text-dark fw-semibold">{{ g.schedule }}</span>
+                              {% endif %}
+                            </td>
+
+                            <!-- Meeting Link -->
+                            <td>
+                              {% if g.group.MEETING_LINK %}
+                                <a href="{{ g.group.MEETING_LINK }}" target="_blank" class="text-decoration-none">
+                                  {{ g.group.MEETING_LINK }}
+                                </a>
+                              {% else %}
+                                <span class="text-muted">—</span>
+                              {% endif %}
+                            </td>
+
+                            <!-- Status Badge -->
+                            <td>
+                              <span class="badge
+                                {% if g.group.STATUS == 'Pending' %} bg-warning text-dark
+                                {% elif g.group.STATUS == 'Scheduled' %} bg-info
+                                {% elif g.group.STATUS == 'Link Sent' %} bg-success
+                                {% else %} bg-secondary {% endif %}">
+                                {{ g.group.STATUS }}
+                              </span>
+                            </td>
+
+                            <!-- Actions -->
+                            <td>
+                              {% if g.group.STATUS == "Scheduled" %}
+                                <a href="{% url 'companySendGDLink' g.group.GROUP_ID %}" class="btn btn-sm btn-primary w-100">
+                                  <i class="bi bi-link-45deg"></i> Send Link
+                                </a>
+                              {% elif g.group.STATUS == "Link Sent" %}
+                                <span class="badge bg-success w-100">Link Sent</span>
+                              {% else %}
+                                <span class="badge bg-secondary w-100">Awaiting Schedule</span>
+                              {% endif %}
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {% else %}
+                      <p class="text-muted mb-0">No groups generated yet.</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+
+              <script>
+              function getCSRFToken() {
+                const name = 'csrftoken';
+                const cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                  const c = cookie.trim();
+                  if (c.startsWith(name + '=')) return c.substring(name.length + 1);
+                }
+                return '';
+              }
+
+              document.addEventListener("DOMContentLoaded", function () {
+                const btn = document.getElementById("generate-gd-groups");
+                if (!btn) return;
+
+                btn.addEventListener("click", async () => {
+                  const jobId = document.getElementById("apt-job-select").value;
+                  const groupSize = document.getElementById("gd-group-size").value;
+                  const startDate = document.getElementById("apt-start-date").value;
+                  const endDate = document.getElementById("apt-end-date").value;
+
+                  if (!jobId) {
+                    alert("Please select a job first.");
+                    return;
+                  }
+
+                  const formData = new FormData();
+                  formData.append("job_id", jobId);
+                  formData.append("group_size", groupSize);
+                  formData.append("start_date", startDate);
+                  formData.append("end_date", endDate);
+
+                  const csrfToken = getCSRFToken();
+
+                  try {
+                    const response = await fetch("/company/generate-gd-groups/", {
+                      method: "POST",
+                      headers: { "X-CSRFToken": csrfToken },
+                      body: formData,
+                    });
+
+                    const data = await response.json();
+                    console.log(data);
+
+                    if (data.success) {
+                      alert(data.message);
+                      const table = document.getElementById("gd-groups-table");
+                      table.innerHTML = "";
+                      data.groups.forEach((g) => {
+                        const row = `
+                          <tr>
+                            <td>Group ${g.group_number}</td>
+                            <td>${g.students.join(", ")}</td>
+                            <td>${g.schedule}</td>
+                            <td>${g.meeting_link || "-"}</td>
+                            <td><button class="btn btn-sm btn-primary">Add Link</button></td>
+                          </tr>`;
+                        table.insertAdjacentHTML("beforeend", row);
+                      });
+                    } else {
+                      alert(data.error || data.message);
+                    }
+                  } catch (err) {
+                    console.error("❌ Fetch error:", err);
+                    alert("Something went wrong. Please try again later.");
+                  }
+                });
+              });
+              </script>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: TECH INTERVIEW -->
+      <div id="tab-tech-interview" class="tab-pane" style="display:none;">
+        <div class="bg-white p-4 rounded-4 shadow-sm">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h5 class="fw-bold mb-0">Technical Interview — Schedule</h5>
+              <div class="small-muted">Students who passed the GD round or are eligible for Technical Interview will appear here</div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Select Job</label>
+            <select class="form-select" id="tech-job-select" required>
+              <option value="">-- Select Job --</option>
+              {% for job in jobs %}
+                <option value="{{ job.JOB_ID }}">{{ job.JOB_TITLE }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Student</th>
+                  <th>College</th>
+                  <th>Status</th>
+                  <th>Slot</th>
+                  <th>Meeting Link</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="tech-interview-table">
+                <tr>
+                  <td colspan="6" class="text-center text-muted">Select a job to load eligible students.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const jobSelect = document.getElementById("tech-job-select");
+          const tableBody = document.getElementById("tech-interview-table");
+
+          // 🧠 1. Restore previously selected job (if saved in localStorage)
+          const savedJobId = localStorage.getItem("selected_job_id");
+          if (savedJobId) {
+            jobSelect.value = savedJobId;
+            loadStudents(savedJobId);  // auto-load on refresh
+          }
+
+          // 🧠 2. When user changes job dropdown
+          jobSelect.addEventListener("change", () => {
+            const jobId = jobSelect.value;
+            localStorage.setItem("selected_job_id", jobId);  // save new selection
+            loadStudents(jobId);
+          });
+
+          // 🧩 Function to load students dynamically
+          async function loadStudents(jobId) {
+            if (!jobId) {
+              tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Select a job to load eligible students.</td></tr>';
+              return;
+            }
+
+            tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-primary"><i class="bi bi-hourglass-split"></i> Loading students...</td></tr>';
+
+            try {
+              const response = await fetch(`/company/get-eligible-tech-students/${jobId}/`, {
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+              });
+              const data = await response.json();
+
+              if (data.success && data.students.length > 0) {
+                tableBody.innerHTML = data.students.map((s) => `
+                  <tr>
+                    <td>${s.name}</td>
+                    <td>${s.college}</td>
+                    <td><span class="badge bg-${s.status === 'Passed' ? 'success' : 'info'}">${s.status}</span></td>
+                    <td><input type="datetime-local" class="form-control" id="slot_${s.id}" value="${s.slot || ''}"></td>
+                    <td><input type="text" class="form-control" id="link_${s.id}" value="${s.link || ''}" placeholder="Meeting Link" readonly></td>
+                    <td>
+                      ${s.link
+                        ? `<button class="btn btn-sm btn-secondary" disabled>✅ Scheduled</button>`
+                        : `<button class="btn btn-sm btn-success generate-link-btn" data-student="${s.id}" data-job="${jobId}">
+                            <i class="bi bi-link-45deg"></i> Generate & Save
+                          </button>`
+                      }
+                    </td>
+                  </tr>
+                `).join("");
+
+                attachGenerateEvents();
+              } else {
+                tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No eligible students found.</td></tr>';
+              }
+            } catch (err) {
+              console.error("Error:", err);
+              tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error loading data</td></tr>';
+            }
+          }
+
+          // 🧩 Function to attach Generate & Save events
+          function attachGenerateEvents() {
+            document.querySelectorAll(".generate-link-btn").forEach((btn) => {
+              btn.addEventListener("click", async () => {
+                const studentId = btn.dataset.student;
+                const jobId = btn.dataset.job;
+                const slotInput = document.getElementById(`slot_${studentId}`);
+                const dateValue = slotInput.value;
+
+                if (!dateValue) {
+                  showToast("Please select interview slot first", "warning");
+                  return;
+                }
+
+                btn.disabled = true;
+                btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Saving...';
+
+                try {
+                  const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+
+                  const response = await fetch(`/company/save-tech-interview/${jobId}/${studentId}/`, {
+                    method: "POST",
+                    headers: {
+                      "X-CSRFToken": csrftoken,
+                      "Content-Type": "application/json",
+                      "X-Requested-With": "XMLHttpRequest",
+                    },
+                    body: JSON.stringify({ date: dateValue }),
+                  });
+
+                  const data = await response.json();
+                  if (data.success) {
+                    document.getElementById(`link_${studentId}`).value = data.link;
+                    btn.classList.remove("btn-success");
+                    btn.classList.add("btn-secondary");
+                    btn.innerHTML = "✅ Saved";
+                    btn.disabled = true;
+                    showToast("Meeting link generated successfully", "success");
+                  } else {
+                    showToast(data.error || "Failed to save link", "danger");
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="bi bi-link-45deg"></i> Generate & Save';
+                  }
+                } catch (err) {
+                  console.error(err);
+                  showToast("Error saving link", "danger");
+                  btn.disabled = false;
+                }
+              });
+            });
+          }
+
+          // ✅ Bootstrap toast helper
+          function showToast(message, type = "success") {
+            const toast = document.createElement("div");
+            toast.className = `toast align-items-center text-white bg-${type} border-0 position-fixed bottom-0 end-0 m-3`;
+            toast.role = "alert";
+            toast.innerHTML = `
+              <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+              </div>`;
+            document.body.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast, { delay: 2000 });
+            bsToast.show();
+            toast.addEventListener("hidden.bs.toast", () => toast.remove());
+          }
+        });
+      </script>
+
+      <!-- TAB 4: HR INTERVIEW -->
+      <div id="tab-hr-interview" class="tab-pane" style="display:none;">
+        <div class="bg-white p-4 rounded-4 shadow-sm">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h5 class="fw-bold mb-0">HR Interview — Schedule</h5>
+              <div class="small-muted">Students who passed the Technical Interview will appear here</div>
+            </div>
+          </div>
+
+          <!-- Job Dropdown -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Select Job</label>
+            <select class="form-select" id="hr-job-select" required>
+              <option value="">-- Select Job --</option>
+              {% for job in jobs %}
+                <option value="{{ job.JOB_ID }}">{{ job.JOB_TITLE }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Student</th>
+                  <th>College</th>
+                  <th>Status</th>
+                  <th>Slot</th>
+                  <th>Meeting Link</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="hr-interview-table">
+                <tr>
+                  <td colspan="6" class="text-center text-muted">Select a job to load eligible students.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const jobSelect = document.getElementById("hr-job-select");
+        const tableBody = document.getElementById("hr-interview-table");
+        const bulkBtn = document.getElementById("bulk-schedule-hr");
+
+        console.log("✅ HR Interview JS loaded");
+
+        // ✅ Restore last selected job from localStorage
+        const savedJobId = localStorage.getItem("selected_hr_job_id");
+        if (savedJobId) {
+          jobSelect.value = savedJobId;
+          loadHRStudents(savedJobId);
+        }
+
+        // ✅ Event: job selection change
+        jobSelect.addEventListener("change", () => {
+          const jobId = jobSelect.value;
+          console.log("🟦 Job selected:", jobId);
+          localStorage.setItem("selected_hr_job_id", jobId);
+          loadHRStudents(jobId);
+        });
+
+        // ✅ Function: Load HR Interview eligible students
+        async function loadHRStudents(jobId) {
+          if (!jobId) {
+            tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Select a job to load eligible students.</td></tr>';
+            return;
+          }
+
+          tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-primary"><i class="bi bi-hourglass-split"></i> Loading...</td></tr>';
+
+          try {
+            const response = await fetch(`/company/get-eligible-hr-students/${jobId}/`, {
+              headers: { "X-Requested-With": "XMLHttpRequest" },
+            });
+
+            if (!response.ok) {
+              console.error("❌ Failed to fetch HR data:", response.status);
+              tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error fetching data.</td></tr>';
+              return;
+            }
+
+            const data = await response.json();
+            console.log("🟩 HR Data Response:", data);
+
+            if (data.success && data.students.length > 0) {
+              tableBody.innerHTML = data.students.map((s) => `
+                <tr>
+                  <td>${s.name}</td>
+                  <td>${s.college}</td>
+                  <td>
+                    <span class="badge bg-${s.status.includes('Rejected') ? 'danger' : s.status.includes('HR') || s.status.includes('Passed') ? 'success' : 'info'}">
+                      ${s.status}
+                    </span>
+                  </td>
+                  <td><input type="datetime-local" class="form-control" id="slot_${s.id}" value="${s.slot || ''}"></td>
+                  <td><input type="text" class="form-control" id="link_${s.id}" value="${s.link || ''}" placeholder="Meeting Link" readonly></td>
+                  <td>
+                    ${s.link
+                      ? `<button class="btn btn-sm btn-secondary" disabled>✅ Scheduled</button>`
+                      : `<button class="btn btn-sm btn-success generate-link-btn" data-student="${s.id}" data-job="${jobId}">
+                          <i class="bi bi-link-45deg"></i> Generate & Save
+                        </button>`}
+                  </td>
+                </tr>
+              `).join("");
+              attachGenerateEvents();
+            } else {
+              tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No eligible students found for this job.</td></tr>';
+            }
+          } catch (err) {
+            console.error("❌ Error loading HR students:", err);
+            tableBody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error loading data.</td></tr>';
+          }
+        }
+
+        // ✅ Function: Attach "Generate & Save" events
+        function attachGenerateEvents() {
+          document.querySelectorAll(".generate-link-btn").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+              const studentId = btn.dataset.student;
+              const jobId = btn.dataset.job;
+              const slotInput = document.getElementById(`slot_${studentId}`);
+              const dateValue = slotInput.value;
+
+              if (!dateValue) {
+                showToast("Please select interview slot first", "warning");
+                return;
+              }
+
+              btn.disabled = true;
+              btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Saving...';
+
+              try {
+                const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+                const response = await fetch(`/company/save-hr-interview/${jobId}/${studentId}/`, {
+                  method: "POST",
+                  headers: {
+                    "X-CSRFToken": csrftoken,
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                  },
+                  body: JSON.stringify({ date: dateValue }),
+                });
+
+                const data = await response.json();
+                console.log("🟩 HR Save Response:", data);
+
+                if (data.success) {
+                  document.getElementById(`link_${studentId}`).value = data.link;
+                  btn.classList.remove("btn-success");
+                  btn.classList.add("btn-secondary");
+                  btn.innerHTML = "✅ Saved";
+                  btn.disabled = true;
+                  showToast("Meeting link generated successfully", "success");
+                } else {
+                  showToast(data.error || "Failed to save link", "danger");
+                  btn.disabled = false;
+                  btn.innerHTML = '<i class="bi bi-link-45deg"></i> Generate & Save';
+                }
+              } catch (err) {
+                console.error("❌ Error saving HR link:", err);
+                showToast("Error saving link", "danger");
+                btn.disabled = false;
+              }
+            });
+          });
+        }
+
+        // ✅ Toast Helper
+        function showToast(message, type = "success") {
+          const toast = document.createElement("div");
+          toast.className = `toast align-items-center text-white bg-${type} border-0 position-fixed bottom-0 end-0 m-3`;
+          toast.role = "alert";
+          toast.innerHTML = `
+            <div class="d-flex">
+              <div class="toast-body">${message}</div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>`;
+          document.body.appendChild(toast);
+          const bsToast = new bootstrap.Toast(toast, { delay: 2000 });
+          bsToast.show();
+          toast.addEventListener("hidden.bs.toast", () => toast.remove());
+        }
+      });
+      </script>
+
+    </div> <!-- end tab-content -->
+  </div> <!-- end main-content -->
+
+  <!-- JS: Bootstrap bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ---------- TAB NAV ----------
+    document.querySelectorAll('.nav-tabs-selection .nav-link').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-tabs-selection .nav-link').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        // hide all
+        document.querySelectorAll('.tab-content .tab-pane').forEach(p => p.style.display = 'none');
+        // show target
+        const target = btn.dataset.target || btn.getAttribute('data-target');
+        document.getElementById(target).style.display = 'block';
+      });
+    });
+
+    // ---------- TECH MODE TOGGLE (coding / gd) ----------
+    document.getElementById('tech-mode').addEventListener('change', (e)=>{
+      const mode = e.target.value;
+      document.getElementById('tech-coding-section').style.display = mode === 'coding' ? 'block' : 'none';
+      document.getElementById('tech-gd-section').style.display = mode === 'gd' ? 'block' : 'none';
+    });
+
+    // ---------- SIMPLE CODING QUESTIONS (local) ----------
+    (function(){
+      const cDiv = document.getElementById('coding-questions');
+      let cQs = JSON.parse(localStorage.getItem('coding_qs')||'[]');
+      function render(){
+        cDiv.innerHTML = '';
+        cQs.forEach((q,i)=>{
+          const el = document.createElement('div');
+          el.className = 'border rounded-3 p-3 mb-3';
+          el.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <strong>Problem ${i+1}</strong>
+              <button class="btn btn-sm btn-danger coding-remove">Remove</button>
+            </div>
+            <input class="form-control coding-title mb-2" value="${q.title||''}" placeholder="Problem title">
+            <textarea class="form-control coding-desc" rows="3" placeholder="Description">${q.desc||''}</textarea>
+          `;
+          cDiv.appendChild(el);
+        });
+        // events
+        cDiv.querySelectorAll('.coding-remove').forEach((btn,idx)=>{
+          btn.addEventListener('click', ()=> { cQs.splice(idx,1); render(); });
+        });
+        cDiv.querySelectorAll('.coding-title').forEach((inp,idx)=> inp.addEventListener('input', ()=> { cQs[idx].title = inp.value; localStorage.setItem('coding_qs', JSON.stringify(cQs)); }));
+        cDiv.querySelectorAll('.coding-desc').forEach((inp,idx)=> inp.addEventListener('input', ()=> { cQs[idx].desc = inp.value; localStorage.setItem('coding_qs', JSON.stringify(cQs)); }));
+      }
+      document.getElementById('coding-add-q').addEventListener('click', ()=> { cQs.push({title:'', desc:''}); render(); });
+      document.getElementById('coding-save').addEventListener('click', ()=> { localStorage.setItem('coding_qs', JSON.stringify(cQs)); alert('Coding questions saved locally'); });
+      render();
+    })();
+  </script>
+
+</body>
+</html>

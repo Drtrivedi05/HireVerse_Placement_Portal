@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Profile | HIreVerse</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    body { background: #f4f6f8; }
+    .main-content {
+      margin-left: 240px;
+      padding: 2rem;
+    }
+    .profile-container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 2.5rem 2rem;
+    }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .profile-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #007bff;
+    }
+    .profile-details {
+      margin-bottom: 2rem;
+    }
+    .profile-details dt {
+      font-weight: 600;
+      color: #007bff;
+    }
+    .profile-details dd {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .profile-actions {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar d-flex flex-column justify-content-between" 
+      style="
+          position: fixed; 
+          top: 0; 
+          left: 0; 
+          height: 100vh; 
+          width: 240px; 
+          background: #ffffff; 
+          box-shadow: 2px 0 8px rgba(0,0,0,0.05); 
+          padding: 20px 0; 
+          z-index: 1000;
+        ">
+
+    <!-- Logo Section -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      {% load static %}
+      <img src="{% static 'assets/logo_main.png' %}" 
+          alt="HireVerse Logo" 
+          style="width: 180px; height: auto; object-fit: contain;">
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+      <a class="nav-link" href="/adminDashboard"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-speedometer2"></i> Dashboard
+      </a>
+
+      <a class="nav-link active" href="/adminProfile"
+        style="background: #e9f5ff; color: #0056b3; font-weight: 600; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-person-circle"></i> Profile
+      </a>
+
+      <a class="nav-link" href="/adminViewData"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-eye"></i> View Data
+      </a>
+
+      <a class="nav-link" href="/addCollege"
+        style="color: #007bff; font-weight: 500; font-weight: 600;
+                font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+                border-radius: 8px; display: flex; align-items: center; 
+                gap: 8px; text-decoration: none; transition: 0.2s;">
+        <i class="bi bi-person-plus"></i> Add Colleges
+      </a>
+
+      <a class="nav-link" href="/adminReports"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-bar-chart"></i> Reports
+      </a>
+    </nav>
+
+    <!-- Logout Button (Bottom Fixed) -->
+    <a class="nav-link" href="{% url 'logout' %}"
+      style="
+          color: #dc3545; 
+          font-weight: 600; 
+          font-size: 1.05rem; 
+          padding: 10px 12px; 
+          border-radius: 8px; 
+          display: flex; align-items: center; gap: 8px;
+          text-decoration: none; 
+          transition: 0.2s; 
+          border-top: 1px solid #f0f0f0; 
+          justify-content: center;
+          margin-top: auto;
+        "
+      onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+      onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+      <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+
+  </div>
+
+  <div class="main-content">
+
+    <!-- Personal Information Card -->
+    <div class="profile-container bg-white shadow-sm rounded-4 p-4" id="personalInfoCard">
+
+      <!-- Profile Header -->
+      <div class="d-flex align-items-center mb-4">
+        <div class="position-relative me-4">
+          {% if admin.profile_photo %}
+            <img src="{{ admin.profile_photo.url }}" alt="Profile Photo" 
+                id="profilePhoto" class="rounded-circle border border-3 border-primary" style="width:100px; height:100px; object-fit:cover;">
+          {% else %}
+            <img src="{% static 'assets/profile.jpeg' %}" alt="Default Profile Photo" 
+                id="profilePhoto" class="rounded-circle border border-3 border-primary" style="width:100px; height:100px; object-fit:cover;">
+          {% endif %}
+
+          <!-- Camera Icon -->
+          <input type="file" id="photoInput" name="admin_profile_photo" accept="image/*" style="display:none;">
+          <button type="button" id="editPhotoBtn" class="btn btn-light position-absolute bottom-0 end-0 border rounded-circle p-1" 
+                  title="Change Photo">
+            <i class="bi bi-camera-fill text-primary"></i>
+          </button>
+        </div>
+
+        <div>
+          <h3 class="mb-1">{{ admin.full_name }}</h3>
+          <p class="text-muted mb-0">{{ admin.role }}</p>
+        </div>
+      </div>
+
+      <!-- Display Info -->
+      <dl class="row mb-0" id="personalInfoDisplay">
+        <dt class="col-sm-5 text-primary fw-semibold">Contact Number</dt>
+        <dd class="col-sm-7">{{ admin.contact_number }}</dd>
+
+        <dt class="col-sm-5 text-primary fw-semibold">Email Address</dt>
+        <dd class="col-sm-7">{{ admin.email }}</dd>
+
+        <dt class="col-sm-5 text-primary fw-semibold">Role</dt>
+        <dd class="col-sm-7">{{ admin.role }}</dd>
+
+        <dt class="col-sm-5 text-primary fw-semibold">Permanent Address</dt>
+        <dd class="col-sm-7">{{ admin.permanent_address }}</dd>
+
+        <dt class="col-sm-5 text-primary fw-semibold">Current Address</dt>
+        <dd class="col-sm-7">{{ admin.current_address }}</dd>
+      </dl>
+      
+      <!-- Edit Form -->
+      <form method="POST" enctype="multipart/form-data" id="personalInfoForm" class="mt-3" style="display:none;">
+        {% csrf_token %}
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="fullNameInput" class="form-label fw-semibold">Full Name</label>
+            <input type="text" class="form-control" id="fullNameInput" name="full_name" value="{{ admin.full_name }}">
+          </div>
+          <div class="col-md-6">
+            <label for="roleInput" class="form-label fw-semibold">Role</label>
+            <input type="text" class="form-control" id="roleInput" name="role" value="{{ admin.role }}" disabled>
+          </div>
+          <div class="col-md-6">
+            <label for="contactInput" class="form-label fw-semibold">Contact Number</label>
+            <input type="tel" min="10" max="10" class="form-control" id="contactInput" name="contact_number" required pattern="\d{10}" value="{{ admin.contact_number }}">
+          </div>
+          <div class="col-md-6">
+            <label for="emailInput" class="form-label fw-semibold">Email Address</label>
+            <input type="email" class="form-control" id="emailInput" name="email" value="{{ admin.email }}">
+          </div>
+          <div class="col-md-6">
+            <label for="permanentInput" class="form-label fw-semibold">Permanent Address</label>
+            <input type="text" class="form-control" id="permanentInput" name="permanent_address" value="{{ admin.permanent_address }}">
+          </div>
+          <div class="col-md-6">
+            <label for="currentInput" class="form-label fw-semibold">Current Address</label>
+            <input type="text" class="form-control" id="currentInput" name="current_address" value="{{ admin.current_address }}">
+          </div>
+        </div>
+        <div class="mt-3 text-end">
+          <button type="button" class="btn btn-secondary me-2" id="cancelPersonalBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+
+      <!-- Edit Button -->
+      <div class="text-end mt-3">
+        <button class="btn btn-outline-primary" id="editPersonalBtn"><i class="bi bi-pencil-fill"></i> Edit</button>
+      </div>
+    </div>
+
+    <!-- Account Settings Card -->
+    <div class="profile-container mt-4" id="accountSettingsCard">
+      <h4 class="mb-3" style="color:#007bff;">Account Settings</h4>
+      {% for message in messages %}
+        {% if 'password' in message.tags %}
+          {% if message.level_tag == "error" %}
+            <div class="alert alert-danger mt-2">{{ message }}</div>
+          {% elif message.level_tag == "success" %}
+            <div class="alert alert-success mt-2">{{ message }}</div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      <form method="POST" id="changePasswordForm">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="oldPassword" class="form-label">Old Password</label>
+          <input type="password" class="form-control" id="oldPassword" name="old_password" placeholder="Enter old password" required>
+        </div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">New Password</label>
+          <input type="password" class="form-control" id="newPassword" name="new_password" placeholder="Enter new password" required>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" name="confirm_password" placeholder="Confirm new password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Change Password</button>
+        <div id="passwordMsg" class="mt-3"></div>
+      </form>
+    </div>
+
+  </div>
+
+  <script>
+    const editBtn = document.getElementById('editPersonalBtn');
+    const form = document.getElementById('personalInfoForm');
+    const display = document.getElementById('personalInfoDisplay');
+    const cancelBtn = document.getElementById('cancelPersonalBtn');
+    
+    const editPhotoBtn = document.getElementById('editPhotoBtn');
+    const photoInput = document.getElementById('photoInput');
+    const profilePhoto = document.getElementById('profilePhoto');
+    
+    // Show form when clicking Edit
+    editBtn.addEventListener('click', () => {
+        form.style.display = 'block';
+        display.style.display = 'none';
+        editBtn.style.display = 'none';
+    });
+    
+    // Cancel editing
+    cancelBtn.addEventListener('click', () => {
+        form.style.display = 'none';
+        display.style.display = 'block';
+        editBtn.style.display = 'inline-block';
+    });
+    
+    // Trigger file input when clicking camera icon
+    editPhotoBtn.addEventListener('click', () => {
+        photoInput.click();
+    });
+    
+    // Preview selected photo before submitting
+    photoInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if(file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                profilePhoto.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+    </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

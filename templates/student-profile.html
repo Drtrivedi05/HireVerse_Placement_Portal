@@ -1,0 +1,931 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile | HireVerse</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    body { background: #f4f6f8; }
+    .sidebar { min-height: 100vh; background: #fff; box-shadow: 2px 0 8px rgba(0,0,0,0.04); width: 240px; position: fixed; top: 0; left: 0; z-index: 1000; }
+    .sidebar .nav-link { color: #007bff; margin-bottom: 1rem; font-weight: 500; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; border-radius: 8px; padding: 0.75rem 1rem; transition: background 0.2s; }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover { background: #e9f5ff; color: #0056b3; }
+    .profile-container { max-width: 750px; margin: 3rem auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 2.5rem 2rem; }
+    .profile-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+    .profile-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+    dt { font-weight: 600; color: #007bff; }
+    dd { margin-bottom: 1rem; color: #333; }
+    .text-end { text-align: right; }
+    .card-header { font-weight:600; font-size:1.1rem; margin-bottom:1rem; color:#007bff; display:flex; justify-content:space-between; align-items:center; }
+    table th, table td { vertical-align: middle !important; }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar d-flex flex-column justify-content-between"
+     style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 240px;
+        background: #ffffff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+        padding: 20px 0;
+        z-index: 1000;
+     ">
+
+  <!-- Logo Section -->
+  <div style="text-align: center; margin-bottom: 20px;">
+    {% load static %}
+    <img src="{% static 'assets/logo_main.png' %}" 
+         alt="HireVerse Logo" 
+         style="width: 180px; height: auto; object-fit: contain;">
+  </div>
+
+  <!-- Navigation Links -->
+  <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+    
+    <a class="nav-link" href="/studentDashboard"
+       style="color: #007bff; font-weight: 500;
+              font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+              border-radius: 8px; display: flex; align-items: center; 
+              gap: 8px; text-decoration: none; transition: 0.2s;">
+      <i class="bi bi-speedometer2 me-2"></i> Dashboard
+    </a>
+
+    <a class="nav-link active" href="/studentProfile"
+       style="background: #e9f5ff; color: #0056b3; font-weight: 600; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-person-circle me-2"></i> Profile
+    </a>
+
+    <a class="nav-link" href="/studentCompanies"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-people me-2"></i> Companies
+    </a>
+
+    <a class="nav-link" href="/studentTest"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-clipboard-check me-2"></i> Attend Test
+    </a>
+
+    <a class="nav-link" href="/studentReport"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-bar-chart me-2"></i> Reports
+    </a>
+
+  </nav>
+
+  <!-- Logout Button (Bottom Fixed) -->
+  <a class="nav-link" href="{% url 'logout' %}"
+     style="
+        color: #dc3545; 
+        font-weight: 600; 
+        font-size: 1.05rem; 
+        padding: 10px 12px; 
+        border-radius: 8px; 
+        display: flex; align-items: center; gap: 8px;
+        text-decoration: none; 
+        transition: 0.2s; 
+        border-top: 1px solid #f0f0f0; 
+        justify-content: center;
+        margin-top: auto;
+     "
+     onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+     onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+    <i class="bi bi-box-arrow-right me-2"></i> Logout
+  </a>
+
+</div>
+
+
+  <div class="main-content">
+
+    <!-- Personal Info Card -->
+    <div class="profile-container" id="personalInfoCard">
+      <!-- PERSONAL INFO MESSAGES -->
+      {% if messages %}
+        {% for message in messages %}
+          {% if 'personal' in message.tags %}
+            <div class="alert alert-{{ message.level_tag }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Personal Information</span>
+        <button class="btn btn-sm btn-outline-primary" id="editPersonalBtn"><i class="bi bi-pencil"></i> Edit</button>
+      </div>
+
+      <!-- Display Section -->
+      <div id="personalInfoDisplay" class="mt-3">
+        <div class="profile-header d-flex align-items-center mb-3">
+          <img src="{% if student.STUDENT_PROFILE_PHOTO %}{{ student.STUDENT_PROFILE_PHOTO.url }}{% else %}{% static 'assets/profile.jpeg' %}{% endif %}" class="profile-avatar rounded-circle me-3" id="profileAvatar" style="width:80px;height:80px;object-fit:cover;">
+          <div>
+            <h3 class="mb-0">{{ student.STUDENT_NAME|default:"N/A" }}</h3>
+            <div class="text-muted">{{ student.STUDENT_COURSE|default:"N/A" }} | {{ student.STUDENT_BRANCH|default:"N/A" }}</div>
+          </div>
+        </div>
+        <dl class="row">
+          <dt class="col-sm-5">Enrollment Number</dt><dd class="col-sm-7">{{ student.STUDENT_ENROLLMENT_NUMBER|default:"N/A" }}</dd>
+          <dt class="col-sm-5">Date of Birth</dt><dd class="col-sm-7">{{ student.STUDENT_DATE_OF_BIRTH|default:"N/A" }}</dd>
+          <dt class="col-sm-5">Gender</dt><dd class="col-sm-7">{{ student.STUDENT_GENDER|default:"N/A" }}</dd>
+          <dt class="col-sm-5">Phone</dt><dd class="col-sm-7">{{ student.STUDENT_PHONE_NO|default:"N/A" }}</dd>
+          <dt class="col-sm-5">Email</dt><dd class="col-sm-7">{{ student.STUDENT_EMAIL|default:"N/A" }}</dd>
+          <dt class="col-sm-5">Permanent Address</dt><dd class="col-sm-7">{{ student.STUDENT_PERMANENT_ADDRESS|default:"N/A" }}</dd>
+          <dt class="col-sm-5">Current Address</dt><dd class="col-sm-7">{{ student.STUDENT_CURRENT_ADDRESS|default:"N/A" }}</dd>
+          <dt class="col-sm-5">Current Semester</dt><dd class="col-sm-7">{{ student.STUDENT_CURRENT_SEMSETER|default:"N/A" }}</dd>
+        </dl>
+      </div>
+
+      <!-- Edit Form Section -->
+      <form id="personalInfoForm" method="POST" enctype="multipart/form-data" style="display:none;" class="mt-3">
+        {% csrf_token %}
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Profile Photo</label>
+            <input type="file" class="form-control" name="STUDENT_PROFILE_PHOTO" accept="image/*" id="profilePhotoInput">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Roll Number</label>
+            <input type="text" class="form-control" name="STUDENT_ROLL_NO" value="{{ student.STUDENT_ROLL_NO }}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Enrollment Number</label>
+            <input type="text" class="form-control" name="STUDENT_ENROLLMENT_NUMBER" value="{{ student.STUDENT_ENROLLMENT_NUMBER }}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" name="STUDENT_DATE_OF_BIRTH" value="{{ student.STUDENT_DATE_OF_BIRTH }}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Gender</label>
+            <select class="form-select" name="STUDENT_GENDER">
+              <option value="Male" {% if student.STUDENT_GENDER == "Male" %}selected{% endif %}>Male</option>
+              <option value="Female" {% if student.STUDENT_GENDER == "Female" %}selected{% endif %}>Female</option>
+              <option value="Other" {% if student.STUDENT_GENDER == "Other" %}selected{% endif %}>Other</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Phone</label>
+            <input type="tel" max="10" min="10" class="form-control" name="STUDENT_PHONE_NO" value="{{ student.STUDENT_PHONE_NO }}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="STUDENT_EMAIL" value="{{ student.STUDENT_EMAIL }}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Permanent Address</label>
+            <input type="text" class="form-control" name="STUDENT_PERMANENT_ADDRESS" value="{{ student.STUDENT_PERMANENT_ADDRESS }}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Current Address</label>
+            <input type="text" class="form-control" name="STUDENT_CURRENT_ADDRESS" value="{{ student.STUDENT_CURRENT_ADDRESS }}">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Current Semester</label>
+            <input type="text" class="form-control" name="STUDENT_CURRENT_SEMSETER" value="{{ student.STUDENT_CURRENT_SEMSETER }}">
+          </div>
+        </div>
+        <div class="mt-3 text-end">
+          <button type="button" class="btn btn-secondary me-2" id="cancelPersonalBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Contact & Social Links Card -->
+    <div class="profile-container mt-4" id="contactCard">
+      <!-- Contact MESSAGES -->
+      {% if messages %}
+        {% for message in messages %}
+          {% if 'contact' in message.tags %}
+            <div class="alert alert-{{ message.level_tag }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Contact & Social Links</span>
+        <button class="btn btn-sm btn-outline-primary" id="editContactBtn"><i class="bi bi-pencil"></i> Edit</button>
+      </div>
+
+      <!-- Display Section -->
+      <div id="contactDisplay" class="mt-3">
+        <dl class="row">
+          <dt class="col-sm-5">LinkedIn</dt>
+          <dd class="col-sm-7">{{ student.STUDENT_LINKEDIN_URL|default:"N/A" }}</dd>
+
+          <dt class="col-sm-5">GitHub</dt>
+          <dd class="col-sm-7">{{ student.STUDENT_GITHUB_LINK|default:"N/A" }}</dd>
+
+          <dt class="col-sm-5">Website / Portfolio</dt>
+          <dd class="col-sm-7">{{ student.STUDENT_PERSONAL_WEBSITE_PORTFOLIO|default:"N/A" }}</dd>
+
+          <dt class="col-sm-5">Resume</dt>
+          <dd class="col-sm-7">
+            {% if student.STUDENT_RESUME %}
+              <a href="{{ student.STUDENT_RESUME.url }}" target="_blank">View Resume</a>
+            {% else %}
+              N/A
+            {% endif %}
+          </dd>
+        </dl>
+      </div>
+
+      <!-- Edit Form Section -->
+      <form id="contactForm" method="POST" enctype="multipart/form-data" style="display:none;" class="mt-3">
+        {% csrf_token %}
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">LinkedIn</label>
+            <input type="url" class="form-control" name="STUDENT_LINKEDIN_URL" value="{{ student.STUDENT_LINKEDIN_URL }}">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">GitHub</label>
+            <input type="url" class="form-control" name="STUDENT_GITHUB_LINK" value="{{ student.STUDENT_GITHUB_LINK }}">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Website / Portfolio</label>
+            <input type="url" class="form-control" name="STUDENT_PERSONAL_WEBSITE_PORTFOLIO" value="{{ student.STUDENT_PERSONAL_WEBSITE_PORTFOLIO }}">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Resume</label>
+            <input type="file" class="form-control" name="STUDENT_RESUME">
+            {% if student.STUDENT_RESUME %}
+              <small class="text-muted">Current file: <a href="{{ student.STUDENT_RESUME.url }}" target="_blank">{{ student.STUDENT_RESUME.name }}</a></small>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="mt-3 text-end">
+          <button type="button" class="btn btn-secondary me-2" id="cancelContactBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+
+
+
+    <!-- JavaScript for toggling edit forms and preview -->
+    <script>
+      // PERSONAL INFO TOGGLE
+      const editPersonalBtn = document.getElementById('editPersonalBtn');
+      const personalInfoDisplay = document.getElementById('personalInfoDisplay');
+      const personalInfoForm = document.getElementById('personalInfoForm');
+      const cancelPersonalBtn = document.getElementById('cancelPersonalBtn');
+
+      editPersonalBtn.addEventListener('click', () => {
+        personalInfoDisplay.style.display = 'none';
+        personalInfoForm.style.display = 'block';
+        window.scrollTo({ top: personalInfoForm.offsetTop - 20, behavior: 'smooth' });
+      });
+
+      cancelPersonalBtn.addEventListener('click', () => {
+        personalInfoForm.style.display = 'none';
+        personalInfoDisplay.style.display = 'block';
+      });
+
+      // CONTACT TOGGLE
+      const editContactBtn = document.getElementById('editContactBtn');
+      const contactDisplay = document.getElementById('contactDisplay');
+      const contactForm = document.getElementById('contactForm');
+      const cancelContactBtn = document.getElementById('cancelContactBtn');
+
+      editContactBtn.addEventListener('click', () => {
+        contactDisplay.style.display = 'none';
+        contactForm.style.display = 'block';
+        window.scrollTo({ top: contactForm.offsetTop - 20, behavior: 'smooth' });
+      });
+
+      cancelContactBtn.addEventListener('click', () => {
+        contactForm.style.display = 'none';
+        contactDisplay.style.display = 'block';
+      });
+
+      // PROFILE PHOTO PREVIEW
+      const profilePhotoInput = document.getElementById('profilePhotoInput');
+      const profileAvatar = document.getElementById('profileAvatar');
+
+      profilePhotoInput.addEventListener('change', function(event) {
+        const [file] = profilePhotoInput.files;
+        if (file) { profileAvatar.src = URL.createObjectURL(file); }
+      });
+    </script>
+
+
+    <!-- ===================== CARDS: Education / Certification / Project / Internship ===================== -->
+
+    <!-- Education Card -->
+    <div class="profile-container mt-4">
+      <div id="passwordMessages" class="mb-2">
+        {% for message in messages %}
+          {% if 'education' in message.tags %}
+            <div class="alert alert-{{ message.level_tag }} alert-dismissible fade show m-0" role="alert" style="font-size: 0.85rem;">
+              {{ message }}
+              <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="card-header">
+        Education
+        <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#addEducationModal"><i class="bi bi-plus"></i> Add</button>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Degree</th>
+            <th>Institution</th>
+            <th>Board/Universtiy</th>
+            <th>Year</th>
+            <th>Score</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for edu in educations %}
+            <tr>
+              <td>{{ edu.EDUCATION_LEVEL|default:"N/A" }}</td>
+              <td>{{ edu.INSTITUTE_NAME|default:"N/A" }}</td>
+              <td>{{ edu.BOARD_UNIVERSITY|default:"N/A" }}</td>
+              <td>{{ edu.YEAR_OF_PASSING|default:"N/A" }}</td>
+              <td>{{ edu.PERCENTAGE|default:"N/A" }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary editEducationBtn" 
+                        data-bs-toggle="modal" data-bs-target="#editEducationModal"
+                        data-id="{{ edu.education_id }}"
+                        data-level="{{ edu.EDUCATION_LEVEL }}"
+                        data-institute="{{ edu.INSTITUTE_NAME }}"
+                        data-university="{{ edu.BOARD_UNIVERSITY }}"
+                        data-year="{{ edu.YEAR_OF_PASSING }}"
+                        data-score="{{ edu.PERCENTAGE }}">
+                  <i class="bi bi-pencil"></i>
+                </button>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="5" class="text-center">No Education yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Internships Card -->
+    <div class="profile-container mt-4">
+      <div id="passwordMessages" class="mb-2">
+        {% for message in messages %}
+          {% if 'internship' in message.tags %}
+            <div class="alert alert-{{ message.level_tag }} alert-dismissible fade show m-0" role="alert" style="font-size: 0.85rem;">
+              {{ message }}
+              <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="card-header">
+        Internships
+        <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#addInternshipModal"><i class="bi bi-plus"></i> Add</button>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th><th>Domain</th><th>Company</th><th>Description</th><th>Duration</th><th>Certificate</th><th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for internship in internships %}
+            <tr>
+              <td>{{ internship.INTERNSHIP_TITLE }}</td>
+              <td>{{ internship.INTERNSHIP_DOMAIN }}</td>
+              <td>{{ internship.COMPANY}}</td>
+              <td>{{ internship.INTERNSHIP_DESCRIPTION }}</td>
+              <td>{{ internship.INTERNSHIP_START_DATE }} to {{ internship.INTERNSHIP_END_DATE }}</td>
+              <td>{{ internship.INTERNSHIP_CERTIFICATE|default:"N/A" }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary editInternshipBtn" 
+                        data-bs-toggle="modal" data-bs-target="#editInternshipModal"
+                        data-id="{{ internship.internship_id }}"
+                        data-title="{{ internship.INTERNSHIP_TITLE }}"
+                        data-domain="{{ internship.INTERNSHIP_DOMAIN }}"
+                        data-company="{{ internship.COMPANY }}"
+                        data-desc="{{ internship.INTERNSHIP_DESCRIPTION }}"
+                        data-start="{{ internship.INTERNSHIP_START_DATE }}"
+                        data-end="{{ internship.INTERNSHIP_END_DATE }}"
+                        data-certificate="{{ internship.INTERNSHIP_CERTIFICATE }}">
+                  <i class="bi bi-pencil"></i>
+                </button>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="6" class="text-center">No internships yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Projects Card -->
+    <div class="profile-container mt-4">
+      <div id="passwordMessages" class="mb-2">
+        {% for message in messages %}
+          {% if 'project' in message.tags %}
+            <div class="alert alert-{{ message.level_tag }} alert-dismissible fade show m-0" role="alert" style="font-size: 0.85rem;">
+              {{ message }}
+              <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="card-header">
+        Projects
+        <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#addProjectModal"><i class="bi bi-plus"></i> Add</button>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th><th>Domain</th><th>Role</th><th>Description</th><th>Status</th><th>Duration</th><th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for project in projects %}
+            <tr>
+              <td>{{ project.PROJECT_TITLE }}</td>
+              <td>{{ project.PROJECT_DOMAIN }}</td>
+              <td>{{ project.PROJECT_ROLE }}</td>
+              <td>{{ project.PROJECT_DESCRIPTION }}</td>
+              <td>{{ project.PROJECT_STATUS }}</td>
+              <td>{{ project.PROJECT_START_DATE }} to {{ project.PROJECT_END_DATE }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary editProjectBtn" 
+                        data-bs-toggle="modal" data-bs-target="#editProjectModal"
+                        data-id="{{ project.project_id }}"
+                        data-title="{{ project.PROJECT_TITLE }}"
+                        data-domain="{{ project.PROJECT_DOMAIN }}"
+                        data-role="{{ project.PROJECT_ROLE }}"
+                        data-desc="{{ project.PROJECT_DESCRIPTION }}"
+                        data-status="{{ project.PROJECT_STATUS }}"
+                        data-start="{{ project.PROJECT_START_DATE }}"
+                        data-end="{{ project.PROJECT_END_DATE }}">
+                  <i class="bi bi-pencil"></i>
+                </button>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="6" class="text-center">No projects yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Certification Card -->
+    <div class="profile-container mt-4">
+      <div id="passwordMessages" class="mb-2">
+        {% for message in messages %}
+          {% if 'certificate' in message.tags %}
+            <div class="alert alert-{{ message.level_tag }} alert-dismissible fade show m-0" role="alert" style="font-size: 0.85rem;">
+              {{ message }}
+              <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="card-header">
+        Certifications
+        <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#addCertModal"><i class="bi bi-plus"></i> Add</button>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th><th>Domain</th><th>Authority</th><th>Date</th><th>URL</th><th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cert in certifications %}
+            <tr>
+              <td>{{ cert.CERTIFICATE_NAME }}</td>
+              <td>{{ cert.CERTIFICATE_DOMAIN }}</td>
+              <td>{{ cert.CERTIFICATE_AUTHORITY }}</td>
+              <td>{{ cert.CERTIFICATE_DATE }}</td>
+              <td><a href="{{ cert.CERTIFICATE_URL }}" target="_blank">{{ cert.CERTIFICATE_URL }}</a></td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary editCertBtn" 
+                        data-bs-toggle="modal" data-bs-target="#editCertModal"
+                        data-id="{{ cert.certificate_id }}"
+                        data-name="{{ cert.CERTIFICATE_NAME }}"
+                        data-domain="{{ cert.CERTIFICATE_DOMAIN }}"
+                        data-authority="{{ cert.CERTIFICATE_AUTHORITY }}"
+                        data-date="{{ cert.CERTIFICATE_DATE }}"
+                        data-url="{{ cert.CERTIFICATE_URL }}">
+                  <i class="bi bi-pencil"></i>
+                </button>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="6" class="text-center">No certifications yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===================== MODALS ===================== -->
+
+    <!-- Add/Edit Education Modal -->
+    <div class="modal fade" id="addEducationModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog">
+        <form method="POST" id="addEducationForm">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="education">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Education</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3"><label class="form-label">Degree</label><input type="text" class="form-control" name="EDUCATION_LEVEL" required></div>
+              <div class="mb-3"><label class="form-label">Institution</label><input type="text" class="form-control" name="INSTITUTE_NAME" required></div>
+              <div class="mb-3"><label class="form-label">Board / Universtiy</label><input type="text" class="form-control" name="BOARD_UNIVERSITY" required></div>
+              <div class="mb-3"><label class="form-label">Year of Passing</label><input type="text" class="form-control" name="YEAR_OF_PASSING" required></div>
+              <div class="mb-3"><label class="form-label">Score</label><input type="text" class="form-control" name="PERCENTAGE" required></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-success">Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editEducationModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog">
+        <form method="POST" id="editEducationForm">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="education"> <!-- ✅ Added -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Edit Education</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3"><label class="form-label">Degree</label><input type="text" class="form-control" name="EDUCATION_LEVEL" id="editEduLevel" required></div>
+              <div class="mb-3"><label class="form-label">Institution</label><input type="text" class="form-control" name="INSTITUTE_NAME" id="editEduInstitute" required></div>
+              <div class="mb-3"><label class="form-label">Board/University</label><input type="text" class="form-control" name="BOARD_UNIVERSITY" id="editEduBoardUniversity" required></div>
+              <div class="mb-3"><label class="form-label">Year of Passing</label><input type="text" class="form-control" name="YEAR_OF_PASSING" id="editEduYear" required></div>
+              <div class="mb-3"><label class="form-label">Score</label><input type="text" class="form-control" name="PERCENTAGE" id="editEduScore" required></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add/Edit Certification Modal -->
+    <div class="modal fade" id="addCertModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog">
+        <form method="POST" id="addCertForm">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="certification">
+          <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Add Certification</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-3"><label class="form-label">Name</label><input type="text" class="form-control" name="CERTIFICATE_NAME" required></div>
+              <div class="mb-3"><label class="form-label">Domain</label><input type="text" class="form-control" name="CERTIFICATE_DOMAIN" required></div>
+              <div class="mb-3"><label class="form-label">Authority</label><input type="text" class="form-control" name="CERTIFICATE_AUTHORITY" required></div>
+              <div class="mb-3"><label class="form-label">Date</label><input type="date" class="form-control" name="CERTIFICATE_DATE" required></div>
+              <div class="mb-3"><label class="form-label">URL</label><input type="url" class="form-control" name="CERTIFICATE_URL"></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-success">Add</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editCertModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog">
+        <form method="POST" id="editCertForm">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="certification"> <!-- ✅ Added -->
+          <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Edit Certification</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-3"><label class="form-label">Name</label><input type="text" class="form-control" name="CERTIFICATE_NAME" id="editCertName" required></div>
+              <div class="mb-3"><label class="form-label">Domain</label><input type="text" class="form-control" name="CERTIFICATE_DOMAIN" id="editCertDomain" required></div>
+              <div class="mb-3"><label class="form-label">Authority</label><input type="text" class="form-control" name="CERTIFICATE_AUTHORITY" id="editCertAuthority" required></div>
+              <div class="mb-3"><label class="form-label">Date</label><input type="date" class="form-control" name="CERTIFICATE_DATE" id="editCertDate" required></div>
+              <div class="mb-3"><label class="form-label">URL</label><input type="url" class="form-control" name="CERTIFICATE_URL" id="editCertUrl"></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-primary">Save Changes</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add/Edit Project Modal -->
+    <div class="modal fade" id="addProjectModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog">
+        <form method="POST" id="addProjectForm">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="project">
+          <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Add Project</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-3"><label class="form-label">Title</label><input type="text" class="form-control" name="PROJECT_TITLE" required></div>
+              <div class="mb-3"><label class="form-label">Domain</label><input type="text" class="form-control" name="PROJECT_DOMAIN" required></div>
+              <div class="mb-3"><label class="form-label">Role</label><input type="text" class="form-control" name="PROJECT_ROLE" required></div>
+              <div class="mb-3"><label class="form-label">Description</label><input type="text" class="form-control" name="PROJECT_DESCRIPTION" required></div>
+              <div class="mb-3"><label class="form-label">Status</label><input type="text" class="form-control" name="PROJECT_STATUS" required></div>
+              <div class="mb-3"><label class="form-label">Start Date</label><input type="date" class="form-control" name="PROJECT_START_DATE" required></div>
+              <div class="mb-3"><label class="form-label">End Date</label><input type="date" class="form-control" name="PROJECT_END_DATE" required></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-success">Add</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editProjectModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog">
+        <form method="POST" id="editProjectForm">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="project"> <!-- ✅ Added -->
+          <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Edit Project</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-3"><label class="form-label">Title</label><input type="text" class="form-control" name="PROJECT_TITLE" id="editProjectTitle" required></div>
+              <div class="mb-3"><label class="form-label">Domain</label><input type="text" class="form-control" name="PROJECT_DOMAIN" id="editProjectDomain" required></div>
+              <div class="mb-3"><label class="form-label">Role</label><input type="text" class="form-control" name="PROJECT_ROLE" id="editProjectRole" required></div>
+              <div class="mb-3"><label class="form-label">Description</label><input type="text" class="form-control" name="PROJECT_DESCRIPTION" id="editProjectDesc" required></div>
+              <div class="mb-3"><label class="form-label">Status</label><input type="text" class="form-control" name="PROJECT_STATUS" id="editProjectStatus" required></div>
+              <div class="mb-3"><label class="form-label">Start Date</label><input type="date" class="form-control" name="PROJECT_START_DATE" id="editProjectStart" required></div>
+              <div class="mb-3"><label class="form-label">End Date</label><input type="date" class="form-control" name="PROJECT_END_DATE" id="editProjectEnd" required></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-primary">Save Changes</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add/Edit Internship Modal -->
+    <div class="modal fade" id="addInternshipModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog">
+        <form method="POST" id="addInternshipForm">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="internship">
+          <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Add Internship</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-3"><label class="form-label">Title</label><input type="text" class="form-control" name="INTERNSHIP_TITLE" required></div>
+              <div class="mb-3"><label class="form-label">Domain</label><input type="text" class="form-control" name="INTERNSHIP_DOMAIN" required></div>
+              <div class="mb-3"><label class="form-label">Company</label><input type="text" class="form-control" name="INTERNSHIP_COMPANY" required></div>
+              <div class="mb-3"><label class="form-label">Description</label><input type="text" class="form-control" name="INTERNSHIP_DESCRIPTION" required></div>
+              <div class="mb-3"><label class="form-label">Start Date</label><input type="date" class="form-control" name="INTERNSHIP_START_DATE" required></div>
+              <div class="mb-3"><label class="form-label">End Date</label><input type="date" class="form-control" name="INTERNSHIP_END_DATE" required></div>
+              <div class="mb-3"><label class="form-label">Certificate</label><input type="text" class="form-control" name="INTERNSHIP_CERTIFICATE"></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-success">Add</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editInternshipModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog">
+        <form method="POST" id="editInternshipForm">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="internship"> <!-- ✅ Added -->
+          <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Edit Internship</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+              <div class="mb-3"><label class="form-label">Title</label><input type="text" class="form-control" name="INTERNSHIP_TITLE" id="editInternshipTitle" required></div>
+              <div class="mb-3"><label class="form-label">Domain</label><input type="text" class="form-control" name="INTERNSHIP_DOMAIN" id="editInternshipDomain" required></div>
+              <div class="mb-3"><label class="form-label">Company</label><input type="text" class="form-control" name="INTERNSHIP_COMPANY" id="editInternshipCompany" required></div>
+              <div class="mb-3"><label class="form-label">Description</label><input type="text" class="form-control" name="INTERNSHIP_DESCRIPTION" id="editInternshipDesc" required></div>
+              <div class="mb-3"><label class="form-label">Start Date</label><input type="date" class="form-control" name="INTERNSHIP_START_DATE" id="editInternshipStart" required></div>
+              <div class="mb-3"><label class="form-label">End Date</label><input type="date" class="form-control" name="INTERNSHIP_END_DATE" id="editInternshipEnd" required></div>
+              <div class="mb-3"><label class="form-label">Certificate</label><input type="text" class="form-control" name="INTERNSHIP_CERTIFICATE" id="editInternshipCert"></div>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-primary">Save Changes</button></div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // ======== EDUCATION EDIT ========
+        const editEducationButtons = document.querySelectorAll(".editEducationBtn");
+        editEducationButtons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            document.querySelector("#editEducationForm input[name='EDUCATION_LEVEL']").value = btn.dataset.level || "";
+            document.querySelector("#editEducationForm input[name='INSTITUTE_NAME']").value = btn.dataset.institute || "";
+            document.querySelector("#editEducationForm input[name='BOARD_UNIVERSITY']").value = btn.dataset.university || "";
+            document.querySelector("#editEducationForm input[name='YEAR_OF_PASSING']").value = btn.dataset.year || "";
+            document.querySelector("#editEducationForm input[name='PERCENTAGE']").value = btn.dataset.score || "";
+
+            // Add hidden input for ID
+            let idInput = document.querySelector("#editEducationForm input[name='EDUCATION_ID']");
+            if (!idInput) {
+              idInput = document.createElement("input");
+              idInput.type = "hidden";
+              idInput.name = "EDUCATION_ID";
+              document.querySelector("#editEducationForm").appendChild(idInput);
+            }
+            idInput.value = btn.dataset.id;
+          });
+        });
+
+        // ======== INTERNSHIP EDIT ========
+        const editInternshipButtons = document.querySelectorAll(".editInternshipBtn");
+        editInternshipButtons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            document.querySelector("#editInternshipForm input[name='INTERNSHIP_TITLE']").value = btn.dataset.title || "";
+            document.querySelector("#editInternshipForm input[name='INTERNSHIP_DOMAIN']").value = btn.dataset.domain || "";
+            document.querySelector("#editInternshipForm input[name='INTERNSHIP_COMPANY']").value = btn.dataset.company || "";
+            document.querySelector("#editInternshipForm input[name='INTERNSHIP_DESCRIPTION']").value = btn.dataset.desc || "";
+            document.querySelector("#editInternshipForm input[name='INTERNSHIP_START_DATE']").value = btn.dataset.start || "";
+            document.querySelector("#editInternshipForm input[name='INTERNSHIP_END_DATE']").value = btn.dataset.end || "";
+            document.querySelector("#editInternshipForm input[name='INTERNSHIP_CERTIFICATE']").value = btn.dataset.certificate || "";
+
+            let idInput = document.querySelector("#editInternshipForm input[name='INTERNSHIP_ID']");
+            if (!idInput) {
+              idInput = document.createElement("input");
+              idInput.type = "hidden";
+              idInput.name = "INTERNSHIP_ID";
+              document.querySelector("#editInternshipForm").appendChild(idInput);
+            }
+            idInput.value = btn.dataset.id;
+          });
+        });
+
+        // ======== PROJECT EDIT ========
+        const editProjectButtons = document.querySelectorAll(".editProjectBtn");
+        editProjectButtons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            document.querySelector("#editProjectForm input[name='PROJECT_TITLE']").value = btn.dataset.title || "";
+            document.querySelector("#editProjectForm input[name='PROJECT_DOMAIN']").value = btn.dataset.domain || "";
+            document.querySelector("#editProjectForm input[name='PROJECT_ROLE']").value = btn.dataset.role || "";
+            document.querySelector("#editProjectForm input[name='PROJECT_DESCRIPTION']").value = btn.dataset.desc || "";
+            document.querySelector("#editProjectForm input[name='PROJECT_STATUS']").value = btn.dataset.status || "";
+            document.querySelector("#editProjectForm input[name='PROJECT_START_DATE']").value = btn.dataset.start || "";
+            document.querySelector("#editProjectForm input[name='PROJECT_END_DATE']").value = btn.dataset.end || "";
+
+            let idInput = document.querySelector("#editProjectForm input[name='PROJECT_ID']");
+            if (!idInput) {
+              idInput = document.createElement("input");
+              idInput.type = "hidden";
+              idInput.name = "PROJECT_ID";
+              document.querySelector("#editProjectForm").appendChild(idInput);
+            }
+            idInput.value = btn.dataset.id;
+          });
+        });
+
+        // ======== CERTIFICATION EDIT ========
+        const editCertButtons = document.querySelectorAll(".editCertBtn");
+        editCertButtons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            document.querySelector("#editCertForm input[name='CERTIFICATE_NAME']").value = btn.dataset.name || "";
+            document.querySelector("#editCertForm input[name='CERTIFICATE_DOMAIN']").value = btn.dataset.domain || "";
+            document.querySelector("#editCertForm input[name='CERTIFICATE_AUTHORITY']").value = btn.dataset.authority || "";
+            document.querySelector("#editCertForm input[name='CERTIFICATE_DATE']").value = btn.dataset.date || "";
+            document.querySelector("#editCertForm input[name='CERTIFICATE_URL']").value = btn.dataset.url || "";
+
+            let idInput = document.querySelector("#editCertForm input[name='CERTIFICATE_ID']");
+            if (!idInput) {
+              idInput = document.createElement("input");
+              idInput.type = "hidden";
+              idInput.name = "CERTIFICATE_ID";
+              document.querySelector("#editCertForm").appendChild(idInput);
+            }
+            idInput.value = btn.dataset.id;
+          });
+        });
+      });
+    </script>
+
+
+    <!-- Account Settings Card -->
+    <div class="profile-container mt-4" id="accountSettingsCard">
+      <h4 class="mb-3" style="color:#007bff;">Account Settings</h4>
+      <!-- Password Messages -->
+      <div id="passwordMessages" class="mb-2">
+        {% for message in messages %}
+          {% if 'password' in message.tags %}
+            <div class="alert alert-{{ message.level_tag }} alert-dismissible fade show m-0" role="alert" style="font-size: 0.85rem;">
+              {{ message }}
+              <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <form id="changePasswordForm" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="oldPassword" class="form-label">Old Password</label>
+          <input type="password" class="form-control" id="oldPassword" name="old_password" placeholder="Enter old password" required>
+        </div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">New Password</label>
+          <input type="password" class="form-control" id="newPassword" name="new_password" placeholder="Enter new password" required>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" name="confirm_password" placeholder="Confirm new password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Change Password</button>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Fill Edit Education Modal
+      document.querySelectorAll('.editEducationBtn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.getElementById('editEduId').value = btn.dataset.id;
+          document.getElementById('editEduLevel').value = btn.dataset.level;
+          document.getElementById('editEduInstitute').value = btn.dataset.institute;
+          document.getElementById('editEduBoardUniversity').value = btn.dataset.university;
+          document.getElementById('editEduYear').value = btn.dataset.year;
+          document.getElementById('editEduScore').value = btn.dataset.score;
+        });
+      });
+
+      // Fill Edit Certification Modal
+      document.querySelectorAll('.editCertBtn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.getElementById('editCertId').value = btn.dataset.id;
+          document.getElementById('editCertName').value = btn.dataset.name;
+          document.getElementById('editCertDomain').value = btn.dataset.domain;
+          document.getElementById('editCertAuthority').value = btn.dataset.authority;
+          document.getElementById('editCertDate').value = btn.dataset.date;
+          document.getElementById('editCertUrl').value = btn.dataset.url;
+        });
+      });
+
+      // Fill Edit Project Modal
+      document.querySelectorAll('.editProjectBtn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.getElementById('editProjectId').value = btn.dataset.id;
+          document.getElementById('editProjectTitle').value = btn.dataset.title;
+          document.getElementById('editProjectDomain').value = btn.dataset.domain;
+          document.getElementById('editProjectRole').value = btn.dataset.role;
+          document.getElementById('editProjectDesc').value = btn.dataset.desc;
+          document.getElementById('editProjectStatus').value = btn.dataset.status;
+          document.getElementById('editProjectStart').value = btn.dataset.start;
+          document.getElementById('editProjectEnd').value = btn.dataset.end;
+        });
+      });
+
+      // Fill Edit Internship Modal
+      document.querySelectorAll('.editInternshipBtn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.getElementById('editInternshipId').value = btn.dataset.id;
+          document.getElementById('editInternshipTitle').value = btn.dataset.title;
+          document.getElementById('editInternshipDomain').value = btn.dataset.domain;
+          document.getElementById('editInternshipCompany').value = btn.dataset.company;
+          document.getElementById('editInternshipDesc').value = btn.dataset.desc;
+          document.getElementById('editInternshipStart').value = btn.dataset.start;
+          document.getElementById('editInternshipEnd').value = btn.dataset.end;
+          document.getElementById('editInternshipCert').value = btn.dataset.certificate;
+        });
+      });
+    </script>
+
+</body>
+</html>

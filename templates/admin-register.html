@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HireVerse | Admin Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body { background: #f4f6f8; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .auth-container { background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.12); padding: 2.5rem; max-width: 520px; width: 100%; }
+    .auth-title { text-align: center; color: #007bff; font-weight: 700; font-size: 1.8rem; margin-bottom: 1.5rem; }
+    .form-label { color: #007bff; font-weight: 500; }
+    .btn-primary { background: #007bff; border: none; font-weight: 600; }
+    .btn-primary:hover { background: #0056b3; }
+    #timer { font-size: 0.9rem; color: #555; text-align: center; margin-top: 5px; }
+  </style>
+</head>
+<body>
+<div class="auth-container">
+  <div class="text-center mb-3">
+    <img src="{% static 'assets/logo_main.png' %}" alt="HireVerse Logo" style="height: 120px;">
+  </div>
+  <div class="auth-title">Admin Registration</div>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- STEP 1: Enter Email -->
+  {% if step == 1 %}
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Email Address</label>
+      <input type="email" name="admin_email" class="form-control" placeholder="Enter email" required>
+    </div>
+    <button type="submit" name="send_otp" class="btn btn-primary w-100">Send OTP</button>
+  </form>
+  {% endif %}
+
+  <!-- STEP 2: OTP Verification -->
+  {% if step == 2 %}
+  <form method="POST" id="otpForm">
+    {% csrf_token %}
+    <div class="mb-3 text-center">
+      <label class="form-label">Enter OTP sent to {{ email }}</label>
+      <input type="text" name="otp" maxlength="6" class="form-control text-center" placeholder="6-digit OTP" required>
+    </div>
+    <button type="submit" name="verify_otp" class="btn btn-primary w-100 mb-2">Verify OTP</button>
+  </form>
+
+  <form method="POST" id="resendForm">
+    {% csrf_token %}
+    <button type="submit" name="resend_otp" id="resendBtn" class="btn btn-outline-primary w-100" disabled>Resend OTP</button>
+    <div id="timer">You can resend OTP in <span id="countdown">30</span> seconds</div>
+  </form>
+
+  <script>
+    let countdown = 30;
+    const countdownElement = document.getElementById("countdown");
+    const resendBtn = document.getElementById("resendBtn");
+
+    const timer = setInterval(() => {
+      countdown--;
+      countdownElement.textContent = countdown;
+      if (countdown <= 0) {
+        clearInterval(timer);
+        resendBtn.disabled = false;
+        document.getElementById("timer").innerHTML = "You can resend OTP now";
+      }
+    }, 1000);
+  </script>
+  {% endif %}
+
+  <!-- STEP 3: Full Registration -->
+  {% if step == 3 %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3"><label class="form-label">Full Name</label><input type="text" name="admin_name" class="form-control" required></div>
+    <div class="mb-3"><label class="form-label">Password</label><input type="password" name="password" class="form-control" required></div>
+    <div class="mb-3"><label class="form-label">Confirm Password</label><input type="password" name="confirm_password" class="form-control" required></div>
+    <div class="mb-3"><label class="form-label">Contact Number</label><input type="tel" max="10" min="10" name="admin_phone_no" pattern="\d{10}" class="form-control" required></div>
+    <div class="mb-3"><label class="form-label">Permanent Address</label><textarea name="admin_permanent_address" class="form-control" required></textarea></div>
+    <div class="mb-3"><label class="form-label">Current Address</label><textarea name="admin_current_address" class="form-control" required></textarea></div>
+    <div class="mb-3"><label class="form-label">Profile Photo</label><input type="file" name="admin_profile_photo" accept="image/*" class="form-control" required></div>
+    <button type="submit" name="register" class="btn btn-primary w-100">Register</button>
+  </form>
+  {% endif %}
+
+  <p class="text-center text-muted mt-3">
+    Already have an account? <a href="{% url 'login' %}">Login here</a>
+  </p>
+</div>
+</body>
+</html>

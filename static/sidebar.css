@@ -1,0 +1,38 @@
+/* Shared Sidebar Styles for HIreVerse Dashboards */
+.sidebar {
+  min-height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+  width: 240px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+.sidebar .nav-link {
+  color: #1976d2;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: background 0.2s, color 0.2s;
+  background: none;
+}
+.sidebar .nav-link.active, .sidebar .nav-link:hover {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+.sidebar .nav-link i {
+  color: #1976d2;
+  font-size: 1.3rem;
+}
+.sidebar h2 {
+  color: #1976d2;
+  font-weight: 700;
+  font-size: 1.7rem;
+  margin-bottom: 2rem;
+}

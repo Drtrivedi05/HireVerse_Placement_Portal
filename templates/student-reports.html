@@ -1,0 +1,344 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Reports | HireVerse</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body { background:#f4f6f8; font-family:Poppins,sans-serif; }
+    .sidebar {
+      position:fixed; top:0; left:0; width:240px; height:100%;
+      background:#fff; box-shadow:2px 0 8px rgba(0,0,0,0.05);
+      padding-top:20px;
+    }
+    .sidebar img { display:block; margin:0 auto 20px; width:200px; height:auto; }
+    .sidebar .nav-link {
+      color:#007bff; font-weight:500; font-size:1.05rem; margin-bottom:1rem;
+      display:flex; align-items:center; gap:0.5rem; border-radius:8px;
+      padding:0.7rem 1rem; transition:0.2s;
+    }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover { background:#e9f5ff; color:#0056b3; }
+    .main-content { margin-left:240px; padding:2rem; background:#f4f6f8; min-height:100vh; }
+    .card { border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+    .chart-container { position:relative; height:250px; }
+    .badge { font-size:0.9rem; }
+  </style>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar d-flex flex-column justify-content-between"
+     style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 240px;
+        background: #ffffff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+        padding: 20px 0;
+        z-index: 1000;
+     ">
+
+  <!-- Logo Section -->
+  <div style="text-align: center; margin-bottom: 20px;">
+    {% load static %}
+    <img src="{% static 'assets/logo_main.png' %}" 
+         alt="HireVerse Logo" 
+         style="width: 180px; height: auto; object-fit: contain;">
+  </div>
+
+  <!-- Navigation Links -->
+  <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+    
+    <a class="nav-link" href="/studentDashboard"
+       style="color: #007bff; font-weight: 500;
+              font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+              border-radius: 8px; display: flex; align-items: center; 
+              gap: 8px; text-decoration: none; transition: 0.2s;">
+      <i class="bi bi-speedometer2 me-2"></i> Dashboard
+    </a>
+
+    <a class="nav-link" href="/studentProfile"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-person-circle me-2"></i> Profile
+    </a>
+
+    <a class="nav-link" href="/studentCompanies"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-people me-2"></i> Companies
+    </a>
+
+    <a class="nav-link" href="/studentTest"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-clipboard-check me-2"></i> Attend Test
+    </a>
+
+    <a class="nav-link active" href="/studentReport"
+       style="background: #e9f5ff; color: #0056b3; font-weight: 600; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-bar-chart me-2"></i> Reports
+    </a>
+
+  </nav>
+
+  <!-- Logout Button (Bottom Fixed) -->
+  <a class="nav-link" href="{% url 'logout' %}"
+     style="
+        color: #dc3545; 
+        font-weight: 600; 
+        font-size: 1.05rem; 
+        padding: 10px 12px; 
+        border-radius: 8px; 
+        display: flex; align-items: center; gap: 8px;
+        text-decoration: none; 
+        transition: 0.2s; 
+        border-top: 1px solid #f0f0f0; 
+        justify-content: center;
+        margin-top: auto;
+     "
+     onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+     onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+    <i class="bi bi-box-arrow-right me-2"></i> Logout
+  </a>
+
+</div>
+
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h3 class="text-primary mb-4"><i class="bi bi-bar-chart-fill"></i> My Placement Reports</h3>
+
+    <!-- Filters -->
+    <div class="card p-4 mb-4">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Select Company</label>
+          <select id="companySelect" class="form-select" onchange="updateJobDropdown()">
+            <option value="">-- Select Company --</option>
+            {% for cname in distinct_companies %}
+              <option value="{{ cname }}">{{ cname }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Select Job</label>
+          <select id="jobSelect" class="form-select" onchange="showReport()">
+            <option value="">-- Select Job --</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report Card -->
+    <div id="reportSection" class="card p-4 d-none">
+      <h5 class="text-primary mb-3" id="jobTitle"></h5>
+      <p><strong>Company:</strong> <span id="companyName"></span></p>
+      <p><strong>Application Status:</strong>
+        <span id="appStatus" class="badge bg-secondary"></span>
+      </p>
+
+      <div class="chart-container mt-4 mb-4">
+        <canvas id="roundChart"></canvas>
+      </div>
+
+      <h6 class="fw-semibold text-primary mt-3">Round-wise Details</h6>
+      <ul id="roundList" class="list-group list-group-flush mt-2"></ul>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const reports = {{ reports|safe }};
+    let chartInstance = null;
+
+    function updateJobDropdown() {
+      const company = document.getElementById("companySelect").value;
+      const jobSelect = document.getElementById("jobSelect");
+      jobSelect.innerHTML = '<option value="">-- Select Job --</option>';
+
+      if (!company) return;
+
+      const jobs = reports.filter(r => r.company_name === company);
+      const uniqueJobs = [...new Set(jobs.map(r => r.job_title))];
+      uniqueJobs.forEach(job => {
+        const opt = document.createElement("option");
+        opt.value = job;
+        opt.textContent = job;
+        jobSelect.appendChild(opt);
+      });
+    }
+
+    function showReport() {
+      const company = document.getElementById("companySelect").value;
+      const job = document.getElementById("jobSelect").value;
+      const section = document.getElementById("reportSection");
+
+      if (!company || !job) {
+        section.classList.add("d-none");
+        return;
+      }
+
+      const record = reports.find(r => r.company_name === company && r.job_title === job);
+      if (!record) {
+        section.classList.add("d-none");
+        return;
+      }
+
+      section.classList.remove("d-none");
+      document.getElementById("jobTitle").textContent = record.job_title;
+      document.getElementById("companyName").textContent = record.company_name;
+
+      // ================== 🧩 APPLICATION STATUS BADGE ==================
+      const appBadge = document.getElementById("appStatus");
+      appBadge.textContent = record.status;
+      appBadge.className = "badge " + (
+        record.status === "Selected" ? "bg-success" :
+        record.status === "Rejected" ? "bg-danger" :
+        ["Aptitude", "Group Discussion", "Technical", "Technical Interview", "HR Interview"].includes(record.status)
+          ? "bg-info text-dark"
+          : ""
+      );
+
+      // ================== 🧠 DEFINE ROUND LOGIC ==================
+      const roundOrder = ["Aptitude", "Group Discussion", "Technical Interview", "HR Interview"];
+      const chartLabels = [...roundOrder];
+      const chartData = [];
+      const chartColors = [];
+
+      // Helper color palette
+      const green = "#28a745";
+      const yellow = "#ffc107";
+      const red = "#dc3545";
+      const gray = "#6c757d";
+
+      // Normalize status text
+      let current = record.status ? record.status.trim().toLowerCase() : "";
+
+      // Round-based logic
+      if (current === "selected") {
+        // ✅ All green (final selection)
+        chartData.push(...[1, 1, 1, 1]);
+        chartColors.push(...[green, green, green, green]);
+      }
+      else if (current === "rejected") {
+        // ❌ All red (rejected case)
+        chartData.push(...[0, 0, 0, 0]);
+        chartColors.push(...[red, red, red, red]);
+      }
+      else if (current.includes("aptitude")) {
+        chartData.push(...[0.5, 0, 0, 0]);
+        chartColors.push(...[yellow, gray, gray, gray]);
+      }
+      else if (current.includes("technical") && !current.includes("interview") || current.includes("group discussion") || current.includes("gd")) {
+        chartData.push(...[1, 0.5, 0, 0]);
+        chartColors.push(...[green, yellow, gray, gray]);
+      }
+      else if (current.includes("technical interview")) {
+        chartData.push(...[1, 1, 0.5, 0]);
+        chartColors.push(...[green, green, yellow, gray]);
+      }
+      else if (current.includes("hr interview")) {
+        chartData.push(...[1, 1, 1, 0.5]);
+        chartColors.push(...[green, green, green, yellow]);
+      }
+      else {
+        // Default (unknown)
+        chartData.push(...[0, 0, 0, 0]);
+        chartColors.push(...[gray, gray, gray, gray]);
+      }
+
+      // ================== 📊 BUILD THE CHART ==================
+      if (chartInstance) chartInstance.destroy();
+      chartInstance = new Chart(document.getElementById("roundChart"), {
+        type: "bar",
+        data: {
+          labels: chartLabels,
+          datasets: [{
+            label: "Round Progress",
+            data: chartData,
+            backgroundColor: chartColors,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              min: 0, max: 1,
+              ticks: {
+                stepSize: 0.5,
+                callback: val => val === 1 ? "Passed" : val === 0.5 ? "Current" : ""
+              }
+            }
+          },
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // ================== 🧾 ROUND LIST (Visual Only) ==================
+      const list = document.getElementById("roundList");
+      list.innerHTML = "";
+
+      // Determine color indicators for list
+      roundOrder.forEach((round, i) => {
+        let colorClass = "bg-secondary"; // Default gray
+
+        if (record.status === "Selected") {
+          colorClass = "bg-success";
+        } else if (record.status === "Rejected") {
+          colorClass = "bg-danger";
+        } else if (
+          (current.includes("aptitude") && i === 0) ||
+          (current.includes("technical") && !current.includes("interview") && i === 1) ||
+          (current.includes("group discussion") && i === 1) ||
+          (current.includes("technical interview") && i === 2) ||
+          (current.includes("hr interview") && i === 3)
+        ) {
+          colorClass = "bg-warning"; // current round
+        } else if (i < chartData.findIndex(val => val === 0.5)) {
+          colorClass = "bg-success"; // passed rounds
+        }
+
+        const li = document.createElement("li");
+        li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+        li.innerHTML = `
+          <span>${round}</span>
+          <span class="rounded-circle ${colorClass}" style="width:18px; height:18px; display:inline-block;"></span>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+  </script>
+
+</body>
+</html>

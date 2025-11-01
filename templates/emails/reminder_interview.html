@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ round_type }} Interview Reminder</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f7f9fb; margin: 0; padding: 0;">
+  <div style="max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); padding: 20px;">
+    <h2 style="color: #007bff; text-align: center;">{{ round_type }} Interview Reminder</h2>
+
+    <p>Dear <strong>{{ student_name }}</strong>,</p>
+
+    <p>This is a reminder that your <strong>{{ round_type }} Interview</strong> for the position of <b>{{ job_title }}</b> at <b>{{ company_name }}</b> is scheduled for tomorrow.</p>
+
+    <div style="background: #f0f6ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+      <p style="margin: 5px 0;"><strong>Date & Time:</strong> {{ date|date:"d M Y, h:i A" }}</p>
+      <p style="margin: 5px 0;"><strong>Meeting Link:</strong> <a href="{{ meeting_link }}" style="color:#007bff;">{{ meeting_link }}</a></p>
+      <p style="margin: 5px 0;"><strong>Mode:</strong> Online</p>
+    </div>
+
+    <p>Kindly be online at least 10 minutes before your interview time. Ensure a quiet environment and formal attire.</p>
+
+    <p>Best wishes,<br>
+    <strong>{{ company_name }} - HireVerse Placement Team</strong></p>
+
+    <div style="text-align: center; margin-top: 15px; color: #777; font-size: 13px;">
+      This is an automated reminder from HireVerse. Please do not reply to this email.
+    </div>
+  </div>
+</body>
+</html>

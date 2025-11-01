@@ -1,0 +1,316 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Profile | HireVerse</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    body { background: #f4f6f8; }
+    .sidebar { min-height: 100vh; background: #fff; padding-top: 2rem; position: fixed; left: 0; top: 0; width: 240px; z-index: 1000; box-shadow: 2px 0 8px rgba(0,0,0,0.04); }
+    .sidebar .nav-link { color: #007bff; margin-bottom: 1rem; font-weight: 500; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; border-radius: 8px; padding: 0.75rem 1rem; transition: background 0.2s; }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover { background: #e9f5ff; color: #0056b3; }
+    .main-content { margin-left: 240px; padding: 2rem; }
+    .profile-container { max-width: 650px; margin: 3rem auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 2.5rem 2rem; }
+    .profile-avatar { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+    .profile-details dt { font-weight: 600; color: #007bff; }
+    .profile-details dd { margin-bottom: 1rem; color: #333; }
+  </style>
+</head>
+<body>
+
+<div class="sidebar d-flex flex-column justify-content-between"
+     style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 240px;
+        background: #ffffff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+        padding: 20px 0;
+        z-index: 1000;
+     ">
+
+  <!-- Logo Section -->
+  <div style="text-align: center; margin-bottom: 20px;">
+    {% load static %}
+    <img src="{% static 'assets/logo_main.png' %}" 
+         alt="HireVerse Logo" 
+         style="width: 180px; height: auto; object-fit: contain;">
+  </div>
+
+  <!-- Navigation Links -->
+  <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+    <a class="nav-link" href="/companyDashboard"
+       style="color: #007bff; font-weight: 500;
+              font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+              border-radius: 8px; display: flex; align-items: center; 
+              gap: 8px; text-decoration: none; transition: 0.2s;">
+      <i class="bi bi-speedometer2 me-2"></i> Dashboard
+    </a>
+
+    <a class="nav-link active" href="/companyProfile"
+       style="background: #e9f5ff; color: #0056b3; font-weight: 600; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-person-circle me-2"></i> Profile
+    </a>
+
+    <a class="nav-link" href="/companyJobPosts"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-briefcase me-2"></i> Posts
+    </a>
+
+    <a class="nav-link" href="/companySelectionTest"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-file-earmark-text me-2"></i> Selection
+    </a>
+
+    <a class="nav-link" href="/companyEvaluateTest"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-clipboard-check me-2"></i> Evaluate
+    </a>
+
+    <a class="nav-link" href="/companyReport"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-bar-chart me-2"></i> Reports
+    </a>
+  </nav>
+
+  <!-- Logout Button (Bottom Fixed) -->
+  <a class="nav-link" href="{% url 'logout' %}"
+     style="
+        color: #dc3545; 
+        font-weight: 600; 
+        font-size: 1.05rem; 
+        padding: 10px 12px; 
+        border-radius: 8px; 
+        display: flex; align-items: center; gap: 8px;
+        text-decoration: none; 
+        transition: 0.2s; 
+        border-top: 1px solid #f0f0f0; 
+        justify-content: center;
+        margin-top: auto;
+     "
+     onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+     onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+    <i class="bi bi-box-arrow-right me-2"></i> Logout
+  </a>
+
+</div>
+
+
+<div class="main-content">
+
+  <!-- Company Profile Card -->
+  <div class="profile-container" id="companyProfileCard">
+    {% for message in messages %}
+        {% if 'personal' in message.tags %}
+          <div class="alert alert-{{ message.level_tag }} alert-dismissible fade show mt-2" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+      {% endfor %}
+    <!-- Profile Header -->
+    <div class="d-flex align-items-center mb-4">
+      <div class="position-relative me-4">
+        {% if company.COMPANY_PROFILE_PHOTO %}
+          <img src="{{ company.COMPANY_PROFILE_PHOTO.url }}" alt="Profile Photo" id="profilePhoto" class="profile-avatar border border-3 border-primary">
+        {% else %}
+          <img src="{% static 'assets/profile.jpeg' %}" alt="Default Profile Photo" id="profilePhoto" class="profile-avatar border border-3 border-primary">
+        {% endif %}
+        <input type="file" id="photoInput" name="COMPANY_PROFILE_PHOTO" accept="image/*" style="display:none;">
+        <button type="button" id="editPhotoBtn" class="btn btn-light position-absolute bottom-0 end-0 border rounded-circle p-1" title="Change Photo">
+          <i class="bi bi-camera-fill text-primary"></i>
+        </button>
+      </div>
+      <div>
+        <h3>{{ company.COMPANY_NAME }}</h3>
+        <p class="text-muted">{{ company.ROLE_TYPE }}</p>
+      </div>
+    </div>
+
+    <!-- Display Info -->
+    <dl class="row profile-details" id="companyInfoDisplay">
+      <dt class="col-sm-5">Email</dt>
+      <dd class="col-sm-7">{{ company.COMPANY_EMAIL }}</dd>
+
+      <dt class="col-sm-5">Phone</dt>
+      <dd class="col-sm-7">{{ company.COMPANY_PHONE_NO }}</dd>
+
+      <dt class="col-sm-5">College</dt>
+      <dd class="col-sm-7">{{ company.COLLEGE.COLLEGE_NAME }}</dd>
+
+      <dt class="col-sm-5">Permanent Address</dt>
+      <dd class="col-sm-7">{{ company.COMPANY_PERMANENT_ADDRESS }}</dd>
+
+      <dt class="col-sm-5">Secondary Address</dt>
+      <dd class="col-sm-7">{{ company.COMPANY_SECONDARY_ADDRESS }}</dd>
+
+      <dt class="col-sm-5">LinkedIn</dt>
+      <dd class="col-sm-7">{{ company.COMPANY_LINKEDIN_URL }}</dd>
+
+      <dt class="col-sm-5">Website</dt>
+      <dd class="col-sm-7">{{ company.COMPANY_WEBSITE }}</dd>
+
+      <dt class="col-sm-5">Industry</dt>
+      <dd class="col-sm-7">{{ company.COMPANY_INDUSTRY }}</dd>
+
+      <dt class="col-sm-5">Date of Establishment</dt>
+      <dd class="col-sm-7">{{ company.COMPANY_DATE_OF_ESTABLISHMENT }}</dd>
+    </dl>
+
+    <!-- Edit Button -->
+    <div class="text-end mt-3">
+      <button class="btn btn-outline-primary" id="editCompanyBtn"><i class="bi bi-pencil-fill"></i> Edit</button>
+    </div>
+
+    <!-- Edit Form -->
+    <form method="POST" enctype="multipart/form-data" id="companyForm" class="mt-3" style="display:none;">
+      {% csrf_token %}
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Company Name</label>
+          <input type="text" class="form-control" name="COMPANY_NAME" value="{{ company.COMPANY_NAME }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" name="COMPANY_EMAIL" value="{{ company.COMPANY_EMAIL }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Phone</label>
+          <input type="tel" max="10" min="10" class="form-control" name="COMPANY_PHONE_NO" value="{{ company.COMPANY_PHONE_NO }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">College</label>
+          <input type="text" class="form-control" value="{{ company.COLLEGE.COLLEGE_NAME }}" disabled>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Permanent Address</label>
+          <input type="text" class="form-control" name="COMPANY_PERMANENT_ADDRESS" value="{{ company.COMPANY_PERMANENT_ADDRESS }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Secondary Address</label>
+          <input type="text" class="form-control" name="COMPANY_SECONDARY_ADDRESS" value="{{ company.COMPANY_SECONDARY_ADDRESS }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">LinkedIn</label>
+          <input type="url" class="form-control" name="COMPANY_LINKEDIN_URL" value="{{ company.COMPANY_LINKEDIN_URL }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Website</label>
+          <input type="url" class="form-control" name="COMPANY_WEBSITE" value="{{ company.COMPANY_WEBSITE }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Industry</label>
+          <input type="text" class="form-control" name="COMPANY_INDUSTRY" value="{{ company.COMPANY_INDUSTRY }}">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Date of Establishment</label>
+          <input type="date" class="form-control" name="COMPANY_DATE_OF_ESTABLISHMENT" value="{{ company.COMPANY_DATE_OF_ESTABLISHMENT }}">
+        </div>
+      </div>
+      <div class="mt-3 text-end">
+        <button type="button" class="btn btn-secondary me-2" id="cancelCompanyBtn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+
+  </div>
+
+  <!-- Account Settings (Change Password) -->
+  <div class="profile-container mt-4">
+    <h4 class="mb-3" style="color:#007bff;">Account Settings</h4>
+    {% for message in messages %}
+      {% if 'password' in message.tags %}
+        <div class="alert alert-{{ message.level_tag }} alert-dismissible fade show mt-2" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <form method="POST" id="changePasswordForm">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="oldPassword" class="form-label">Old Password</label>
+        <input type="password" class="form-control" id="oldPassword" name="old_password" placeholder="Enter old password" required>
+      </div>
+      <div class="mb-3">
+        <label for="newPassword" class="form-label">New Password</label>
+        <input type="password" class="form-control" id="newPassword" name="new_password" placeholder="Enter new password" required>
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" name="confirm_password" placeholder="Confirm new password" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Change Password</button>
+      <div id="passwordMsg" class="mt-3"></div>
+    </form>
+  </div>
+
+</div>
+
+<script>
+  const editBtn = document.getElementById('editCompanyBtn');
+  const form = document.getElementById('companyForm');
+  const display = document.getElementById('companyInfoDisplay');
+  const cancelBtn = document.getElementById('cancelCompanyBtn');
+  
+  const editPhotoBtn = document.getElementById('editPhotoBtn');
+  const photoInput = document.getElementById('photoInput');
+  const profilePhoto = document.getElementById('profilePhoto');
+
+  editBtn.addEventListener('click', () => {
+      form.style.display = 'block';
+      display.style.display = 'none';
+      editBtn.style.display = 'none';
+  });
+
+  cancelBtn.addEventListener('click', () => {
+      form.style.display = 'none';
+      display.style.display = 'block';
+      editBtn.style.display = 'inline-block';
+  });
+
+  editPhotoBtn.addEventListener('click', () => photoInput.click());
+
+  photoInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if(file) {
+          const reader = new FileReader();
+          reader.onload = e => profilePhoto.src = e.target.result;
+          reader.readAsDataURL(file);
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

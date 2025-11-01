@@ -1,0 +1,363 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HireVerse | Student Dashboard</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Styles -->
+  <style>
+    body { background:#f4f6f8; font-family:Poppins,sans-serif; margin:0; padding:0; }
+    .sidebar { position:fixed; top:0; left:0; width:240px; height:100%; background:#fff; padding-top:20px; box-shadow:2px 0 8px rgba(0,0,0,0.04); z-index:1000; }
+    .sidebar img { display:block; margin:0 auto 20px; width:180px; height:auto; }
+    .sidebar .nav-link { color:#007bff; font-weight:500; font-size:1.1rem; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; padding:0.75rem 1rem; border-radius:8px; transition:0.2s; }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover { background:#e9f5ff; color:#0056b3; }
+    .main-content { margin-left:240px; padding:2rem; }
+    .topbar { background:#fff; padding:1rem 2rem; border-bottom:1px solid #e3e3e3; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:900; box-shadow:0 2px 8px rgba(0,0,0,0.08); border-radius:12px; margin-bottom:1.2rem; transition:0.2s; }
+    .topbar:hover { box-shadow:0 4px 16px rgba(0,0,0,0.16); transform:translateY(-2px) scale(1.01); }
+    .dashboard-cards { display:flex; gap:1.5rem; margin-bottom:2rem; flex-wrap:wrap; }
+    .dashboard-card { background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:1.5rem; flex:1 1 220px; min-width:220px; text-align:center; transition:box-shadow 0.2s, transform 0.2s; }
+    .dashboard-card:hover { box-shadow:0 4px 16px rgba(0,0,0,0.16); transform:translateY(-4px) scale(1.03); }
+    .dashboard-card .bi { font-size:2.2rem; color:#007bff; margin-bottom:0.5rem; }
+    .dashboard-card h4 { margin-bottom:0.5rem; font-size:1.2rem; color:#007bff; font-weight:600; }
+    .dashboard-card p { font-size:2rem; font-weight:bold; margin:0; }
+    .table-container { background:#fff; border-radius:12px; padding:1rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem; }
+    .table thead th { font-weight:600; color:black; }
+    .section-title { font-size:1.3rem; font-weight:600; margin-bottom:1rem; color:#007bff; }
+    .btn-secondary { border-radius:8px; background-color:#007bff; border:none; color:#fff; font-weight:500; transition:all 0.2s ease; }
+    .btn-secondary:hover { background-color:#0056b3; transform:translateY(-2px); box-shadow:0 4px 10px rgba(0,123,255,0.3); }
+    @media(max-width:768px){ .main-content{margin-left:0;padding:1rem;} .sidebar{width:100%;position:relative;} }
+  </style>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar d-flex flex-column justify-content-between"
+     style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 240px;
+        background: #ffffff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+        padding: 20px 0;
+        z-index: 1000;
+     ">
+
+    <!-- Logo Section -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      {% load static %}
+      <img src="{% static 'assets/logo_main.png' %}" 
+          alt="HireVerse Logo" 
+          style="width: 180px; height: auto; object-fit: contain;">
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+      
+      <a class="nav-link active" href="/studentDashboard"
+        style="background: #e9f5ff; color: #0056b3; font-weight: 600;
+                font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+                border-radius: 8px; display: flex; align-items: center; 
+                gap: 8px; text-decoration: none; transition: 0.2s;">
+        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+      </a>
+
+      <a class="nav-link" href="/studentProfile"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-person-circle me-2"></i> Profile
+      </a>
+
+      <a class="nav-link" href="/studentCompanies"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-people me-2"></i> Companies
+      </a>
+
+      <a class="nav-link" href="/studentTest"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-clipboard-check me-2"></i> Attend Test
+      </a>
+
+      <a class="nav-link" href="/studentReport"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-bar-chart me-2"></i> Reports
+      </a>
+
+    </nav>
+
+    <!-- Logout Button (Bottom Fixed) -->
+    <a class="nav-link" href="{% url 'logout' %}"
+      style="
+          color: #dc3545; 
+          font-weight: 600; 
+          font-size: 1.05rem; 
+          padding: 10px 12px; 
+          border-radius: 8px; 
+          display: flex; align-items: center; gap: 8px;
+          text-decoration: none; 
+          transition: 0.2s; 
+          border-top: 1px solid #f0f0f0; 
+          justify-content: center;
+          margin-top: auto;
+      "
+      onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+      onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+      <i class="bi bi-box-arrow-right me-2"></i> Logout
+    </a>
+
+  </div>
+
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="topbar">
+      <h3>Student Dashboard</h3>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="dashboard-cards">
+      <div class="dashboard-card"><i class="bi bi-briefcase"></i><h4>Companies Available</h4><p>{{ company_count }}</p></div>
+      <div class="dashboard-card"><i class="bi bi-file-earmark-person"></i><h4>Applications</h4><p>{{ application_count }}</p></div>
+      <div class="dashboard-card"><i class="bi bi-bar-chart"></i><h4>Tests Scheduled</h4><p>{{ test_count }}</p></div>
+      <div class="dashboard-card"><i class="bi bi-award"></i><h4>Placements</h4><p>{{ placement_count }}</p></div>
+    </div>
+
+    <!-- My Applications -->
+    <h4 class="section-title">My Applications</h4>
+    <div class="table-container">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Company</th><th>Job Post</th><th>Status</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            {% for app in applications %}
+            <tr>
+              <td>{{ app.JOB.COMPANY.COMPANY_NAME }}</td>
+              <td>{{ app.JOB.JOB_TITLE }}</td>
+              <td>
+                {% if app.APPLICATION_STATUS == "Applied" %}
+                  <span class="badge bg-info text-dark px-3 py-2">Applied</span>
+                {% elif app.APPLICATION_STATUS == "Aptitude Round" %}
+                  <span class="badge bg-primary px-3 py-2">Aptitude Round</span>
+                {% elif app.APPLICATION_STATUS == "Technical/GD" %}
+                  <span class="badge bg-info text-dark px-3 py-2">Tech / GD Round</span>
+                {% elif app.APPLICATION_STATUS == "Technical Interview" %}
+                  <span class="badge bg-secondary px-3 py-2">Technical Interview</span>
+                {% elif app.APPLICATION_STATUS == "HR Interview" %}
+                  <span class="badge bg-light text-dark border px-3 py-2">HR Interview</span>
+                {% elif app.APPLICATION_STATUS == "Selected" %}
+                  <span class="badge bg-success px-3 py-2">Selected</span>
+                {% elif app.APPLICATION_STATUS == "Rejected" %}
+                  <span class="badge bg-danger px-3 py-2">Rejected</span>
+                {% elif app.APPLICATION_STATUS == "Process Completed" %}
+                  <span class="badge bg-dark px-3 py-2">Process Completed</span>
+                {% else %}
+                  <span class="badge bg-secondary px-3 py-2">{{ app.APPLICATION_STATUS }}</span>
+                {% endif %}
+              </td>
+
+              <td><button class="btn btn-sm btn-primary" onclick="viewApplication({{ app.APPLICATION_ID }})""><i class="bi bi-eye"></i> View</button></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-center text-muted">No applications yet.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Companies Available -->
+    <h4 class="section-title">Companies Available</h4>
+    <div class="table-container">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Company Name</th><th>Job Post</th><th>Package</th><th>Status</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            {% for job in companies %}
+            <tr>
+              <td>{{ job.COMPANY.COMPANY_NAME }}</td>
+              <td>{{ job.JOB_TITLE }}</td>
+              <td>{{ job.JOB_SALARY }} LPA</td>
+              <td>
+                {% if job.JOB_STATUS == "Open" %}
+                  <span class="badge bg-success">Active</span>
+                {% else %}
+                  <span class="badge bg-secondary">Closed</span>
+                {% endif %}
+              </td>
+              <td><button class="btn btn-sm btn-primary" onclick="viewJob({{ job.JOB_ID }})"><i class="bi bi-eye"></i> View</button></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center text-muted">No active jobs available.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Reports Section -->
+    <h4 class="section-title">Reports</h4>
+    <div class="table-container">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Report Name</th><th>Date</th><th>Download</th></tr>
+          </thead>
+          <tbody>
+            {% for report in reports %}
+            <tr>
+              <td>{{ report.RESULT_TYPE|default:"Placement Report" }}</td>
+              <td>{{ report.RESULT_DATE|date:"Y-m-d" }}</td>
+              <td><a href="{{ report.RESULT_FILE.url }}" download class="btn btn-sm btn-success"><i class="bi bi-download"></i> Download</a></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3" class="text-center text-muted">No reports available.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="viewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content shadow-lg border-0" style="border-radius:15px; overflow:hidden;">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title fw-semibold" id="viewModalTitle">Details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="viewModalBody" style="min-height:180px; font-size:0.95rem;">
+          <div class="text-center text-secondary py-4" id="loadingSpinner">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2 fw-semibold">Loading details, please wait...</p>
+          </div>
+        </div>
+        <div class="modal-footer bg-light">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary d-none" id="actionButton"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showModal(title, bodyHTML) {
+      document.getElementById("viewModalTitle").textContent = title;
+      const modalBody = document.getElementById("viewModalBody");
+      const actionBtn = document.getElementById("actionButton");
+
+      modalBody.innerHTML = bodyHTML;
+      actionBtn.classList.add("d-none"); // Always hidden
+
+      new bootstrap.Modal(document.getElementById("viewModal")).show();
+    }
+
+    function viewJob(jobId) {
+      const modalBody = document.getElementById("viewModalBody");
+      modalBody.innerHTML = `
+        <div class="text-center text-secondary py-4">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p class="mt-2 fw-semibold">Loading job details...</p>
+        </div>
+      `;
+      fetch(`/student-job-details/${jobId}/`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            const j = data.job;
+            const jobHTML = `
+              <div class="row gy-2">
+                <div class="col-md-6"><strong>Job Title:</strong><br>${j.JOB_TITLE}</div>
+                <div class="col-md-6"><strong>Company:</strong><br>${j.COMPANY.COMPANY_NAME}</div>
+                <div class="col-12"><hr></div>
+                <div class="col-md-6"><strong>Type:</strong><br>${j.JOB_TYPE}</div>
+                <div class="col-md-6"><strong>Location:</strong><br>${j.JOB_LOCATION}</div>
+                <div class="col-md-6"><strong>Salary Package:</strong><br>${j.JOB_SALARY} LPA</div>
+                <div class="col-md-6"><strong>Status:</strong><br>
+                  <span class="badge ${j.JOB_STATUS == 'Open' ? 'bg-success' : 'bg-secondary'}">
+                    ${j.JOB_STATUS}
+                  </span>
+                </div>
+                <div class="col-12 mt-3"><strong>Description:</strong><br><p>${j.JOB_DESCRIPTION}</p></div>
+                <div class="col-12 text-end text-muted"><small>Posted on ${j.JOB_POSTED_DATE}</small></div>
+              </div>
+            `;
+            showModal("Job Details", jobHTML);
+          } else {
+            showModal("Job Details", "<p class='text-danger'>Job not found.</p>");
+          }
+        })
+        .catch(() => showModal("Error", "<p class='text-danger'>Unable to load job details.</p>"));
+    }
+
+    function viewApplication(appId) {
+      const modalBody = document.getElementById("viewModalBody");
+      modalBody.innerHTML = `
+        <div class="text-center text-secondary py-4">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p class="mt-2 fw-semibold">Loading application details...</p>
+        </div>
+      `;
+      fetch(`/student-application-details/${appId}/`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            const s = data.student;
+            const appHTML = `
+              <div class="row gy-2">
+                <div class="col-md-6"><strong>Student Name:</strong><br>${s.STUDENT_NAME}</div>
+                <div class="col-md-6"><strong>Email:</strong><br>${s.STUDENT_EMAIL}</div>
+                <div class="col-md-6"><strong>Branch:</strong><br>${s.STUDENT_BRANCH}</div>
+                <div class="col-md-6"><strong>CGPA:</strong><br>${s.STUDENT_CGPA}</div>
+                <div class="col-md-6"><strong>Job:</strong><br>${data.job}</div>
+                <div class="col-md-6"><strong>Status:</strong><br>
+                  <span class="badge ${data.status == 'Selected' ? 'bg-success' : 'bg-warning text-dark'}">
+                    ${data.status}
+                  </span>
+                </div>
+              </div>
+            `;
+            showModal("Application Details", appHTML);
+          } else {
+            showModal("Application Details", "<p class='text-danger'>Application not found.</p>");
+          }
+        })
+        .catch(() => showModal("Error", "<p class='text-danger'>Unable to load application details.</p>"));
+    }
+  </script>
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

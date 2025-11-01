@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIreVerse Chat Room</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    body { 
+      background: #f4f6f8; 
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    /* Chat container base styles */
+    .teams-chat-container {
+      transition: all 0.3s ease;
+    }
+    
+    .chat-container { 
+      max-width: 600px; 
+      margin: 3rem auto; 
+      background: #fff; 
+      border-radius: 16px; 
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08); 
+      padding: 2.5rem 2rem; 
+    }
+    
+    .chat-messages { 
+      height: 350px; 
+      overflow-y: auto; 
+      background: #f8f9fa; 
+      border-radius: 8px; 
+      padding: 1rem; 
+      margin-bottom: 1rem;
+      scroll-behavior: smooth;
+    }
+    
+    .chat-message { 
+      margin-bottom: 1rem; 
+      animation: fadeInUp 0.3s ease;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .chat-user { 
+      font-weight: bold; 
+      color: #007bff; 
+    }
+    
+    .chat-input { 
+      width: 100%; 
+      transition: border-color 0.2s ease;
+    }
+    
+    .chat-input:focus {
+      border-color: #007bff !important;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+    }
+    
+    /* Chat item styles */
+    .chat-item {
+      transition: all 0.2s ease;
+      border: 1px solid #e0e0e0 !important;
+    }
+    
+    .chat-item:hover {
+      background-color: #f8f9fa !important;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .chat-item.bg-primary {
+      background-color: #007bff !important;
+    }
+    
+    .chat-item.bg-primary:hover {
+      background-color: #0056b3 !important;
+      transform: none;
+    }
+    
+    /* Favorite button styles */
+    .favorite-btn {
+      transition: all 0.2s ease;
+      opacity: 0.7;
+    }
+    
+    .favorite-btn:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    
+    /* Mobile hamburger menu */
+    .mobile-toggle {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+    }
+    
+    .mobile-toggle:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+    
+    /* Sidebar styles */
+    .teams-sidebar {
+      transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Responsive breakpoints */
+    @media (max-width: 768px) {
+      .teams-chat-container {
+        height: 100vh !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        flex-direction: column;
+        max-width: none;
+      }
+      
+      .teams-sidebar {
+        width: 85% !important;
+        max-width: 320px !important;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 1000;
+        transition: left 0.3s ease;
+        max-height: 100vh;
+        overflow-y: auto;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      }
+      
+      .teams-sidebar.mobile-open {
+        left: 0;
+      }
+      
+      .teams-main-chat {
+        height: 100vh !important;
+        padding-top: 60px;
+        width: 100% !important;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .chat-messages {
+        height: calc(100vh - 220px) !important;
+        padding: 1rem;
+      }
+      
+      /* Better touch targets */
+      .chat-item {
+        padding: 12px !important;
+        margin-bottom: 8px !important;
+      }
+      
+      .favorite-btn {
+        padding: 8px !important;
+        min-width: 32px;
+        min-height: 32px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .teams-chat-container {
+        padding: 0;
+      }
+      
+      .teams-sidebar {
+        width: 90% !important;
+      }
+      
+      .chat-messages {
+        padding: 0.75rem;
+        height: calc(100vh - 200px) !important;
+      }
+      
+      .d-flex.align-items-center.position-relative {
+        padding: 8px 12px !important;
+        gap: 8px !important;
+      }
+      
+      #chatInput {
+        font-size: 1rem !important;
+      }
+      
+      /* Smaller avatars on mobile */
+      .avatar, .chat-message span:first-child {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 14px !important;
+      }
+      
+      /* Better spacing for mobile */
+      .chat-item .fw-bold {
+        font-size: 14px !important;
+      }
+      
+      .chat-item .text-muted {
+        font-size: 12px !important;
+      }
+    }
+    
+    /* Landscape orientation on mobile */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .teams-main-chat {
+        padding-top: 50px;
+      }
+      
+      .chat-messages {
+        height: calc(100vh - 160px) !important;
+      }
+      
+      .mobile-toggle {
+        top: 10px;
+        left: 10px;
+        padding: 8px;
+      }
+    }
+    
+    /* Scroll bar customization */
+    .chat-messages::-webkit-scrollbar,
+    .teams-sidebar::-webkit-scrollbar,
+    #chatList::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .chat-messages::-webkit-scrollbar-track,
+    .teams-sidebar::-webkit-scrollbar-track,
+    #chatList::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 3px;
+    }
+    
+    .chat-messages::-webkit-scrollbar-thumb,
+    .teams-sidebar::-webkit-scrollbar-thumb,
+    #chatList::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 3px;
+    }
+    
+    .chat-messages::-webkit-scrollbar-thumb:hover,
+    .teams-sidebar::-webkit-scrollbar-thumb:hover,
+    #chatList::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+    
+    /* Loading state styles */
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    
+    /* Focus styles for accessibility */
+    .chat-item:focus {
+      outline: 2px solid #007bff;
+      outline-offset: 2px;
+    }
+    
+    .favorite-btn:focus {
+      outline: 2px solid #007bff;
+      outline-offset: 1px;
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .chat-item {
+        border: 2px solid #000 !important;
+      }
+      
+      .chat-item:hover {
+        background-color: #f0f0f0 !important;
+      }
+    }
+    
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile toggle button -->
+  <button class="mobile-toggle" id="mobileToggle">
+    <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+    </svg>
+  </button>
+  
+  <div class="teams-chat-container" id="chatContainer" style="display:flex; height:90vh; max-width:1200px; margin:2rem auto; background:#fff; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.12); overflow:hidden;">
+  <div class="teams-sidebar" id="sidebar" style="width:320px; background:#fff; color:#2c3e50; padding:1.5rem 1rem; display:flex; flex-direction:column; border-right:1px solid #e0e0e0;">
+    <div class="p-3 border-bottom bg-white">
+      <h5 class="mb-2" style="color:#2c3e50;">Chat</h5>
+      <div class="d-flex gap-2 mb-3">
+        <button class="btn btn-outline-primary btn-sm">Unread</button>
+        <button class="btn btn-outline-primary btn-sm">Chats</button>
+        <button class="btn btn-outline-primary btn-sm">Meeting chats</button>
+      </div>
+      <input type="text" class="form-control form-control-sm bg-light border-0" placeholder="Search by name..." id="chatSearchInput">
+    </div>
+    <div class="px-3 pt-2" style="background:#f8f9fa; flex: 1; overflow-y: auto;" id="chatList">
+      <!-- Chat list will be dynamically rendered here -->
+    </div>
+    </div>
+  <div class="teams-main-chat" style="flex:1 1 auto; background:#fff; color:#2c3e50; display:flex; flex-direction:column;">
+      <div style="padding:1.5rem 2rem; border-bottom:1px solid #e0e0e0; display:flex; align-items:center; justify-content:space-between; background:#fff;">
+        <div style="font-size:1.3rem; font-weight:700; color:#3498db;">Teams Chat</div>
+        
+      </div>
+      <div class="chat-messages" id="chatMessages" style="flex:1 1 auto; overflow-y:auto; padding:2rem; background:#f8f9fa; color:#2c3e50;"></div>
+      <form id="chatForm" autocomplete="off" style="padding:1.5rem 2rem; border-top:1px solid #e0e0e0; background:#fff;">
+        <div class="d-flex align-items-center position-relative" style="background:#fff; border-radius:12px; padding:10px 18px; gap:16px; border:1px solid #e0e0e0;">
+          <input type="text" id="chatInput" class="form-control chat-input border-0" placeholder="Type a message" required style="background:transparent; color:#2c3e50; box-shadow:none; font-size:1.15rem; border:none; flex:1;">
+          <input type="file" id="fileInput" style="display:none;">
+          <button type="button" class="btn btn-link p-0" id="emojiBtn" title="Emoji"><svg width="24" height="24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M8 15c1.5 1 4.5 1 6 0"/></svg></button>
+          <button type="button" class="btn btn-link p-0" id="attachBtn" title="Attach"><svg width="24" height="24" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          <span style="height:24px;width:1px;background:#e0e0e0;display:inline-block;margin:0 8px;"></span>
+          <button type="submit" class="btn btn-link p-0" title="Send"><svg width="28" height="28" fill="none" stroke="#3498db" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="6,24 24,14 6,4 10,14"/></svg></button>
+          <div id="emojiPicker" style="display:none; position:absolute; bottom:54px; right:60px; background:#fff; border:1px solid #e0e0e0; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:10px; z-index:10; width:220px;">
+            <div style="display:flex; flex-wrap:wrap; gap:8px; max-height:120px; overflow-y:auto;">
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😀</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😂</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😍</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😎</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😭</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">👍</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">🙏</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">🔥</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">🥳</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">🤔</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😅</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😇</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😡</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">🥺</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">🤩</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😐</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😋</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😜</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😏</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😬</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">🤗</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">🤓</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😴</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😤</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😱</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">😈</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">👻</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">💩</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">👀</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">🙌</span>
+              <span class="emoji-item" style="font-size:22px; cursor:pointer;">💯</span>
+            </div>
+          </div>
+          <span id="fileName" style="margin-left:10px; color:#888; font-size:0.98rem;"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% load static %}
+  <!-- <script src="{% static 'chat-data.js' %}"></script> -->
+  <script>
+    // Global variables
+    let currentChatContact = null;
+    let searchTerm = '';
+
+    // Dynamic Chat Rendering Functions
+    function renderChatFilters() {
+      const filterContainer = document.querySelector('.d-flex.gap-2.mb-3');
+      filterContainer.innerHTML = '';
+      
+      chatData.chatFilters.forEach(filter => {
+        const button = document.createElement('button');
+        button.className = `btn btn-sm ${filter.active ? 'btn-primary' : 'btn-outline-primary'}`;
+        button.textContent = filter.label;
+        button.onclick = () => setActiveFilter(filter.id);
+        filterContainer.appendChild(button);
+      });
+    }
+
+    function createChatItem(contact) {
+      const div = document.createElement('div');
+      div.className = 'd-flex align-items-center mb-2 p-2 rounded bg-white border chat-item';
+      div.style.cursor = 'pointer';
+      div.dataset.contactId = contact.id;
+      
+      // Avatar
+      let avatarHtml;
+      if (contact.avatar && contact.avatar.startsWith('assets/')) {
+        avatarHtml = `<img src="${contact.avatar}" alt="Avatar" class="me-2" style="width:36px;height:36px;border-radius:50%;object-fit:cover;">`;
+      } else {
+        avatarHtml = `<div class="avatar text-dark fw-bold me-2" style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:${contact.avatarColor};">${contact.shortName}</div>`;
+      }
+      
+      // Status indicator
+      let statusHtml = '';
+      if (contact.hasNotification) {
+        const iconClass = contact.notificationType === 'warning' ? 'bi-exclamation-circle-fill text-warning' : 'bi-circle-fill text-success';
+        statusHtml = `<span class="ms-2"><i class="bi ${iconClass}" style="font-size:${contact.notificationType === 'warning' ? '14px' : '10px'};"></i></span>`;
+      } else if (contact.isOnline) {
+        statusHtml = `<span class="ms-2"><i class="bi bi-circle-fill text-success" style="font-size:10px;"></i></span>`;
+      }
+      
+      div.innerHTML = `
+        ${avatarHtml}
+        <div class="flex-grow-1">
+          <div class="fw-bold" style="font-size:15px; color:#2c3e50;">${contact.name}</div>
+          ${contact.lastMessage ? `<div class="text-muted" style="font-size:13px;">${contact.lastMessage}</div>` : ''}
+        </div>
+        <div class="ms-2 text-secondary" style="font-size:12px;">${contact.lastMessageTime}</div>
+        ${statusHtml}
+        <button class="btn btn-link p-0 ms-2 favorite-btn" onclick="toggleFavorite('${contact.id}', event)" style="color: ${contact.isFavorite ? '#ffd700' : '#ccc'};">
+          <i class="bi bi-star${contact.isFavorite ? '-fill' : ''}" style="font-size:14px;"></i>
+        </button>
+      `;
+      
+      div.onclick = (e) => {
+        if (!e.target.closest('.favorite-btn')) {
+          selectChat(contact.id);
+        }
+      };
+      
+      return div;
+    }
+
+    function renderChatList() {
+      const chatListContainer = document.getElementById('chatList');
+      chatListContainer.innerHTML = '';
+      
+      const contacts = searchTerm ? chatUtils.searchContacts(searchTerm) : chatUtils.getFilteredContacts();
+      
+      // Group contacts
+      const favorites = contacts.filter(c => c.isFavorite);
+      const regular = contacts.filter(c => !c.isFavorite);
+      
+      // Render favorites
+      if (favorites.length > 0) {
+        const favSection = document.createElement('div');
+        favSection.className = 'mb-2 text-uppercase text-secondary';
+        favSection.style.fontSize = '13px';
+        favSection.textContent = 'Favorites';
+        chatListContainer.appendChild(favSection);
+        
+        favorites.forEach(contact => {
+          chatListContainer.appendChild(createChatItem(contact));
+        });
+      }
+      
+      // Render regular chats
+      if (regular.length > 0) {
+        const chatSection = document.createElement('div');
+        chatSection.className = 'mb-2 text-uppercase text-secondary';
+        chatSection.style.fontSize = '13px';
+        chatSection.textContent = 'Chats';
+        chatListContainer.appendChild(chatSection);
+        
+        regular.forEach(contact => {
+          chatListContainer.appendChild(createChatItem(contact));
+        });
+      }
+      
+      // No results message
+      if (contacts.length === 0) {
+        const noResults = document.createElement('div');
+        noResults.className = 'text-center text-muted p-3';
+        noResults.textContent = searchTerm ? 'No contacts found' : 'No chats available';
+        chatListContainer.appendChild(noResults);
+      }
+    }
+
+    function selectChat(contactId) {
+      currentChatContact = contactId;
+      const contact = chatUtils.getContact(contactId);
+      
+      if (contact) {
+        // Update header
+        const chatHeader = document.querySelector('.teams-main-chat > div div');
+        chatHeader.textContent = contact.name;
+        
+        // Update active chat item
+        document.querySelectorAll('.chat-item').forEach(item => {
+          item.classList.remove('bg-primary', 'text-white');
+          item.classList.add('bg-white');
+        });
+        
+        const selectedItem = document.querySelector(`[data-contact-id="${contactId}"]`);
+        if (selectedItem) {
+          selectedItem.classList.remove('bg-white');
+          selectedItem.classList.add('bg-primary', 'text-white');
+        }
+        
+        // Render messages
+        renderMessages(contactId);
+        
+        // Close sidebar on mobile
+        if (window.innerWidth <= 768) {
+          document.getElementById('sidebar').classList.remove('mobile-open');
+        }
+      }
+    }
+
+    function renderMessages(contactId) {
+      const chatMessages = document.getElementById('chatMessages');
+      chatMessages.innerHTML = '';
+      
+      const conversation = chatUtils.getConversation(contactId);
+      
+      conversation.forEach(message => {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'chat-message';
+        msgDiv.style.display = 'flex';
+        msgDiv.style.alignItems = 'center';
+        msgDiv.style.gap = '10px';
+        msgDiv.style.marginBottom = '1rem';
+        
+        const isCurrentUser = message.senderId === chatData.currentUser.id;
+        const avatarLetter = isCurrentUser ? chatData.currentUser.avatar : chatUtils.getContact(contactId)?.shortName || 'U';
+        const avatarColor = isCurrentUser ? chatData.currentUser.avatarColor : chatUtils.getContact(contactId)?.avatarColor || '#ccc';
+        
+        let messageContent = message.message;
+        if (message.type === 'file') {
+          messageContent = `<span style='font-size:0.95rem; color:#3498db;'><i class='bi bi-paperclip'></i> ${message.fileName || message.message}</span>`;
+        }
+        
+        msgDiv.innerHTML = `
+          <span style='width:32px;height:32px;border-radius:50%;background:${avatarColor};color:#23272b;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;'>${avatarLetter}</span>
+          <span><span class="chat-user">${message.senderName}:</span> ${messageContent}</span>
+        `;
+        
+        chatMessages.appendChild(msgDiv);
+      });
+      
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function toggleFavorite(contactId, event) {
+      event.stopPropagation();
+      const contact = chatUtils.toggleFavorite(contactId);
+      
+      if (contact) {
+        // Update the star icon
+        const favoriteBtn = event.currentTarget;
+        const icon = favoriteBtn.querySelector('i');
+        if (contact.isFavorite) {
+          icon.className = 'bi bi-star-fill';
+          favoriteBtn.style.color = '#ffd700';
+        } else {
+          icon.className = 'bi bi-star';
+          favoriteBtn.style.color = '#ccc';
+        }
+        
+        // Re-render list to update grouping
+        setTimeout(() => renderChatList(), 100);
+      }
+    }
+
+    function setActiveFilter(filterId) {
+      chatUtils.setActiveFilter(filterId);
+      renderChatFilters();
+      renderChatList();
+    }
+
+    function addNewMessage(message) {
+      if (currentChatContact) {
+        const newMessage = chatUtils.addMessage(currentChatContact, message);
+        renderMessages(currentChatContact);
+        renderChatList(); // Update last message in sidebar
+        return newMessage;
+      }
+    }
+
+    // Initialize chat interface
+    function initializeChat() {
+      renderChatFilters();
+      renderChatList();
+      
+      // Select first contact by default
+      if (chatData.contacts.length > 0) {
+        selectChat(chatData.contacts[0].id);
+      }
+    }
+    // Enhanced Responsive Features and Event Handlers
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const sidebar = document.getElementById('sidebar');
+    const chatSearchInput = document.getElementById('chatSearchInput');
+
+    // File attachment logic (enhanced)
+    const attachBtn = document.getElementById('attachBtn');
+    const fileInput = document.getElementById('fileInput');
+    const fileNameSpan = document.getElementById('fileName');
+    
+    attachBtn.addEventListener('click', function() {
+      fileInput.click();
+    });
+    
+    fileInput.addEventListener('change', function() {
+      if (fileInput.files.length > 0) {
+        fileNameSpan.textContent = fileInput.files[0].name;
+      } else {
+        fileNameSpan.textContent = '';
+      }
+    });
+
+    // Enhanced emoji picker with responsive positioning
+    const emojiBtn = document.getElementById('emojiBtn');
+    const emojiPicker = document.getElementById('emojiPicker');
+    
+    emojiBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      
+      // Dynamic positioning based on screen size
+      if (window.innerWidth <= 480) {
+        emojiPicker.style.right = '5px';
+        emojiPicker.style.width = '180px';
+        emojiPicker.style.bottom = '50px';
+      } else if (window.innerWidth <= 768) {
+        emojiPicker.style.right = '10px';
+        emojiPicker.style.width = '200px';
+        emojiPicker.style.bottom = '54px';
+      } else {
+        emojiPicker.style.right = '60px';
+        emojiPicker.style.width = '220px';
+        emojiPicker.style.bottom = '54px';
+      }
+      
+      emojiPicker.style.display = emojiPicker.style.display === 'block' ? 'none' : 'block';
+    });
+    
+    document.addEventListener('click', function(e) {
+      if (emojiPicker.style.display === 'block' && !emojiPicker.contains(e.target) && e.target !== emojiBtn) {
+        emojiPicker.style.display = 'none';
+      }
+    });
+    
+    emojiPicker.querySelectorAll('.emoji-item').forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        e.stopPropagation();
+        chatInput.value += item.textContent;
+        emojiPicker.style.display = 'none';
+        chatInput.focus();
+      });
+    });
+
+    // Enhanced chat form submission
+    chatForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const message = chatInput.value.trim();
+      let fileName = '';
+      
+      if (fileInput.files.length > 0) {
+        fileName = fileInput.files[0].name;
+      }
+      
+      if (message || fileName) {
+        const messageData = {
+          text: message,
+          type: fileName ? 'file' : 'text',
+          fileName: fileName
+        };
+        
+        addNewMessage(messageData);
+        
+        // Reset form
+        chatInput.value = '';
+        fileInput.value = '';
+        fileNameSpan.textContent = '';
+        
+        // Auto-scroll to bottom
+        setTimeout(() => {
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 100);
+      }
+    });
+
+    // Enhanced search functionality
+    chatSearchInput.addEventListener('input', function() {
+      searchTerm = this.value.toLowerCase();
+      renderChatList();
+    });
+
+    // Enhanced responsive functionality
+    mobileToggle.addEventListener('click', function() {
+      sidebar.classList.toggle('mobile-open');
+    });
+
+    // Enhanced outside click handling
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+        if (!sidebar.contains(e.target) && !mobileToggle.contains(e.target)) {
+          sidebar.classList.remove('mobile-open');
+        }
+      }
+    });
+
+    // Enhanced resize handler with better performance
+    let resizeTimeout;
+    function handleResize() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (window.innerWidth > 768) {
+          sidebar.classList.remove('mobile-open');
+        }
+        
+        // Dynamic chat messages height
+        const chatMessages = document.getElementById('chatMessages');
+        if (window.innerWidth <= 768) {
+          const viewportHeight = window.innerHeight;
+          const headerHeight = window.innerWidth <= 480 ? 120 : 140;
+          const inputHeight = window.innerWidth <= 480 ? 80 : 100;
+          const newHeight = Math.max(200, viewportHeight - headerHeight - inputHeight);
+          chatMessages.style.height = `${newHeight}px`;
+        } else {
+          chatMessages.style.height = '';
+        }
+        
+        // Adjust emoji picker on resize
+        if (emojiPicker.style.display === 'block') {
+          emojiPicker.style.display = 'none';
+        }
+      }, 100);
+    }
+
+    // Enhanced touch gestures with better sensitivity
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    });
+    
+    document.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+      handleSwipeGesture();
+    });
+    
+    function handleSwipeGesture() {
+      if (window.innerWidth <= 768) {
+        const swipeThreshold = 80;
+        const swipeDistance = touchEndX - touchStartX;
+        const verticalDistance = Math.abs(touchEndY - touchStartY);
+        
+        // Only process horizontal swipes
+        if (verticalDistance < 100) {
+          // Swipe right to open sidebar
+          if (swipeDistance > swipeThreshold && touchStartX < 50) {
+            sidebar.classList.add('mobile-open');
+          }
+          
+          // Swipe left to close sidebar
+          if (swipeDistance < -swipeThreshold && sidebar.classList.contains('mobile-open')) {
+            sidebar.classList.remove('mobile-open');
+          }
+        }
+      }
+    }
+
+    // Enhanced keyboard handling for mobile
+    function handleVirtualKeyboard() {
+      if (window.innerWidth <= 768) {
+        chatInput.addEventListener('focus', function() {
+          setTimeout(() => {
+            // Scroll to bottom when keyboard appears
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Adjust layout for virtual keyboard
+            const viewport = window.visualViewport;
+            if (viewport) {
+              const keyboardHeight = window.innerHeight - viewport.height;
+              if (keyboardHeight > 150) {
+                document.body.style.paddingBottom = `${keyboardHeight}px`;
+              }
+            }
+          }, 300);
+        });
+        
+        chatInput.addEventListener('blur', function() {
+          // Reset layout when keyboard disappears
+          document.body.style.paddingBottom = '';
+        });
+        
+        // Handle viewport changes for modern browsers
+        if (window.visualViewport) {
+          window.visualViewport.addEventListener('resize', () => {
+            if (document.activeElement === chatInput) {
+              setTimeout(() => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+              }, 100);
+            }
+          });
+        }
+      }
+    }
+
+    // Auto-focus management
+    function manageFocus() {
+      // Only auto-focus on larger screens to prevent mobile keyboard popup
+      if (window.innerWidth > 768) {
+        chatInput.focus();
+      }
+    }
+
+    // Enhanced orientation change handling
+    window.addEventListener('orientationchange', function() {
+      setTimeout(() => {
+        handleResize();
+        if (currentChatContact) {
+          renderMessages(currentChatContact);
+        }
+      }, 200);
+    });
+
+    // Event listeners
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('load', function() {
+      initializeChat();
+      handleResize();
+      handleVirtualKeyboard();
+      manageFocus();
+    });
+
+    // Performance optimization: Debounced scroll handler for chat list
+    let scrollTimeout;
+    if (document.getElementById('chatList')) {
+      document.getElementById('chatList').addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          // Handle infinite scrolling or lazy loading if needed
+        }, 150);
+      });
+    }
+
+    // Accessibility improvements
+    chatInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        chatForm.dispatchEvent(new Event('submit'));
+      }
+    });
+
+    // Connection status simulation (for future real-time features)
+    function simulateConnectionStatus() {
+      // This could be enhanced to show real connection status
+      console.log('Chat interface initialized and ready');
+    }
+
+    // Initialize connection status
+    setTimeout(simulateConnectionStatus, 1000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HireVerse Round Reminder - {{ company_name }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f7f9fb; margin: 0; padding: 0;">
+  <div style="max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); padding: 20px;">
+    <h2 style="color: #007bff; text-align: center;">Upcoming Round Reminder</h2>
+
+    <p>Dear <strong>{{ tnp_name }}</strong>,</p>
+
+    <p>This is to inform you that <b>{{ company_name }}</b> has scheduled rounds for the position <b>{{ job_title }}</b> for your students tomorrow.</p>
+
+    <div style="background: #f0f6ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+      <p style="margin: 5px 0;"><strong>Company:</strong> {{ company_name }}</p>
+      <p style="margin: 5px 0;"><strong>Position:</strong> {{ job_title }}</p>
+      <p style="margin: 5px 0;"><strong>Scheduled Date:</strong> {{ date|date:"d M Y, h:i A" }}</p>
+    </div>
+
+    <p>Please ensure that students are informed and prepared accordingly. You can monitor their participation from your TNP dashboard.</p>
+
+    <p>Warm regards,<br>
+    <strong>HireVerse Notifications</strong></p>
+
+    <div style="text-align: center; margin-top: 15px; color: #777; font-size: 13px;">
+      Automated reminder — no reply required.
+    </div>
+  </div>
+</body>
+</html>

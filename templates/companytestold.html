@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'sidebar.css' %}">
+  <style>
+    body { background: #f6f8fa; }
+    .main-content { margin-left: 240px; padding: 2rem; }
+    .topbar { background: #fff; padding: 1rem 2rem; border-bottom: 1px solid #e3e3e3; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 900; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 12px; margin-bottom: 1.2rem; }
+    .nav-tabs-selection { background: #f4f8fb; border-radius: 12px; display: flex; justify-content: center; gap: 2rem; padding: 0.5rem 0; margin-bottom: 2rem; }
+    .nav-tabs-selection .nav-link { font-size: 1.15rem; font-weight: 500; color: #6c757d; border-radius: 8px; padding: 0.7rem 2.5rem; border: none; background: none; transition: all 0.2s; }
+    .nav-tabs-selection .nav-link.active { color: #111; background: #fff; border: 2px solid #111; }
+    .selection-card {
+      border: 1px solid #e3e3e3;
+      transition: box-shadow 0.2s;
+    }
+    .selection-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+      border-color: #b3d1ff;
+    }
+    .test-config-section {
+      border: 1px solid #e3e3e3;
+      transition: box-shadow 0.2s;
+    }
+    .test-config-section:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+      border-color: #b3d1ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar d-flex flex-column">
+    <div class="d-flex justify-content-center align-items-center mb-4" style="height:130px;">
+      <img src="{% static 'assets/logo_main.png' %}" 
+        alt="HireVerse Logo" 
+        style="width:350px;height:120px;object-fit:contain;display:block;margin:auto;">
+    </div>
+    <!-- ...existing sidebar code... -->
+    <nav class="nav flex-column">
+      <a class="nav-link" href="/companyDashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a class="nav-link" href="/companyProfile"><i class="bi bi-person-circle"></i> Profile</a>
+      <a class="nav-link" href="/companyJobPosts"><i class="bi bi-briefcase"></i> Posts</a>
+      <a class="nav-link active" href="/companySelectionTest"><i class="bi bi-file-earmark-text"></i> Selection</a>
+      <a class="nav-link" href="/companyReport"><i class="bi bi-bar-chart"></i> Reports</a>
+      <a class="nav-link" href="/companyNotification"><i class="bi bi-bell"></i> Notifications</a>
+      <a class="nav-link" href="/chatRoom"><i class="bi bi-chat-dots"></i> Chat Room</a>
+      <a class="nav-link" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    </nav>
+  </div>
+  <div class="main-content">
+    <div class="topbar d-flex align-items-center justify-content-between">
+      <h3>Selection Process Management</h3>
+    </div>
+    <div class="d-flex flex-wrap gap-4 mb-4">
+      <!-- Aptitude Test Card -->
+      <div class="selection-card bg-white p-4 rounded-4 shadow-sm flex-grow-1" style="min-width:320px;max-width:400px;">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="fw-semibold">Aptitude Test</div>
+          <i class="bi bi-lightbulb" style="font-size:1.3rem;color:#1a4e8a;"></i>
+        </div>
+        <div class="fs-2 fw-bold mb-2">45/77</div>
+        <div class="progress mb-3" style="height:12px;">
+          <div class="progress-bar bg-primary" role="progressbar" style="width:58.4%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="77"></div>
+        </div>
+        <div class="d-flex gap-2">
+    <button class="btn btn-outline-secondary" style="border-radius:8px;">Configure</button>
+    <button class="btn btn-primary" style="border-radius:8px; font-weight:500;" data-bs-toggle="modal" data-bs-target="#scheduleModal">Schedule</button>
+  <!-- Schedule Modal -->
+  <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="scheduleModalLabel">Schedule Event</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="scheduleForm">
+            <div class="mb-3">
+              <label for="eventDate" class="form-label">Date</label>
+              <input type="date" class="form-control" id="eventDate" required>
+            </div>
+            <div class="mb-3">
+              <label for="eventTime" class="form-label">Time</label>
+              <input type="time" class="form-control" id="eventTime" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="confirmScheduleBtn">Confirm Schedule</button>
+        </div>
+      </div>
+    </div>
+  </div>
+        </div>
+      </div>
+      <!-- Technical Test Card -->
+      <div class="selection-card bg-white p-4 rounded-4 shadow-sm flex-grow-1" style="min-width:320px;max-width:400px;">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="fw-semibold">Technical Test</div>
+          <i class="bi bi-file-earmark-text" style="font-size:1.3rem;color:#1a4e8a;"></i>
+        </div>
+        <div class="fs-2 fw-bold mb-2">32/45</div>
+        <div class="progress mb-3" style="height:12px;">
+          <div class="progress-bar bg-primary" role="progressbar" style="width:71.1%" aria-valuenow="32" aria-valuemin="0" aria-valuemax="45"></div>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary" style="border-radius:8px;">Configure</button>
+          <button class="btn btn-primary" style="border-radius:8px; font-weight:500;" data-bs-toggle="modal" data-bs-target="#scheduleModal">Schedule</button>
+        </div>
+      </div>
+      <!-- Group Discussion Card -->
+      <div class="selection-card bg-white p-4 rounded-4 shadow-sm flex-grow-1" style="min-width:320px;max-width:400px;">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="fw-semibold">Group Discussion</div>
+          <i class="bi bi-chat-dots" style="font-size:1.3rem;color:#1a4e8a;"></i>
+        </div>
+        <div class="fs-2 fw-bold mb-2">24/32</div>
+        <div class="progress mb-3" style="height:12px;">
+          <div class="progress-bar bg-primary" role="progressbar" style="width:75%" aria-valuenow="24" aria-valuemin="0" aria-valuemax="32"></div>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary" style="border-radius:8px;">Groups</button>
+          <button class="btn btn-primary" style="border-radius:8px; font-weight:500;" data-bs-toggle="modal" data-bs-target="#scheduleModal">Schedule</button>
+        </div>
+      </div>
+      <!-- Final Interview Card -->
+      <div class="selection-card bg-white p-4 rounded-4 shadow-sm flex-grow-1" style="min-width:320px;max-width:400px;">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="fw-semibold">Final Interview</div>
+          <i class="bi bi-people" style="font-size:1.3rem;color:#1a4e8a;"></i>
+        </div>
+        <div class="fs-2 fw-bold mb-2">18/24</div>
+        <div class="progress mb-3" style="height:12px;">
+          <div class="progress-bar bg-primary" role="progressbar" style="width:75%" aria-valuenow="18" aria-valuemin="0" aria-valuemax="24"></div>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary" style="border-radius:8px;">Configure</button>
+          <button class="btn btn-primary" style="border-radius:8px; font-weight:500;" data-bs-toggle="modal" data-bs-target="#scheduleModal">Schedule</button>
+        </div>
+      </div>
+    </div>
+    <!-- Test Configuration Section -->
+    <div class="test-config-section bg-white p-4 rounded-4 shadow-sm mb-4" style="max-width:100%;">
+      <h2 class="fw-bold mb-1">Test Configuration</h2>
+      <div class="text-secondary mb-4" style="font-size:1.15rem;">Configure your selection tests and AI-powered question generation</div>
+      <h4 class="fw-bold mb-3">Aptitude Test Settings</h4>
+      <div class="row g-4 mb-4">
+        <div class="col-md-6">
+          <div class="bg-white border rounded-4 p-4 h-100">
+            <h5 class="fw-bold mb-2">Self-Provided Questions</h5>
+            <div class="text-secondary mb-3">Upload your own question bank</div>
+              <input type="file" id="questionFileInput" style="display:none;">
+              <button class="btn btn-outline-primary px-4 py-2" style="font-weight:500;" id="uploadQuestionsBtn">Upload Questions</button>
+              <span id="questionFileName" style="margin-left:10px; color:#888; font-size:0.98rem;"></span>
+            <!-- Quiz Builder Section (only one) -->
+            <div class="quiz-builder-section bg-white p-3 rounded-4 shadow-sm mt-4" style="max-width:100%;">
+              <h5 class="fw-bold mb-1">Custom Quiz Builder</h5>
+              <div class="text-secondary mb-3" style="font-size:1.05rem;">Create your own quiz just like Google Forms. Add, edit, and remove questions below.</div>
+              <div id="quizQuestions"></div>
+              <button class="btn btn-outline-primary mt-3" id="addQuestionBtn"><i class="bi bi-plus-circle"></i> Add Question</button>
+              <button class="btn btn-success mt-3 ms-2" id="saveQuizBtn"><i class="bi bi-save"></i> Save Quiz</button>
+              <div id="quizSaveMsg" class="mt-2 text-success" style="display:none;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="bg-white border rounded-4 p-4 h-100">
+            <h5 class="fw-bold mb-2">AI-Generated Questions</h5>
+            <div class="text-secondary mb-3">Generate questions based on job description</div>
+            <button class="btn btn-primary px-4 py-2" style="font-weight:500;">Configure AI Quiz</button>
+          </div>
+        </div>
+      </div>
+      <h4 class="fw-bold mb-3">Test Monitoring</h4>
+      <div class="row g-3">
+        <div class="col-md-8">
+          <div class="mb-3">Full-screen mode enforcement</div>
+          <div class="mb-3">Camera monitoring</div>
+          <div class="mb-3">Microphone monitoring</div>
+          <div class="mb-3">Multi-person detection alerts</div>
+        </div>
+        <div class="col-md-4 d-flex flex-column align-items-end">
+          <button class="btn btn-primary mb-3" style="border-radius:8px;min-width:100px;">Enabled</button>
+          <button class="btn btn-primary mb-3" style="border-radius:8px;min-width:100px;">Enabled</button>
+          <button class="btn btn-primary mb-3" style="border-radius:8px;min-width:100px;">Enabled</button>
+          <button class="btn btn-primary mb-3" style="border-radius:8px;min-width:100px;">Enabled</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Schedule Modal Logic
+document.addEventListener('DOMContentLoaded', function() {
+  const confirmBtn = document.getElementById('confirmScheduleBtn');
+  const eventDate = document.getElementById('eventDate');
+  const eventTime = document.getElementById('eventTime');
+  confirmBtn.addEventListener('click', function() {
+    if (eventDate.value && eventTime.value) {
+      alert('Event scheduled for ' + eventDate.value + ' at ' + eventTime.value);
+      // Optionally, save to localStorage or send to backend here
+      document.getElementById('scheduleForm').reset();
+      var modal = bootstrap.Modal.getInstance(document.getElementById('scheduleModal'));
+      modal.hide();
+    } else {
+      alert('Please select both date and time.');
+    }
+  });
+});
+</script>
+<script>
+// Quiz Builder Logic
+document.addEventListener('DOMContentLoaded', function() {
+  let questions = [];
+  // Scope quiz builder to the first quiz-builder-section only
+  const quizBuilderSection = document.querySelector('.quiz-builder-section');
+  if (!quizBuilderSection) return;
+  const quizQuestionsDiv = quizBuilderSection.querySelector('#quizQuestions');
+  const addQuestionBtn = quizBuilderSection.querySelector('#addQuestionBtn');
+  const saveQuizBtn = quizBuilderSection.querySelector('#saveQuizBtn');
+  const quizSaveMsg = quizBuilderSection.querySelector('#quizSaveMsg');
+
+  function renderQuestions() {
+    quizQuestionsDiv.innerHTML = '';
+    questions.forEach((q, idx) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'border rounded-3 p-3 mb-3';
+      qDiv.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="fw-bold">Q${idx+1}</span>
+          <button class="btn btn-sm btn-danger" data-remove="${idx}"><i class="bi bi-trash"></i> Remove</button>
+        </div>
+        <input type="text" class="form-control mb-2" placeholder="Enter question text" value="${q.text}" data-qtext="${idx}">
+        <select class="form-select mb-2" data-qtype="${idx}">
+          <option value="mcq" ${q.type==='mcq'?'selected':''}>Multiple Choice</option>
+          <option value="short" ${q.type==='short'?'selected':''}>Short Answer</option>
+          <option value="paragraph" ${q.type==='paragraph'?'selected':''}>Paragraph</option>
+        </select>
+        <div data-options="${idx}" style="display:${q.type==='mcq'?'block':'none'};">
+          <label class="mb-1">Options:</label>
+          ${q.options.map((opt, oidx) => `
+            <div class="input-group mb-1">
+              <input type="text" class="form-control" value="${opt}" data-opt="${idx}-${oidx}">
+              <button class="btn btn-outline-danger" data-removeopt="${idx}-${oidx}"><i class="bi bi-x"></i></button>
+            </div>
+          `).join('')}
+          <button class="btn btn-sm btn-outline-primary" data-addopt="${idx}"><i class="bi bi-plus"></i> Add Option</button>
+        </div>
+      `;
+      quizQuestionsDiv.appendChild(qDiv);
+    });
+    attachEvents();
+  }
+
+  function attachEvents() {
+    // Remove question
+    quizQuestionsDiv.querySelectorAll('button[data-remove]').forEach(btn => {
+      btn.onclick = function() {
+        const idx = parseInt(btn.getAttribute('data-remove'));
+        questions.splice(idx,1);
+        renderQuestions();
+      };
+    });
+    // Edit question text
+    quizQuestionsDiv.querySelectorAll('input[data-qtext]').forEach(inp => {
+      inp.oninput = function() {
+        const idx = parseInt(inp.getAttribute('data-qtext'));
+        questions[idx].text = inp.value;
+      };
+    });
+    // Change question type
+    quizQuestionsDiv.querySelectorAll('select[data-qtype]').forEach(sel => {
+      sel.onchange = function() {
+        const idx = parseInt(sel.getAttribute('data-qtype'));
+        questions[idx].type = sel.value;
+        if (sel.value === 'mcq' && !questions[idx].options) questions[idx].options = [''];
+        if (sel.value !== 'mcq') questions[idx].options = [];
+        renderQuestions();
+      };
+    });
+    // Add option
+    quizQuestionsDiv.querySelectorAll('button[data-addopt]').forEach(btn => {
+      btn.onclick = function() {
+        const idx = parseInt(btn.getAttribute('data-addopt'));
+        questions[idx].options.push('');
+        renderQuestions();
+      };
+    });
+    // Edit option text
+    quizQuestionsDiv.querySelectorAll('input[data-opt]').forEach(inp => {
+      inp.oninput = function() {
+        const [qidx, oidx] = inp.getAttribute('data-opt').split('-').map(Number);
+        questions[qidx].options[oidx] = inp.value;
+      };
+    });
+    // Remove option
+    quizQuestionsDiv.querySelectorAll('button[data-removeopt]').forEach(btn => {
+      btn.onclick = function() {
+        const [qidx, oidx] = btn.getAttribute('data-removeopt').split('-').map(Number);
+        questions[qidx].options.splice(oidx,1);
+        renderQuestions();
+      };
+    });
+  }
+
+  addQuestionBtn.onclick = function() {
+    questions.push({text:'',type:'mcq',options:['']});
+    renderQuestions();
+  };
+
+  saveQuizBtn.onclick = function() {
+    localStorage.setItem('customQuiz', JSON.stringify(questions));
+    quizSaveMsg.textContent = 'Quiz saved locally!';
+    quizSaveMsg.style.display = 'block';
+    setTimeout(()=>{quizSaveMsg.style.display='none';},2000);
+  };
+
+  // Load quiz if exists
+  if (localStorage.getItem('customQuiz')) {
+    questions = JSON.parse(localStorage.getItem('customQuiz'));
+    renderQuestions();
+  }
+});
+</script>
+<script>
+  // Upload Questions button logic
+  document.addEventListener('DOMContentLoaded', function() {
+    const uploadBtn = document.getElementById('uploadQuestionsBtn');
+    const fileInput = document.getElementById('questionFileInput');
+    const fileNameSpan = document.getElementById('questionFileName');
+    if (uploadBtn && fileInput && fileNameSpan) {
+      uploadBtn.addEventListener('click', function() {
+        fileInput.click();
+      });
+      fileInput.addEventListener('change', function() {
+        if (fileInput.files.length > 0) {
+          fileNameSpan.textContent = fileInput.files[0].name + ' uploaded!';
+        } else {
+          fileNameSpan.textContent = '';
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>

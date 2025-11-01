@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIreVerse Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    body {
+      background: #f4f6f8;
+    }
+    .main-content {
+      margin-left: 240px;
+      padding: 2rem;
+    }
+    .topbar {
+      background: #fff;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #e3e3e3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border-radius: 12px;
+      transition: box-shadow 0.2s, transform 0.2s;
+      margin-bottom: 1.2rem;
+    }
+    .topbar:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+      transform: translateY(-2px) scale(1.01);
+    }
+    .dashboard-cards {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .dashboard-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 1.5rem;
+      flex: 1 1 220px;
+      min-width: 220px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .dashboard-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+      transform: translateY(-4px) scale(1.03);
+    }
+    .dashboard-card .bi {
+      font-size: 2.2rem;
+      color: #007bff;
+      margin-bottom: 0.5rem;
+    }
+    .dashboard-card h4 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      color: #007bff;
+      font-weight: 600;
+    }
+    .dashboard-card p {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #007bff;
+    }
+    .table-responsive {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 1rem;
+    }
+    .sidebar h2 {
+      color: #007bff;
+      font-weight: 700;
+      font-size: 1.7rem;
+      margin-bottom: 2rem;
+    }
+    /* --- View College Modal Styling --- */
+    .modal-content {
+      border-radius: 16px;
+      border: none;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+      animation: fadeInUp 0.3s ease;
+    }
+
+    .modal-header {
+      background: #007bff;
+      color: #fff;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      border-bottom: none;
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .modal-body {
+      background: #f9fbff;
+      padding: 1.8rem;
+      font-size: 1rem;
+      line-height: 1.7;
+      border-top: 1px solid #e3e3e3;
+      border-bottom: 1px solid #e3e3e3;
+    }
+
+    /* Add card-like view layout for college info */
+    .modal-body strong {
+      color: black;
+      display: inline-block;
+      width: 200px;
+    }
+
+    .modal-body br {
+      content: "";
+      display: block;
+      margin: 4px 0;
+    }
+
+    .modal-footer {
+      background: #f7f9fc;
+      border-top: none;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+      padding: 1rem 1.5rem;
+    }
+
+   .btn-secondary {
+      border-radius: 8px;
+      background-color: #007bff;
+      border: none;
+      color: #fff;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    }
+
+
+    @keyframes fadeInUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="sidebar d-flex flex-column justify-content-between" 
+      style="
+          position: fixed; 
+          top: 0; 
+          left: 0; 
+          height: 100vh; 
+          width: 240px; 
+          background: #ffffff; 
+          box-shadow: 2px 0 8px rgba(0,0,0,0.05); 
+          padding: 20px 0; 
+          z-index: 1000;
+        ">
+
+    <!-- Logo Section -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      {% load static %}
+      <img src="{% static 'assets/logo_main.png' %}" 
+          alt="HireVerse Logo" 
+          style="width: 180px; height: auto; object-fit: contain;">
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+      <a class="nav-link active" href="/adminDashboard"
+        style="background: #e9f5ff; color: #0056b3; font-weight: 600; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-speedometer2"></i> Dashboard
+      </a>
+
+      <a class="nav-link" href="/adminProfile"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-person-circle"></i> Profile
+      </a>
+
+      <a class="nav-link" href="/adminViewData"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-eye"></i> View Data
+      </a>
+
+      <a class="nav-link" href="/addCollege"
+        style="color: #007bff; font-weight: 500;
+                font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+                border-radius: 8px; display: flex; align-items: center; 
+                gap: 8px; text-decoration: none; transition: 0.2s;">
+        <i class="bi bi-person-plus"></i> Add Colleges
+      </a>
+
+      <a class="nav-link" href="/adminReports"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-bar-chart"></i> Reports
+      </a>
+    </nav>
+
+    <!-- Logout Button (Bottom Fixed) -->
+    <a class="nav-link" href="{% url 'logout' %}"
+      style="
+          color: #dc3545; 
+          font-weight: 600; 
+          font-size: 1.05rem; 
+          padding: 10px 12px; 
+          border-radius: 8px; 
+          display: flex; align-items: center; gap: 8px;
+          text-decoration: none; 
+          transition: 0.2s; 
+          border-top: 1px solid #f0f0f0; 
+          justify-content: center;
+          margin-top: auto;
+        "
+      onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+      onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+      <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+
+  </div>
+
+  <div class="main-content">
+    <div class="topbar d-flex align-items-center justify-content-between">
+      <h3>Admin Dashboard</h3>
+    </div>
+    <div class="dashboard-cards">
+      <div class="dashboard-card">
+        <i class="bi bi-shield-lock"></i>
+        <h4>Admins</h4>
+        <p>{{ total_admins }}</p>
+      </div>
+
+      <div class="dashboard-card">
+        <i class="bi bi-building"></i>
+        <h4>College</h4>
+        <p>{{ total_colleges }}</p>
+      </div>
+      
+      <div class="dashboard-card">
+        <i class="bi bi-people"></i>
+        <h4>TNP Members</h4>
+        <p>{{ total_tnp }}</p>
+      </div>
+      
+      <div class="dashboard-card">
+        <i class="bi bi-briefcase"></i>
+        <h4>Companies</h4>
+        <p>{{ total_companies }}</p>
+      </div>
+      
+      <div class="dashboard-card">
+        <i class="bi bi-person"></i>
+        <h4>Students</h4>
+        <p>{{ total_students }}</p>
+      </div>      
+    </div>
+    
+    <!-- Recent Colleges Table -->
+    <div class="mb-4">
+      <div class="section-title">Recent Colleges</div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>College Name</th>
+              <th>College Address</th>
+              <th>College Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for college in recent_colleges %}
+            <tr>
+              <td>{{ college.COLLEGE_NAME }}</td>
+              <td>{{ college.COLLEGE_ADDRESS }}</td>
+              <td>{{ college.COLLEGE_EMAIL }}</td>
+              <td>
+                <button class="btn btn-sm btn-primary view-btn" data-id="{{ college.COLLEGE_ID }}">
+                  <i class="bi bi-eye"></i> View
+                </button>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4" class="text-center">No colleges found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Reports Table -->
+    <div class="mb-4">
+      <div class="section-title">Reports</div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Report Name</th>
+              <th>Date</th>
+              <th>Download</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for report in reports %}
+            <tr>
+              <td>{{ report.REPORT_NAME }}</td>
+              <td>{{ report.REPORT_DATE|date:"Y-m-d" }}</td>
+              <td>
+                <a href="{{ report.FILE.url }}" download class="btn btn-sm btn-success">
+                  <i class="bi bi-download"></i> Download
+                </a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="3" class="text-center">No reports found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Modal for View Details -->
+<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewModalLabel">Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="viewModalBody">
+        <!-- Details will be injected here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.view-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const collegeId = this.dataset.id;
+                fetch(`/college/${collegeId}/details/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const modalBody = document.getElementById('viewModalBody');
+                        if (data.success) {
+                            const c = data.college;
+                            modalBody.innerHTML = `
+                                <strong>College Name:</strong> ${c.name}<br>
+                                <strong>College Address:</strong> ${c.address}<br>
+                                <strong>College Email:</strong> ${c.email}<br>
+                                <strong>College Phone No:</strong> ${c.phone}<br>
+                                <strong>College University:</strong> ${c.university}<br>
+                                <strong>Courses Provided:</strong> ${c.course}<br>
+                                <strong>Established in the Year:</strong> ${c.established}<br>
+                            `;
+                        } else {
+                            modalBody.innerHTML = `<p class="text-danger">${data.error}</p>`;
+                        }
+                        const modal = new bootstrap.Modal(document.getElementById('viewModal'));
+                        modal.show();
+                    });
+            });
+        });
+    });
+  </script>
+  
+  <script src="{% static 'main.js' %}"></script>
+</body>
+</html>

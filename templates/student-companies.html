@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HireVerse | Companies & Job Posts</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body { background:#f4f6f8; font-family:Poppins,sans-serif; }
+    .sidebar { position:fixed; top:0; left:0; width:240px; height:100%; background:#fff; box-shadow:2px 0 8px rgba(0,0,0,0.04); z-index:1000; padding-top:20px; }
+    .sidebar img { display:block; margin:0 auto 20px; width:180px; height:auto; }
+    .sidebar .nav-link { color:#007bff; font-weight:500; font-size:1.1rem; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; padding:0.75rem 1rem; border-radius:8px; transition:0.2s; }
+    .sidebar .nav-link.active, .sidebar .nav-link:hover { background:#e9f5ff; color:#0056b3; }
+    .main-content { margin-left:240px; padding:2rem; background:#fff; }
+    .section-title { font-size:1.3rem; font-weight:600; margin-bottom:1rem; color:#007bff; }
+    .table-container { background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:1rem; }
+    .table thead th { font-weight:600; color:black; }
+  </style>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar d-flex flex-column justify-content-between"
+     style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 240px;
+        background: #ffffff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+        padding: 20px 0;
+        z-index: 1000;
+     ">
+
+    <!-- Logo Section -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      {% load static %}
+      <img src="{% static 'assets/logo_main.png' %}" 
+          alt="HireVerse Logo" 
+          style="width: 180px; height: auto; object-fit: contain;">
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+      
+      <a class="nav-link" href="/studentDashboard"
+        style="color: #007bff; font-weight: 500;
+                font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+                border-radius: 8px; display: flex; align-items: center; 
+                gap: 8px; text-decoration: none; transition: 0.2s;">
+        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+      </a>
+
+      <a class="nav-link" href="/studentProfile"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-person-circle me-2"></i> Profile
+      </a>
+
+      <a class="nav-link active" href="/studentCompanies"
+        style="background: #e9f5ff; color: #0056b3; font-weight: 600; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-people me-2"></i> Companies
+      </a>
+
+      <a class="nav-link" href="/studentTest"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-clipboard-check me-2"></i> Attend Test
+      </a>
+
+      <a class="nav-link" href="/studentReport"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;"
+        onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+        <i class="bi bi-bar-chart me-2"></i> Reports
+      </a>
+
+    </nav>
+
+    <!-- Logout Button (Bottom Fixed) -->
+    <a class="nav-link" href="{% url 'logout' %}"
+      style="
+          color: #dc3545; 
+          font-weight: 600; 
+          font-size: 1.05rem; 
+          padding: 10px 12px; 
+          border-radius: 8px; 
+          display: flex; align-items: center; gap: 8px;
+          text-decoration: none; 
+          transition: 0.2s; 
+          border-top: 1px solid #f0f0f0; 
+          justify-content: center;
+          margin-top: auto;
+      "
+      onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+      onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+      <i class="bi bi-box-arrow-right me-2"></i> Logout
+    </a>
+
+  </div>
+
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h3 class="section-title">Companies & Job Posts</h3>
+
+    <div class="table-container">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Company Name</th>
+              <th>Job Title</th>
+              <th>Package (LPA)</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for job in jobs %}
+            <tr>
+              <td>{{ job.COMPANY.COMPANY_NAME }}</td>
+              <td>{{ job.JOB_TITLE }}</td>
+              <td>{{ job.JOB_SALARY }}</td>
+              <td>
+                {% if job.JOB_STATUS == "Open" %}
+                  <span class="badge bg-success">Open</span>
+                {% else %}
+                  <span class="badge bg-danger">Close</span>
+                {% endif %}
+              </td>
+              <td>
+                <button class="btn btn-sm btn-primary" onclick="viewJob({{ job.JOB_ID }})">
+                  <i class="bi bi-eye"></i> View
+                </button>
+              </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center text-muted">No jobs available.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="viewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Job Details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="viewModalBody">Loading...</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 🔹 Display message above the table
+    function showMessage(message, type = "success") {
+      let msgBox = document.getElementById("messageBox");
+      if (!msgBox) {
+        msgBox = document.createElement("div");
+        msgBox.id = "messageBox";
+        msgBox.className = "alert alert-dismissible fade show mt-3";
+        msgBox.style.margin = "0 2rem";
+        const container = document.querySelector(".main-content") || document.body;
+        container.prepend(msgBox);
+      }
+      msgBox.className = `alert alert-${type} alert-dismissible fade show mt-3`;
+      msgBox.innerHTML = `
+        <strong>${type === "success" ? "Success!" : "Notice:"}</strong> ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      `;
+    }
+
+    // 🔹 View job details and show modal
+    function viewJob(jobId) {
+      fetch(`/student-job-details/${jobId}/`)
+        .then(res => res.json())
+        .then(data => {
+          const modalBody = document.getElementById('viewModalBody');
+          if (data.success) {
+            const j = data.job;
+            const alreadyApplied = data.already_applied;
+            const isClosed = j.JOB_STATUS ==="Close";
+
+            modalBody.innerHTML = `
+              <h4 class="text-center text-primary mb-3">${j.JOB_TITLE}</h4>
+              <p><strong>Company:</strong> ${j.COMPANY_NAME}</p>
+              <p><strong>Location:</strong> ${j.COMPANY_LOCATION}</p>
+              <p><strong>Email:</strong> ${j.COMPANY_EMAIL}</p>
+              <p><strong>Package:</strong> ${j.JOB_SALARY} LPA</p>
+              <p><strong>Type:</strong> ${j.JOB_TYPE}</p>
+              <p><strong>Status:</strong> ${j.JOB_STATUS}</p>
+              <p><strong>Vacancies:</strong> ${j.JOB_VACANCY}</p>
+              <p><strong>Posted On:</strong> ${j.JOB_POSTED_DATE}</p>
+              <p><strong>Description:</strong><br>${j.JOB_DESCRIPTION}</p>
+              <div class="text-center mt-4">
+                ${
+                  alreadyApplied
+                    ? `<button class="btn btn-secondary px-4" disabled><i class="bi bi-check2-circle"></i> Already Applied</button>`
+                    : isClosed
+                      ? `<button class="btn btn-danger px-4" disabled><i class="bi bi-x-circle"></i> Job Closed</button>`
+                      : `<button class="btn btn-success px-4" onclick="applyForJob(${j.JOB_ID})">
+                          <i class="bi bi-send-check"></i> Apply Now
+                        </button>`
+                }
+              </div>
+            `;
+          } else {
+            modalBody.innerHTML = "<p class='text-danger'>Job details not found.</p>";
+          }
+          new bootstrap.Modal(document.getElementById('viewModal')).show();
+        });
+    }
+
+    // 🔹 Apply for a job
+    function applyForJob(jobId) {
+      fetch(`/apply-job/${jobId}/`, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': getCSRFToken() },
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            showMessage("Application submitted successfully!", "success");
+            document.querySelector('#viewModalBody .btn-success').outerHTML =
+              `<button class="btn btn-secondary px-4" disabled><i class="bi bi-check2-circle"></i> Already Applied</button>`;
+          } else {
+            showMessage(data.message, "warning");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          showMessage("Something went wrong. Please try again later.", "danger");
+        });
+    }
+
+    // 🔹 CSRF token helper
+    function getCSRFToken() {
+      const name = 'csrftoken';
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + '=')) {
+          return cookie.substring(name.length + 1);
+        }
+      }
+      return '';
+    }
+  </script>
+</body>
+</html>

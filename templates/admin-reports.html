@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Reports - HIreVerse</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    body { background: #f6f8fa; }
+    .main-content { margin-left: 240px; padding: 2rem; background: #f6f8fa; }
+    .report-list { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 2rem; }
+    .report-item { border-bottom: 1px solid #e3e3e3; padding: 1rem 0; }
+    .report-item:last-child { border-bottom: none; }
+    .report-title { font-weight: 600; color: #007bff; }
+    .report-time { font-size: 0.9rem; color: #888; }
+  </style>
+
+   {% load static %}
+  <script src="{% static 'main.js' %}"></script>
+</head>
+<body>
+  <div class="sidebar d-flex flex-column">
+    <div class="sidebar d-flex flex-column justify-content-between" 
+      style="
+          position: fixed; 
+          top: 0; 
+          left: 0; 
+          height: 100vh; 
+          width: 240px; 
+          background: #ffffff; 
+          box-shadow: 2px 0 8px rgba(0,0,0,0.05); 
+          padding: 20px 0; 
+          z-index: 1000;
+        ">
+
+    <!-- Logo Section -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      {% load static %}
+      <img src="{% static 'assets/logo_main.png' %}" 
+          alt="HireVerse Logo" 
+          style="width: 180px; height: auto; object-fit: contain;">
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+      <a class="nav-link" href="/adminDashboard"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-speedometer2"></i> Dashboard
+      </a>
+
+      <a class="nav-link" href="/adminProfile"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-person-circle"></i> Profile
+      </a>
+
+      <a class="nav-link" href="/adminViewData"
+        style="color: #007bff; font-weight: 500; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-eye"></i> View Data
+      </a>
+
+      <a class="nav-link" href="/addCollege"
+        style="color: #007bff; font-weight: 500;
+                font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+                border-radius: 8px; display: flex; align-items: center; 
+                gap: 8px; text-decoration: none; transition: 0.2s;">
+        <i class="bi bi-person-plus"></i> Add Colleges
+      </a>
+
+      <a class="nav-link active" href="/adminReports"
+        style="background: #e9f5ff; color: #0056b3; font-weight: 600; font-size: 1.05rem; 
+                margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+                display: flex; align-items: center; gap: 8px; text-decoration: none;
+                transition: 0.2s;">
+        <i class="bi bi-bar-chart"></i> Reports
+      </a>
+    </nav>
+
+    <!-- Logout Button (Bottom Fixed) -->
+    <a class="nav-link" href="{% url 'logout' %}"
+      style="
+          color: #dc3545; 
+          font-weight: 600; 
+          font-size: 1.05rem; 
+          padding: 10px 12px; 
+          border-radius: 8px; 
+          display: flex; align-items: center; gap: 8px;
+          text-decoration: none; 
+          transition: 0.2s; 
+          border-top: 1px solid #f0f0f0; 
+          justify-content: center;
+          margin-top: auto;
+        "
+      onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+      onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+      <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+
+  </div>
+
+
+  <div class="main-content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="text-primary mb-0"><i class="bi bi-bar-chart"></i> Admin Reports</h3>
+      <button class="btn btn-danger btn-sm" onclick="downloadPDF()"><i class="bi bi-filetype-pdf"></i> Export PDF</button>
+    </div>
+
+    <!-- Filter -->
+    <div class="card mb-4 shadow-sm p-3">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Filter by College</label>
+          <select id="collegeFilter" class="form-select" onchange="filterReports()">
+            <option value="all">All Colleges</option>
+            {% for c in college_data %}
+              <option value="{{ c.college_name }}">{{ c.college_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6 text-end align-self-end">
+          <button class="btn btn-secondary btn-sm" onclick="resetFilters()"><i class="bi bi-arrow-clockwise"></i> Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="reportContainer">
+      {% for c in college_data %}
+        <div class="card mb-4 shadow-sm report-card" data-college="{{ c.college_name }}">
+          <div class="card-body">
+            <h5 class="text-primary">{{ c.college_name }}</h5>
+            <p>College Code: <strong>{{ c.college_code }}</strong></p>
+            <p>TNP Members: <strong>{{ c.tnp_count }}</strong></p>
+            <p>Students: <strong>{{ c.student_count }}</strong></p>
+            <canvas id="chart-{{ forloop.counter }}" height="100"></canvas>
+          </div>
+        </div>
+      {% empty %}
+        <div class="alert alert-info text-center">No college data available.</div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const charts = document.querySelectorAll("canvas[id^='chart-']");
+      charts.forEach(canvas => {
+        const card = canvas.closest('.report-card');
+        const tnp = parseInt(card.querySelector('p:nth-of-type(2) strong').textContent);
+        const students = parseInt(card.querySelector('p:nth-of-type(3) strong').textContent);
+
+        new Chart(canvas, {
+          type: 'doughnut',
+          data: {
+            labels: ['TNP Members', 'Students'],
+            datasets: [{ data: [tnp, students], backgroundColor: ['#007bff', '#17a2b8'] }]
+          },
+          options: { plugins: { legend: { position: 'bottom' } } }
+        });
+      });
+    });
+
+    function filterReports() {
+      const college = document.getElementById("collegeFilter").value.toLowerCase();
+      document.querySelectorAll(".report-card").forEach(card => {
+        card.style.display = (college === "all" || card.dataset.college.toLowerCase().includes(college)) ? "block" : "none";
+      });
+    }
+
+    function resetFilters() {
+      document.getElementById("collegeFilter").value = "all";
+      filterReports();
+    }
+
+    async function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const reportElement = document.querySelector(".main-content");
+
+      // Show loading spinner or message
+      const loadingMsg = document.createElement("div");
+      loadingMsg.innerText = "Generating PDF, please wait...";
+      loadingMsg.style.position = "fixed";
+      loadingMsg.style.top = "50%";
+      loadingMsg.style.left = "50%";
+      loadingMsg.style.transform = "translate(-50%, -50%)";
+      loadingMsg.style.background = "#fff";
+      loadingMsg.style.padding = "1rem 2rem";
+      loadingMsg.style.borderRadius = "8px";
+      loadingMsg.style.boxShadow = "0 0 15px rgba(0,0,0,0.1)";
+      loadingMsg.style.zIndex = "2000";
+      document.body.appendChild(loadingMsg);
+
+      // Create PDF object (Portrait, Points, A4)
+      const pdf = new jsPDF("p", "pt", "a4");
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const margin = 40; // Add margin for aesthetics
+
+      // Convert HTML to canvas
+      const canvas = await html2canvas(reportElement, {
+        scale: 2, // Higher = better quality
+        useCORS: true, // Ensures images from static folder load properly
+        scrollY: 0,
+      });
+
+      // Convert to image
+      const imgData = canvas.toDataURL("image/png");
+
+      // Calculate image dimensions to fit inside PDF nicely
+      const imgWidth = pageWidth - margin * 2;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      let position = margin;
+      let heightLeft = imgHeight;
+
+      // Add custom header
+      pdf.setFontSize(18);
+      pdf.setTextColor(33, 37, 41); // Dark gray text
+      pdf.text("HireVerse Placement Report", margin, 30);
+
+      // Add timestamp below header
+      pdf.setFontSize(10);
+      pdf.setTextColor(100);
+      pdf.text(`Generated on: ${new Date().toLocaleString()}`, margin, 45);
+
+      // Add content image
+      pdf.addImage(imgData, "PNG", margin, 60, imgWidth, imgHeight);
+      heightLeft -= pageHeight - 80;
+
+      // If content overflows multiple pages
+      while (heightLeft > 0) {
+        pdf.addPage();
+        pdf.addImage(
+          imgData,
+          "PNG",
+          margin,
+          position - heightLeft,
+          imgWidth,
+          imgHeight
+        );
+        heightLeft -= pageHeight - 80;
+      }
+
+      // Add footer with page number
+      const totalPages = pdf.internal.getNumberOfPages();
+      for (let i = 1; i <= totalPages; i++) {
+        pdf.setPage(i);
+        pdf.setFontSize(9);
+        pdf.setTextColor(150);
+        pdf.text(
+          `Page ${i} of ${totalPages}`,
+          pageWidth - margin - 50,
+          pageHeight - 10
+        );
+      }
+
+      // Save the PDF
+      pdf.save("hireverse_report.pdf");
+
+      // Remove loading message
+      document.body.removeChild(loadingMsg);
+    }
+
+  </script>
+</body>
+</html>

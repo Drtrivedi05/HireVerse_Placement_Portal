@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ round.ROUND_NAME }} | HireVerse</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body { background:#f8f9fb; font-family:Poppins,sans-serif; }
+    .quiz-container { max-width:1100px; margin:auto; background:#fff; padding:2rem; border-radius:12px; box-shadow:0 3px 10px rgba(0,0,0,0.08); }
+    .quiz-header { border-bottom:2px solid #e0e0e0; margin-bottom:1.5rem; padding-bottom:1rem; }
+    .question-box { margin-bottom:1.5rem; }
+    .question-box h5 { color:#007bff; }
+    .options label { display:block; margin-bottom:0.5rem; cursor:pointer; border:1px solid #ddd; padding:0.5rem 0.8rem; border-radius:6px; transition:0.2s; }
+    .options input { margin-right:10px; }
+    .options label:hover { background:#e9f5ff; }
+    .quiz-footer { display:flex; justify-content:space-between; align-items:center; margin-top:2rem; }
+    .timer { font-weight:600; color:#dc3545; font-size:1.1rem; }
+  </style>
+</head>
+
+<body>
+  <div class="quiz-container mt-4">
+    <div class="quiz-header">
+      <h4>{{ company.COMPANY_NAME }} — {{ job.JOB_TITLE }}</h4>
+      <p class="text-muted mb-1"><strong>Round:</strong> {{ round.ROUND_NAME }}</p>
+      <p class="text-muted"><strong>Duration:</strong> {{ duration }} mins</p>
+      <div class="timer" id="timer"></div>
+    </div>
+
+    <form id="quizForm" method="post" action="{% url 'submit_quiz' round.ROUND_ID %}">
+      {% csrf_token %}
+      {% for q in questions %}
+        <div class="question-box">
+          <h5>Q{{ forloop.counter }}. {{ q.QUESTION_TEXT }}</h5>
+          <div class="options">
+            <label><input type="radio" name="question_{{ q.pk }}" value="A"> {{ q.OPTION_A }}</label>
+            <label><input type="radio" name="question_{{ q.pk }}" value="B"> {{ q.OPTION_B }}</label>
+            <label><input type="radio" name="question_{{ q.pk }}" value="C"> {{ q.OPTION_C }}</label>
+            <label><input type="radio" name="question_{{ q.pk }}" value="D"> {{ q.OPTION_D }}</label>
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-center text-muted">No questions found for this test.</p>
+      {% endfor %}
+
+      <div class="quiz-footer">
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-check-circle"></i> Submit Test
+        </button>
+        <a href="studentTest" class="btn btn-outline-secondary">Exit</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Simple countdown timer
+    let timeLeft = {{ duration }} * 60;
+    const timerEl = document.getElementById('timer');
+
+    function updateTimer() {
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+      timerEl.textContent = `⏱️ Time Left: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+      if (timeLeft <= 0) {
+        document.getElementById('quizForm').submit();
+      } else {
+        timeLeft--;
+        setTimeout(updateTimer, 1000);
+      }
+    }
+    updateTimer();
+  </script>
+
+    <script>
+        // === Fullscreen Mode ===
+        document.addEventListener("DOMContentLoaded", () => {
+            enterFullscreen();
+            startProctoring();
+        });
+
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) elem.requestFullscreen();
+            else if (elem.mozRequestFullScreen) elem.mozRequestFullScreen();
+            else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+            else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+        }
+
+        // === Exit Fullscreen Detection ===
+        document.addEventListener("fullscreenchange", () => {
+            if (!document.fullscreenElement) {
+            alert("⚠️ You have exited fullscreen. Please return immediately!");
+            enterFullscreen();
+            }
+        });
+
+        // === Mic and Camera Access ===
+        async function startProctoring() {
+            try {
+            await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            console.log("✅ Mic and camera access granted.");
+            } catch (error) {
+            alert("⚠️ Please allow camera and mic access to start the test.");
+            document.getElementById('quizForm').remove(); // block access
+            }
+        }
+
+        // === Prevent Copying / Switching Tabs ===
+        document.addEventListener("copy", (e) => {
+            e.preventDefault();
+            alert("⚠️ Copying content is not allowed!");
+        });
+
+        document.addEventListener("cut", (e) => e.preventDefault());
+        document.addEventListener("paste", (e) => e.preventDefault());
+        document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+        // === Detect Tab Switch or Minimize ===
+        let warningCount = 0;
+        window.addEventListener("blur", () => {
+            warningCount++;
+            alert(`⚠️ Warning ${warningCount}: Don't switch tabs or minimize the window!`);
+            if (warningCount >= 3) {
+            alert("❌ Test auto-submitted due to suspicious activity!");
+            document.getElementById("quizForm").submit();
+            }
+        });
+    </script>
+
+</body>
+</html>

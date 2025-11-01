@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Members - TNP Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f6f8fa;
+    }
+    .form-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 32px 24px;
+    }
+    .form-title { font-size: 2rem; font-weight: 600; text-align: center; margin-bottom: 32px; }
+    .nav-pills .nav-link { border-radius: 8px; margin-bottom: 8px; font-size: 1.1rem; text-align: left; }
+    .nav-pills .nav-link.active { background: #007bff; color: #fff; }
+    .tab-content { min-height: 400px; display: flex; flex-direction: column; justify-content: flex-start; width: 100%; transition: all 0.4s cubic-bezier(.4,0,.2,1); }
+    .form-actions { margin-top: 24px; text-align: right; }
+    .alert-small { font-size: 0.9rem; padding: 0.5rem 0.75rem; }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar d-flex flex-column justify-content-between"
+     style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 240px;
+        background: #ffffff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+        padding: 20px 0;
+        z-index: 1000;
+     ">
+
+  <!-- Logo Section -->
+  <div style="text-align: center; margin-bottom: 20px;">
+    {% load static %}
+    <img src="{% static 'assets/logo_main.png' %}" 
+         alt="HireVerse Logo" 
+         style="width: 180px; height: auto; object-fit: contain;">
+  </div>
+
+  <!-- Navigation Links -->
+  <nav class="nav flex-column" style="padding: 0 15px; flex-grow: 1;">
+    
+    <a class="nav-link" href="/tnpDashboard"
+       style="color: #007bff; font-weight: 500;
+              font-size: 1.05rem; margin-bottom: 12px; padding: 10px 12px;
+              border-radius: 8px; display: flex; align-items: center; 
+              gap: 8px; text-decoration: none; transition: 0.2s;">
+      <i class="bi bi-speedometer2 me-2"></i> TNP Dashboard
+    </a>
+
+    <a class="nav-link" href="/tnpProfile"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-person-circle me-2"></i> Profile
+    </a>
+
+    <a class="nav-link active" href="/tnpAddMember"
+       style="background: #e9f5ff; color: #0056b3; font-weight: 600; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-person-plus me-2"></i> Add Members
+    </a>
+
+    <a class="nav-link" href="/tnpViewData"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-eye me-2"></i> View Data
+    </a>
+
+    <a class="nav-link" href="/tnpReport"
+       style="color: #007bff; font-weight: 500; font-size: 1.05rem;
+              margin-bottom: 12px; padding: 10px 12px; border-radius: 8px;
+              display: flex; align-items: center; gap: 8px; text-decoration: none;
+              transition: 0.2s;"
+       onmouseover="this.style.backgroundColor='#e9f5ff'; this.style.color='#0056b3';"
+       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#007bff';">
+      <i class="bi bi-bar-chart me-2"></i> Reports
+    </a>
+  </nav>
+
+  <!-- Logout Button -->
+  <a class="nav-link" href="{% url 'logout' %}"
+     style="
+        color: #dc3545; 
+        font-weight: 600; 
+        font-size: 1.05rem; 
+        padding: 10px 12px; 
+        border-radius: 8px; 
+        display: flex; align-items: center; gap: 8px;
+        text-decoration: none; 
+        transition: 0.2s; 
+        border-top: 1px solid #f0f0f0; 
+        justify-content: center;
+        margin-top: auto;
+     "
+     onmouseover="this.style.backgroundColor='#ffe6e9'; this.style.color='#b02a37';"
+     onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545';">
+    <i class="bi bi-box-arrow-right me-2"></i> Logout
+  </a>
+
+</div>
+
+  <div class="form-container">
+    <div class="form-title">Add Members</div>
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="nav nav-pills flex-column mb-4" id="addMemberTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="tnp-tab" data-bs-toggle="tab" data-bs-target="#tnp" type="button" role="tab" aria-controls="tnp" aria-selected="true">Add TNP</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="company-tab" data-bs-toggle="tab" data-bs-target="#company" type="button" role="tab" aria-controls="company" aria-selected="false">Add Company</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="student-tab" data-bs-toggle="tab" data-bs-target="#student" type="button" role="tab" aria-controls="student" aria-selected="false">Add Student</button>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <!-- Messages -->
+            {% for message in messages %}
+              {% if 'tnp' in message.tags %}
+                <div class="alert alert-{{ message.level_tag }} alert-small alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endif %}
+            {% endfor %}
+
+            <!-- Messages -->
+            {% for message in messages %}
+              {% if 'company' in message.tags %}
+                <div class="alert alert-{{ message.level_tag }} alert-small alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endif %}
+            {% endfor %}
+
+            <!-- Messages -->
+            {% for message in messages %}
+              {% if 'student' in message.tags %}
+                <div class="alert alert-{{ message.level_tag }} alert-small alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endif %}
+            {% endfor %}
+        <div class="tab-content" id="addMemberTabsContent">
+          <!-- Add TNP Tab -->
+          <div class="tab-pane fade show active" id="tnp" role="tabpanel" aria-labelledby="tnp-tab">
+            <form method="POST" enctype="multipart/form-data" action="{% url 'tnpAddMember' %}">
+              {% csrf_token %}
+              <input type="hidden" name="member_type" value="tnp">
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">Full Name</label><input type="text" class="form-control" name="full_name" required></div>
+                <div class="col-md-6"><label class="form-label">Designation</label><input type="text" class="form-control" value="TNP Member" disabled></div>
+                <div class="col-md-6"><label class="form-label">Email</label><input type="email" class="form-control" name="email" required></div>
+                <div class="col-md-6"><label class="form-label">Password</label><input type="password" class="form-control" name="password" required></div>
+                <div class="col-md-6"><label class="form-label">Mobile</label><input type="tel" min="10" max="10" class="form-control" name="mobile" required></div>
+                <div class="col-md-6"><label class="form-label">Profile Photo</label><input type="file" class="form-control" name="profile_photo" accept="image/*"></div>
+              </div>
+              <div class="form-actions"><button type="submit" class="btn btn-primary">Add TNP</button></div>
+            </form>
+          </div>
+
+          <!-- Add Company Tab -->
+          <div class="tab-pane fade" id="company" role="tabpanel" aria-labelledby="company-tab">
+            <form method="POST" enctype="multipart/form-data" action="{% url 'tnpAddMember' %}">
+              {% csrf_token %}
+              <input type="hidden" name="member_type" value="company">
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">Company Name</label><input type="text" class="form-control" name="company_name" required></div>
+                <div class="col-md-6"><label class="form-label">Email</label><input type="email" class="form-control" name="email" required></div>
+                <div class="col-md-6"><label class="form-label">Phone</label><input type="tel" min="10" max="10" class="form-control" name="phone" required></div>
+                <div class="col-md-6"><label class="form-label">Website</label><input type="url" class="form-control" name="website"></div>
+                <div class="col-md-6"><label class="form-label">Industry</label><input type="text" class="form-control" name="industry"></div>
+                <div class="col-md-6"><label class="form-label">Company Logo</label><input type="file" class="form-control" name="profile_photo" accept="image/*"></div>
+              </div>
+              <div class="form-actions"><button type="submit" class="btn btn-primary">Add Company</button></div>
+            </form>
+          </div>
+
+          <!-- Add Student Tab -->
+          <div class="tab-pane fade" id="student" role="tabpanel" aria-labelledby="student-tab">
+            <form method="POST" enctype="multipart/form-data" action="{% url 'tnpAddMember' %}">
+              {% csrf_token %}
+              <input type="hidden" name="member_type" value="student">
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">Full Name</label><input type="text" class="form-control" name="full_name" required></div>
+                <div class="col-md-6"><label class="form-label">Email</label><input type="email" class="form-control" name="email" required></div>
+                <div class="col-md-6"><label class="form-label">Phone</label><input type="tel" max="10" min="10" class="form-control" name="phone" required></div>
+                <div class="col-md-6"><label class="form-label">Department</label><input type="text" class="form-control" name="department"></div>
+                <div class="col-md-6"><label class="form-label">Roll Number</label><input type="text" class="form-control" name="roll_no"></div>
+                <div class="col-md-6"><label class="form-label">Profile Photo</label><input type="file" class="form-control" name="profile_photo" accept="image/*"></div>
+              </div>
+              <div class="form-actions"><button type="submit" class="btn btn-primary">Add Student</button></div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    /* --- Loading Overlay --- */
+    #loadingOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .spinner-border {
+      width: 4rem;
+      height: 4rem;
+      color: #007bff;
+    }
+
+    .loading-text {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: #007bff;
+      font-weight: 600;
+      text-align: center;
+    }
+  </style>
+
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay">
+    <div class="text-center">
+      <div class="spinner-border" role="status"></div>
+      <div class="loading-text">Adding Member... please wait</div>
+    </div>
+  </div>
+
+
+  <script>
+    // Get all forms
+    const forms = document.querySelectorAll('form');
+
+    forms.forEach(form => {
+      form.addEventListener('submit', function () {
+        // Show loading overlay
+        document.getElementById('loadingOverlay').style.display = 'flex';
+      });
+    });
+  </script>
+
+</body>
+</html>
