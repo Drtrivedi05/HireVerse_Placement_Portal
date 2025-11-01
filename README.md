@@ -37,15 +37,15 @@ Feature	Description
 
         
 🧰 Tech Stack
-Layer	Technology Used
-Frontend	HTML5, CSS3, JavaScript, Bootstrap 5.3
-Backend	Django (Python 3.10+)
-Database	SQLite (default) / PostgreSQL (production)
-Authentication	Django Auth System (Role-based)
-Automation	Custom AI utilities (ai_utils.py)
-Task Scheduling	Django Management Commands + Cron
-Version Control	Git & GitHub
-Deployment	Gunicorn + Nginx (Linux Server)
+        Layer	Technology Used
+        Frontend	HTML5, CSS3, JavaScript, Bootstrap 5.3
+        Backend	Django (Python 3.10+)
+        Database	SQLite (default) / PostgreSQL (production)
+        Authentication	Django Auth System (Role-based)
+        Automation	Custom AI utilities (ai_utils.py)
+        Task Scheduling	Django Management Commands + Cron
+        Version Control	Git & GitHub
+        Deployment	Gunicorn + Nginx (Linux Server)
 
 
 🧩 System Architecture
@@ -115,23 +115,23 @@ HIREVERSE/
 
 1️⃣ Clone the Repository
 
-git clone https://github.com/<your-username>/HireVerse.git
-
-cd HireVerse/HIREVERSE
+        git clone https://github.com/<your-username>/HireVerse.git
+        
+        cd HireVerse/HIREVERSE
 
 
 2️⃣ Set Up Virtual Environment
 
-python -m venv venv
-
-source venv/bin/activate     # macOS/Linux
-
-venv\Scripts\activate        # Windows
+        python -m venv venv
+        
+        source venv/bin/activate     # macOS/Linux
+        
+        venv\Scripts\activate        # Windows
 
 
 3️⃣ Install Required Packages
 
-pip install -r requirements.txt
+        pip install -r requirements.txt
 
 
 4️⃣ Configure Environment Variables
@@ -167,32 +167,51 @@ Visit 👉 http://127.0.0.1:8000
 🧩 Default User Roles
 
 Role	Dashboard URL	Permissions
+
 Admin	/admin_dashboard/	Manage all data & analytics
+
 TNP Head	/tnp_dashboard/	Manage colleges, students, and job postings
+
 Company	/company_dashboard/	Create jobs, quizzes, and conduct placement rounds
+
 Student	/student_dashboard/	Apply for jobs, attend quizzes, and view placement results
+
 
 
 🧱 Database Schema (Core Models)
 
 
 Model	Description
+
 TblUser	Base user model for authentication
+
 TblAdmin, TblTnp, TblCompany, TblStudent	Role-specific user profiles
+
 TblJob	Job postings created by companies
+
 TblApplication	Applications submitted by students
+
 TblQuiz, TblQuestion	Aptitude/coding test management
+
 TblPlacementRound, TblRoundResult	Round progression tracking
+
 TblInterviewSchedule	Interview details and modes
+
 TblNotification, TblChatRoom	Communication modules
+
 TblActivityLog, TblLoginHistory	System tracking and audit logs
 
 
 📡 API Endpoints (Optional Extension)
+
 Endpoint	Method	Description
+
 /api/jobs/	GET	List all job postings
+
 /api/apply/<job_id>/	POST	Apply for a specific job
+
 /api/quiz/<job_id>/	GET/POST	Start or submit a quiz
+
 /api/notifications/	GET	Retrieve user notifications
 
 (These can be implemented using Django REST Framework if REST APIs are required.)
@@ -200,42 +219,42 @@ Endpoint	Method	Description
 
 📈 Analytics & Reporting
 
-Job-wise applicant statistics
-
-Company placement ratio
-
-Student performance tracking
-
-Department-wise placement count
-
-Round-wise progress visualization
+        Job-wise applicant statistics
+        
+        Company placement ratio
+        
+        Student performance tracking
+        
+        Department-wise placement count
+        
+        Round-wise progress visualization
 
 
 🔔 Background Tasks
 
-Custom Django commands automate repetitive tasks:
-
-send_round_reminders.py: Sends email reminders for upcoming placement rounds.
-
-Can be scheduled via cron jobs or Celery beat.
+        Custom Django commands automate repetitive tasks:
+        
+        send_round_reminders.py: Sends email reminders for upcoming placement rounds.
+        
+        Can be scheduled via cron jobs or Celery beat.
 
 
 💬 Communication & Notifications
 
-Chat module: Real-time chat between students, TNP, and companies.
-
-Notification system: Alerts users for updates, new jobs, and results.
-
-Activity logs: Track every user’s interactions.
+        Chat module: Real-time chat between students, TNP, and companies.
+        
+        Notification system: Alerts users for updates, new jobs, and results.
+        
+        Activity logs: Track every user’s interactions.
 
 
 🎨 Frontend Design
 
-Built with Bootstrap 5.3 and custom CSS.
-
-Features clean white cards, rounded corners, soft shadows, and a modern blue-accent theme.
-
-Each dashboard (Admin, TNP, Company, Student) uses consistent responsive design.
+        Built with Bootstrap 5.3 and custom CSS.
+        
+        Features clean white cards, rounded corners, soft shadows, and a modern blue-accent theme.
+        
+        Each dashboard (Admin, TNP, Company, Student) uses consistent responsive design.
 
 
 🚀 Deployment Guide
@@ -295,42 +314,49 @@ Open a Pull Request on GitHub.
 
 🧠 Future Enhancements
 
- AI-based candidate ranking system
-
- Resume parsing using NLP
-
- Real-time WebSocket chat (Django Channels)
-
- Email-based verification and OTP login
-
- Integration with LinkedIn/Indeed for job sync
-
- College-wide placement statistics dashboard
+         AI-based candidate ranking system
+        
+         Resume parsing using NLP
+        
+         Real-time WebSocket chat (Django Channels)
+        
+         Email-based verification and OTP login
+        
+         Integration with LinkedIn/Indeed for job sync
+        
+         College-wide placement statistics dashboard
 
 
 👨‍💻 Contributors
 
 Name	Role	Contribution
+
 Your Name	Project Lead	Backend, Architecture, Design
+
 Team Member 1	Developer	Django Views & Models
+
 Team Member 2	UI/UX	Frontend & Bootstrap Integration
+
 Team Member 3	QA / Testing	Test cases, Validation
 
 
+
 📜 License
+
 
 This project is licensed under the MIT License.
 You are free to use, modify, and distribute it under the same terms.
 
 
+
 ⭐ Acknowledgements
 
-Django Documentation
-
-Bootstrap Framework
-
-Chart.js for analytics
-
-OpenAI for AI utility inspiration
-
-Stack Overflow and GitHub Community
+        Django Documentation
+        
+        Bootstrap Framework
+        
+        Chart.js for analytics
+        
+        OpenAI for AI utility inspiration
+        
+        Stack Overflow and GitHub Community
