@@ -350,4 +350,5 @@ You are free to use, modify, and distribute it under the same terms.
         Stack Overflow and GitHub Community
 
 👨‍💻 Contributor
+
 Dhrumil Trivedi(Full Stack Developer & Project Lead) :Designed and developed the entire HireVerse platform — including system architecture, backend (Django models, views, and authentication), frontend (Bootstrap-based dashboards), database schema, AI utilities, and deployment setup. Responsible for full lifecycle: concept, development, testing, and documentation.
