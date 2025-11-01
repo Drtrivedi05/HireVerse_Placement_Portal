@@ -24,8 +24,6 @@ It automates every stage of the campus recruitment lifecycle — from job postin
 
 🧱 Key Highlights
 
-Feature	Description
-
         🔐 Role-Based Access	Four distinct dashboards: Admin, TNP, Company, Student
         🧠 AI & Automation	Automated quiz evaluation, scoring, and analytics
         📊 Dashboard Analytics	Visual representation of placement metrics
@@ -38,6 +36,7 @@ Feature	Description
 
         
 🧰 Tech Stack
+
         Layer	Technology Used
         Frontend	HTML5, CSS3, JavaScript, Bootstrap 5.3
         Backend	Django (Python 3.10+)
@@ -169,55 +168,55 @@ Visit 👉 http://127.0.0.1:8000
 
 🧩 Default User Roles
 
-Role	Dashboard URL	Permissions
-
-Admin	/admin_dashboard/	Manage all data & analytics
-
-TNP Head	/tnp_dashboard/	Manage colleges, students, and job postings
-
-Company	/company_dashboard/	Create jobs, quizzes, and conduct placement rounds
-
-Student	/student_dashboard/	Apply for jobs, attend quizzes, and view placement results
+        Role	Dashboard URL	Permissions
+        
+        Admin	/admin_dashboard/	Manage all data & analytics
+        
+        TNP Head	/tnp_dashboard/	Manage colleges, students, and job postings
+        
+        Company	/company_dashboard/	Create jobs, quizzes, and conduct placement rounds
+        
+        Student	/student_dashboard/	Apply for jobs, attend quizzes, and view placement results
 
 
 
 🧱 Database Schema (Core Models)
 
 
-Model	Description
-
-TblUser	Base user model for authentication
-
-TblAdmin, TblTnp, TblCompany, TblStudent	Role-specific user profiles
-
-TblJob	Job postings created by companies
-
-TblApplication	Applications submitted by students
-
-TblQuiz, TblQuestion	Aptitude/coding test management
-
-TblPlacementRound, TblRoundResult	Round progression tracking
-
-TblInterviewSchedule	Interview details and modes
-
-TblNotification, TblChatRoom	Communication modules
-
-TblActivityLog, TblLoginHistory	System tracking and audit logs
+        Model	Description
+        
+        TblUser	Base user model for authentication
+        
+        TblAdmin, TblTnp, TblCompany, TblStudent	Role-specific user profiles
+        
+        TblJob	Job postings created by companies
+        
+        TblApplication	Applications submitted by students
+        
+        TblQuiz, TblQuestion	Aptitude/coding test management
+        
+        TblPlacementRound, TblRoundResult	Round progression tracking
+        
+        TblInterviewSchedule	Interview details and modes
+        
+        TblNotification, TblChatRoom	Communication modules
+        
+        TblActivityLog, TblLoginHistory	System tracking and audit logs
 
 
 📡 API Endpoints (Optional Extension)
 
-Endpoint	Method	Description
-
-/api/jobs/	GET	List all job postings
-
-/api/apply/<job_id>/	POST	Apply for a specific job
-
-/api/quiz/<job_id>/	GET/POST	Start or submit a quiz
-
-/api/notifications/	GET	Retrieve user notifications
-
-(These can be implemented using Django REST Framework if REST APIs are required.)
+        Endpoint	Method	Description
+        
+        /api/jobs/	GET	List all job postings
+        
+        /api/apply/<job_id>/	POST	Apply for a specific job
+        
+        /api/quiz/<job_id>/	GET/POST	Start or submit a quiz
+        
+        /api/notifications/	GET	Retrieve user notifications
+        
+        (These can be implemented using Django REST Framework if REST APIs are required.)
 
 
 📈 Analytics & Reporting
@@ -330,18 +329,10 @@ Open a Pull Request on GitHub.
          College-wide placement statistics dashboard
 
 
-👨‍💻 Contributors
-
-Name	Role	Contribution
-
-Your Name	Project Lead	Backend, Architecture, Design
-
-Team Member 1	Developer	Django Views & Models
-
-Team Member 2	UI/UX	Frontend & Bootstrap Integration
-
-Team Member 3	QA / Testing	Test cases, Validation
-
+👨‍💻 Contributor
+        
+        Name	Role	Contribution
+        Dhrumil Trivedi	Full Stack Developer & Project Lead	Designed and developed the entire HireVerse platform — including system architecture, backend (Django models, views, and authentication), frontend (Bootstrap-based dashboards), database schema, AI utilities, and deployment setup. Responsible for full lifecycle: concept, development, testing, and documentation.
 
 
 📜 License
