@@ -31,15 +31,11 @@ urlpatterns = [
     path("getJobsByCollege/<int:college_id>/", views.get_jobs_by_college, name="get_jobs_by_college"),
     path("getRoundsByJob/<int:job_id>/", views.get_rounds_by_job, name="get_rounds_by_job"),
     path("getPassedStudentsCompany/<int:job_id>/<int:round_id>/", views.get_passed_students_company, name="get_passed_students_company"),
-
-
     path('companySelectionTest/', views.company_selection_test, name='companySelectionTest'),
     path('companyEvaluateTest/', views.company_evaluate_test, name='companyEvaluateTest'),
     path("company/save-gd-evaluation/<int:job_id>/<int:group_id>/", views.company_save_gd_evaluation, name="company_save_gd_evaluation"),
     path("company/save-tech-evaluation/", views.company_save_tech_evaluation, name="company_save_tech_evaluation"),
-
     path("company/save-hr-evaluation/", views.company_save_hr_evaluation, name="company_save_hr_evaluation"),
-
     path("saveAptitudeQuiz/", views.save_aptitude_quiz, name="save_aptitude_quiz"),
     path("ai-generate-quiz/", views.ai_generate_and_save_quiz, name="ai_generate_and_save_quiz"),
     path("company/generate-gd-groups/", views.generate_gd_groups, name="generate_gd_groups"),
@@ -47,11 +43,9 @@ urlpatterns = [
     path("company/update-gd-schedule/<int:group_id>/", views.company_update_gd_schedule, name="companyUpdateGDSchedule"),
     path("company/get-eligible-tech-students/<int:job_id>/", views.company_get_eligible_tech_students, name="company_get_eligible_tech_students"),
     path("company/save-tech-interview/<int:job_id>/<int:student_id>/", views.company_save_tech_interview, name="company_save_tech_interview"),
-
     # HR Interview Scheduling Routes
     path("company/get-eligible-hr-students/<int:job_id>/", views.company_get_eligible_hr_students, name="company_get_eligible_hr_students"),
     path("company/save-hr-interview/<int:job_id>/<int:student_id>/", views.company_save_hr_interview, name="company_save_hr_interview"),
-
     # path("company/send-gd-link/<int:group_id>/", views.company_send_gd_link, name="companySendGDLink"),
     path('student-job-details/<int:job_id>/', views.job_details, name='job_details'),
     path('student-application-details/<int:app_id>/', views.application_details, name='application-details'),
@@ -71,7 +65,6 @@ urlpatterns = [
     path('getCompanyJobs/<int:company_id>/', views.get_company_jobs, name='get_company_jobs'),
     path('getJobRounds/<int:job_id>/', views.get_job_rounds, name='get_job_rounds'),
     path('getPassedStudents/<int:job_id>/<int:round_id>/', views.get_passed_students, name='get_passed_students'),
-
     # TNP View Data
     path('tnpViewData/', views.tnp_view_data, name='tnpViewData'),
     path('tnp/edit/<str:table_name>/<int:record_id>/', views.tnp_edit_record, name='tnp_edit_record'),
@@ -79,4 +72,5 @@ urlpatterns = [
     path('tnp/student-details/<int:student_id>/', views.tnp_student_details, name='tnp_student_details'),
     path('tnp/company-details/<int:job_id>/', views.tnp_company_details, name='tnp_company_details'),
     path('logout/', views.user_logout, name='logout'),
+
 ]
